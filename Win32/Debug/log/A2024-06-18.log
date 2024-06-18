@@ -1,0 +1,5 @@
+GCont.exe: 0000358C: 20:36:24 []:>--------------------------------------------------------------<
+GCont.exe: 0000358C: 20:36:24 [TUniServerModule]:Server First Init.
+GCont.exe: 0000358C: 20:36:24 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 0000358C: 20:36:24 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 0000358C: 20:36:24 [TUniServerModule]:HTTP Server Started. Port: 8077
