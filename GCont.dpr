@@ -12,7 +12,9 @@ uses
   Forms,
   ServerModule in 'ServerModule.pas' {UniServerModule: TUniGUIServerModule},
   MainModule in 'MainModule.pas' {UniMainModule: TUniGUIMainModule},
-  Main in 'Main.pas' {MainForm: TUniForm};
+  Main in 'Main.pas' {MainForm: TUniForm},
+  ULogin in 'ULogin.pas' {FLogin: TUniForm},
+  UController in 'UController.pas';
 
 {$R *.res}
 
