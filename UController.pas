@@ -8,6 +8,7 @@ interface
        IdExplicitTLSClientServerBase;
 
   function MD5String(const Value: string): string;
+  function fImpressaoCSV(dsRegistros : TDataSet; sArquivo : string ): string;
 
 implementation
 
@@ -22,6 +23,53 @@ begin
     Result := xMD5.HashStringAsHex(Value);
   finally
     xMD5.Free;
+  end;
+end;
+
+function fImpressaoCSV(dsRegistros : TDataSet; sArquivo : string ): string;
+var
+i,j : integer;
+sLinha : string;
+slArquivoCSV : TStringList;
+begin
+
+  try
+
+    slArquivoCSV := TStringList.Create;
+
+    sLinha := '';
+    for I := 0 to dsRegistros.Fields.Count - 1 do begin
+      if dsRegistros.Fields[i].FieldKind = fkInternalCalc then
+        Continue;
+      sLinha := sLinha + dsRegistros.Fields[i].DisplayLabel + ';';
+    end;
+
+    slArquivoCSV.Add(sLinha);
+
+    dsRegistros.First;
+    for I := 0 to dsRegistros.RecordCount - 1 do begin
+      sLinha := '';
+      for j := 0 to dsRegistros.Fields.Count - 1 do begin
+        if dsRegistros.Fields[j].FieldKind = fkInternalCalc then
+          Continue;
+        sLinha := sLinha + dsRegistros.FieldByName(dsRegistros.Fields[j].FieldName).AsString + ';';
+      end;
+      slArquivoCSV.Add(sLinha);
+      dsRegistros.Next;
+    end;
+
+    try
+      slArquivoCSV.SaveToFile(sArquivo);
+    except
+      on e : exception do begin
+        Result := e.Message;
+        Exit;
+      end;
+    end;
+
+    Result := 'OK';
+  finally
+    FreeAndNil(slArquivoCSV);
   end;
 end;
 

@@ -1,0 +1,59 @@
+object FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma
+  Left = 0
+  Top = 0
+  ClientHeight = 168
+  ClientWidth = 400
+  Caption = 'Usu'#225'rio - Confirma'#231#227'o da Senha'
+  BorderStyle = bsSingle
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  PixelsPerInch = 96
+  TextHeight = 13
+  object edt_nova_senha: TUniEdit
+    Left = 114
+    Top = 28
+    Width = 191
+    Hint = ''
+    PasswordChar = '*'
+    Text = ''
+    ParentFont = False
+    Font.Charset = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    TabOrder = 0
+    Color = clBtnFace
+  end
+  object UniLabel5: TUniLabel
+    Left = 70
+    Top = 31
+    Width = 40
+    Height = 13
+    Hint = ''
+    Caption = 'Usu'#225'rio:'
+    TabOrder = 1
+  end
+  object UniEdit1: TUniEdit
+    Left = 114
+    Top = 56
+    Width = 191
+    Hint = ''
+    PasswordChar = '*'
+    Text = ''
+    ParentFont = False
+    Font.Charset = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    TabOrder = 2
+    Color = clBtnFace
+  end
+  object UniLabel1: TUniLabel
+    Left = 76
+    Top = 59
+    Width = 34
+    Height = 13
+    Hint = ''
+    Caption = 'Senha:'
+    TabOrder = 3
+  end
+end

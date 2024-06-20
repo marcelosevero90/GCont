@@ -14,7 +14,11 @@ uses
   MainModule in 'MainModule.pas' {UniMainModule: TUniGUIMainModule},
   Main in 'Main.pas' {MainForm: TUniForm},
   ULogin in 'ULogin.pas' {FLogin: TUniForm},
-  UController in 'UController.pas';
+  UController in 'UController.pas',
+  UUsuarioProfile in 'UUsuarioProfile.pas' {FUsuarioProfile: TUniForm},
+  UUsuarioPermisPrograma in 'UUsuarioPermisPrograma.pas' {FUsuarioPermisPrograma: TUniFrame},
+  UBOUsuario in 'UBOUsuario.pas',
+  UUsuarioSenhaConfirma in 'UUsuarioSenhaConfirma.pas' {FUsuarioSenhaConfirma: TUniForm};
 
 {$R *.res}
 

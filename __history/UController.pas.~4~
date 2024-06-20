@@ -1,0 +1,47 @@
+unit UController;
+
+interface
+
+  uses IdHashMessageDigest, Classes, SysUtils,
+       Data.DB, Datasnap.Provider, Datasnap.DBClient, Data.SqlExpr,
+       IdSMTP, IdSSLOpenSSL, IdMessage, IdText, IdAttachmentFile,
+       IdExplicitTLSClientServerBase;
+
+  function MD5String(const Value: string): string;
+  function fImpressaoCSV(dsRegistros : TDataSet; sAcao : string ): string;
+
+implementation
+
+uses MainModule;
+
+function MD5String(const Value: string): string;
+var
+  xMD5: TIdHashMessageDigest5;
+begin
+  xMD5 := TIdHashMessageDigest5.Create;
+  try
+    Result := xMD5.HashStringAsHex(Value);
+  finally
+    xMD5.Free;
+  end;
+end;
+
+function fImpressaoCSV(dsRegistros : TDataSet; sAcao : string ): string;
+var
+i : integer;
+sLinha : string;
+begin
+
+  sLinha := '';
+  for I := 0 to dsRegistros.Fields.Count - 1 do begin
+    if dsRegistros.Fields[i].FieldKind = fkInternalCalc then
+      Continue;
+    sLinha := sLinha + dsRegistros.Fields[i].DisplayLabel + ';';
+  end;
+
+
+
+
+end;
+
+end.

@@ -166,7 +166,7 @@ begin
 
   MainForm.btUsuarioConfig.Caption  := sNomeUsuario;
   MainForm.sbMenu.Panels[0].Text    := MainForm.fdUsuario.FieldByName('nomeUsuario').AsString;
-  MainForm.sbMenu.Panels[1].Text    := MainForm.fdEmpresa.FieldByName('razaoSocial').AsString;
+  MainForm.sbMenu.Panels[1].Text    := MainForm.fdEmpresa.FieldByName('codEmpresa').AsString + ' - ' + MainForm.fdEmpresa.FieldByName('razaoSocial').AsString;
 end;
 
 procedure TFLogin.pUsuarioPermisProg;
@@ -198,6 +198,20 @@ begin
     end;
     fdAux.Next;
   end;
+
+  if MainForm.fdUsuario.FieldByName('tipoUsuario').AsInteger = 2 then begin //Super - permite manutenção para usuários
+    nd := MainForm.NavTree.Items.FindNodeByCaption('USUÁRIOS');
+    nd.Enabled := True;
+    nd := MainForm.NavTree.Items.FindNodeByCaption('EMPRESA');
+    nd.Enabled := True;
+  end
+  else begin  //comum - não permite manutenção para usuário comum
+    nd := MainForm.NavTree.Items.FindNodeByCaption('USUÁRIOS');
+    nd.Enabled := False;
+    nd := MainForm.NavTree.Items.FindNodeByCaption('EMPRESA');
+    nd.Enabled := False;
+  end;
+
 end;
 
 initialization

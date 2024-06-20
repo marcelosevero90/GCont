@@ -1,13 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/06/18 18:14:27.162,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ServerModule.pas</Transaction>
-    <Transaction>2024/06/18 18:14:27.265,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\MainModule.pas</Transaction>
-    <Transaction>2024/06/18 18:14:31.174,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Main.pas</Transaction>
-    <Transaction>2024/06/18 22:19:14.154,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
-    <Transaction>2024/06/18 22:19:19.432,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ULogin.dfm=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.dfm</Transaction>
-    <Transaction>2024/06/18 22:19:19.432,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ULogin.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
-    <Transaction>2024/06/18 22:39:46.213,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
-    <Transaction>2024/06/18 22:39:53.265,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UController.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+	<Transactions>
+    <Transaction>2024/06/18 18:14:27.000.162,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ServerModule.pas</Transaction>
+    <Transaction>2024/06/18 18:14:27.000.265,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\MainModule.pas</Transaction>
+    <Transaction>2024/06/18 18:14:31.000.174,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Main.pas</Transaction>
+    <Transaction>2024/06/18 22:19:14.000.154,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/18 22:19:19.000.432,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ULogin.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/18 22:19:19.000.432,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\ULogin.dfm=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.dfm</Transaction>
+    <Transaction>2024/06/18 22:39:46.000.213,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/18 22:39:53.000.265,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UController.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 17:24:26.000.039,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 17:24:41.000.423,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioProfile.pas</Transaction>
+    <Transaction>2024/06/19 17:24:41.000.423,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.dfm=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioProfile.dfm</Transaction>
+    <Transaction>2024/06/19 18:34:48.000.782,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 18:35:02.000.586,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 18:35:19.000.258,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.dfm=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioPermisPrograma.dfm</Transaction>
+    <Transaction>2024/06/19 18:35:19.000.258,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioPermisPrograma.pas</Transaction>
+    <Transaction>2024/06/19 20:57:29.265,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 20:57:35.350,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UBOUsuario.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 21:08:12.830,=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 21:08:27.048,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioSenhaConfirma.pas=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 21:08:27.048,C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\UUsuarioSenhaConfirma.dfm=C:\Users\User\OneDrive\ProjetosDelphi\GCont\GCont\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

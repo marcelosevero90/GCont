@@ -1,0 +1,296 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIRegClasses, uniGUIForm, Vcl.Menus, uniMainMenu,
+  uniGUIBaseClasses, uniImageList, uniPageControl, uniButton, uniBitBtn,
+  uniPanel, uniStatusBar, uniSplitter, uniMultiItem, uniComboBox, uniToolBar,
+  uniTreeView, uniImage, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TMainForm = class(TUniForm)
+    UniPanel1: TUniPanel;
+    NavTree: TUniTreeView;
+    UniToolBar1: TUniToolBar;
+    btExpandTree: TUniToolButton;
+    btCollapseTree: TUniToolButton;
+    UniToolButton3: TUniToolButton;
+    btCloseAllTabs: TUniToolButton;
+    UniToolButton5: TUniToolButton;
+    SearchEdit: TUniComboBox;
+    UniSplitter1: TUniSplitter;
+    sbMenu: TUniStatusBar;
+    UniContainerPanel2: TUniContainerPanel;
+    UniContainerPanel3: TUniContainerPanel;
+    btUsuarioConfig: TUniBitBtn;
+    pgControlAdmin: TUniPageControl;
+    UniTabSheet1: TUniTabSheet;
+    UniNativeImageList1: TUniNativeImageList;
+    UniPopupMenu1: TUniPopupMenu;
+    AddtoFavorites1: TUniMenuItem;
+    RemoveFromFavorites1: TUniMenuItem;
+    UniNativeImageList2: TUniNativeImageList;
+    imgEmpresa: TUniImage;
+    fdEmpresa: TFDQuery;
+    fdUsuario: TFDQuery;
+    fdUsuariocodEmpresa: TIntegerField;
+    fdUsuariocodEstabel: TIntegerField;
+    fdUsuariocodUsuario: TStringField;
+    fdUsuarionomeUsuario: TStringField;
+    fdUsuariosenhaUsuario: TStringField;
+    fdUsuariotipoUsuario: TIntegerField;
+    fdUsuarioaltSenhaProxAcesso: TIntegerField;
+    fdUsuariodataUltAltAcesso: TDateField;
+    fdUsuariosituacao: TIntegerField;
+    fdUsuarioemail: TStringField;
+    fdUsuariotelefone: TStringField;
+    btSair: TUniBitBtn;
+    procedure NavTreeClick(Sender: TObject);
+    procedure TabSheetClose(Sender: TObject; var AllowClose: Boolean);
+    procedure SearchEditChange(Sender: TObject);
+    procedure SearchEditTriggerEvent(Sender: TUniCustomComboBox;
+      AButtonId: Integer);
+    procedure btExpandTreeClick(Sender: TObject);
+    procedure btCollapseTreeClick(Sender: TObject);
+    procedure btCloseAllTabsClick(Sender: TObject);
+    procedure UniFormCreate(Sender: TObject);
+    procedure btSairClick(Sender: TObject);
+    procedure btUsuarioConfigClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    iCodEmpresa, iCodEstabel : Integer;
+    sCodUsuario : string;
+
+    PSString: string;
+    procedure SearchTree(const AText: string);
+    procedure pConfirmaLoggof(Sender: TComponent; AResult:Integer);
+  end;
+
+function MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  uniGUIVars, MainModule, uniGUIApplication, uniGUIFrame, ULogin, ServerModule,
+  UController, UUsuarioProfile;
+
+function MainForm: TMainForm;
+begin
+  Result := TMainForm(UniMainModule.GetFormInstance(TMainForm));
+end;
+
+procedure TMainForm.btCloseAllTabsClick(Sender: TObject);
+var
+  I: Integer;
+  Ts : TUniTabSheet;
+begin
+  for I := pgControlAdmin.PageCount - 1 downto 0 do
+  begin
+    Ts := pgControlAdmin.Pages[I];
+    if Ts.Closable then Ts.Close;
+  end;
+end;
+
+procedure TMainForm.btCollapseTreeClick(Sender: TObject);
+begin
+NavTree.FullCollapse;
+end;
+
+procedure TMainForm.btExpandTreeClick(Sender: TObject);
+begin
+NavTree.FullExpand;
+end;
+
+procedure TMainForm.btSairClick(Sender: TObject);
+begin
+  MessageDlg('Confirma troca de usuário?',mtConfirmation,mbYesNo,pConfirmaLoggof);
+end;
+
+procedure TMainForm.btUsuarioConfigClick(Sender: TObject);
+begin
+  fdUsuario.Edit;
+  FUsuarioProfile.ShowModalN;
+end;
+
+procedure TMainForm.NavTreeClick(Sender: TObject);
+var
+  Nd : TUniTreeNode;
+  Ts : TUniTabSheet;
+  FrC : TUniFrameClass;
+  Fr : TUniFrame;
+  FClassName: string;
+begin
+  try
+    Nd := NavTree.Selected;
+    if not Nd.Enabled then
+      Exit;
+
+    if Nd.Count = 0 then
+    begin
+      Ts := Nd.Data;
+      if not Assigned(Ts) then
+      begin
+
+        MainForm.ShowMask('Abrindo Tela...Aguarde!');
+        UniSession.Synchronize();
+
+        Ts := TUniTabSheet.Create(Self);
+        Ts.PageControl := pgControlAdmin;
+
+        Ts.Closable := True;
+        Ts.OnClose := TabSheetClose;
+        Ts.Tag := NativeInt(Nd);
+        Ts.ImageIndex := Nd.ImageIndex;
+        Ts.Caption := Nd.Text;
+
+        if Nd.Text = 'USUÁRIOS' then begin
+          FClassName := 'TFUsuarioPermisPrograma' ;
+        end
+
+        ;
+
+        FrC := TUniFrameClass(FindClass(FClassName));
+
+        Fr := FrC.Create(Self);
+        Fr.Align := alClient;
+        Fr.Parent := Ts;
+
+        Nd.Data := Ts;
+      end;
+      pgControlAdmin.ActivePage := Ts;
+    end;
+  finally
+    MainForm.HideMask;
+  end;
+
+
+end;
+
+procedure TMainForm.pConfirmaLoggof(Sender: TComponent; AResult: Integer);
+var
+sArqImgLogin : string;
+begin
+  if AResult = mrYes then begin
+    btCloseAllTabs.OnClick(Sender);
+    sArqImgLogin := UniServerModule.FilesFolderPath + 'empresa/imgLogin/' + fdEmpresa.FieldByName('imagemLogin').AsString;
+    if FileExists(sArqImgLogin) then
+      FLogin.img_empresa.Picture.LoadFromFile(sArqImgLogin);
+    FLogin.ShowModalN;
+  end;
+end;
+
+procedure TMainForm.SearchEditChange(Sender: TObject);
+begin
+  SearchTree(SearchEdit.Text);
+end;
+
+procedure TMainForm.SearchEditTriggerEvent(Sender: TUniCustomComboBox;
+  AButtonId: Integer);
+begin
+  case AButtonId of
+    0 : SearchTree(Sender.Text);
+  end;
+end;
+
+procedure TMainForm.SearchTree(const AText: string);
+var
+  S, SString : string;
+  I : Integer;
+  aExpand : Boolean;
+begin
+  SString := Trim(AText);
+  if SString<>PSString then
+  begin
+    PSString := LowerCase(SString);
+    if (Length(PSString) > 1) or (PSString = '') then
+    begin
+      aExpand := PSString<>'';
+      NavTree.BeginUpdate;
+      try
+        NavTree.ResetData;
+        for I := 0 to NavTree.Items.Count - 1 do
+        begin
+          S := LowerCase(NavTree.Items[I].Text);
+          NavTree.Items[I].Visible := (Length(PSString) = 0) or (Pos(PSString, S)>0);
+          NavTree.Items[I].Expanded := aExpand;
+        end;
+      finally
+        NavTree.EndUpdate;
+      end;
+    end;
+  end;
+end;
+
+procedure TMainForm.TabSheetClose(Sender: TObject; var AllowClose: Boolean);
+var
+  Ts : TUniTabSheet;
+  Nd : TUniTreeNode;
+begin
+  Ts := Sender as TUniTabSheet;
+  Nd := Pointer(Ts.Tag);
+  if Assigned(Nd) then
+  begin
+    Nd.Data := nil;
+    if NavTree.Selected = Nd then
+      NavTree.Selected := nil;
+  end;
+
+end;
+
+procedure TMainForm.UniFormCreate(Sender: TObject);
+var
+sArqImgLogin,sArqImgMenu : string;
+begin
+  iCodEmpresa := StrToIntDef(uniApplication.Parameters.Values['Empresa'],0);
+  iCodEstabel := 0; //para implementações futuras
+
+  try
+    UniMainModule.conexaoDB.Connected := False;
+    UniMainModule.conexaoDB.Connected := True;
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao conectar no sistema: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      UniSession.Terminate();
+      Exit;
+    end;
+  end;
+
+  fdEmpresa.Close;
+  fdEmpresa.SQL.Clear;
+  fdEmpresa.SQL.Add('select * from gcEmpresa where codEmpresa = ' + IntToStr(iCodEmpresa));
+  fdEmpresa.Active := True;
+  if fdEmpresa.IsEmpty then begin
+    MessageDlg('Empresa não cadastrada!',mtError,[mbOK],nil);
+    //Application.Terminate;
+    UniSession.Terminate();
+    Exit;
+  end;
+
+  sArqImgLogin := UniServerModule.FilesFolderPath + 'empresa/imgLogin/' + fdEmpresa.FieldByName('imagemLogin').AsString;
+  sArqImgMenu  := UniServerModule.FilesFolderPath + 'empresa/imgMenu/' + fdEmpresa.FieldByName('imagemMenu').AsString;
+  if FileExists(sArqImgLogin) then
+    FLogin.img_empresa.Picture.LoadFromFile(sArqImgLogin);
+  if FileExists(sArqImgMenu) then
+    imgEmpresa.Picture.LoadFromFile(sArqImgMenu);
+
+  FLogin.edt_login.SetFocus;
+  FLogin.ShowModalN;
+
+
+end;
+
+initialization
+  RegisterAppFormClass(TMainForm);
+
+end.

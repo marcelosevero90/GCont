@@ -1,0 +1,6 @@
+GCont.exe: 000042A0: 12:05:43 [127.0.0.1]:Failed Sequence Recovery: SeqId: 19, Event: click
+GCont.exe: 00005B84: 12:06:18 [127.0.0.1]:Failed Sequence Recovery: SeqId: 19, Event: click
+GCont.exe: 00005B84: 12:06:18 [127.0.0.1]:Sequence sent from cache:  SeqId: 19
+GCont.exe: 00005B84: 12:06:18 [127.0.0.1]:Processed: Id: 19, Evt: click, [aSHyAnLdCb10EFBCCEB]
+GCont.exe: 000042A0: 12:06:18 [127.0.0.1]:Sequence sent from cache:  SeqId: 19
+GCont.exe: 000042A0: 12:06:18 [127.0.0.1]:Processed: Id: 19, Evt: click, [aSHyAnLdCb10EFBCCEB]

@@ -39,6 +39,18 @@ type
     imgEmpresa: TUniImage;
     fdEmpresa: TFDQuery;
     fdUsuario: TFDQuery;
+    fdUsuariocodEmpresa: TIntegerField;
+    fdUsuariocodEstabel: TIntegerField;
+    fdUsuariocodUsuario: TStringField;
+    fdUsuarionomeUsuario: TStringField;
+    fdUsuariosenhaUsuario: TStringField;
+    fdUsuariotipoUsuario: TIntegerField;
+    fdUsuarioaltSenhaProxAcesso: TIntegerField;
+    fdUsuariodataUltAltAcesso: TDateField;
+    fdUsuariosituacao: TIntegerField;
+    fdUsuarioemail: TStringField;
+    fdUsuariotelefone: TStringField;
+    btSair: TUniBitBtn;
     procedure NavTreeClick(Sender: TObject);
     procedure TabSheetClose(Sender: TObject; var AllowClose: Boolean);
     procedure SearchEditChange(Sender: TObject);
@@ -48,6 +60,8 @@ type
     procedure btCollapseTreeClick(Sender: TObject);
     procedure btCloseAllTabsClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
+    procedure btSairClick(Sender: TObject);
+    procedure btUsuarioConfigClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,6 +72,7 @@ type
 
     PSString: string;
     procedure SearchTree(const AText: string);
+    procedure pConfirmaLoggof(Sender: TComponent; AResult:Integer);
   end;
 
 function MainForm: TMainForm;
@@ -68,7 +83,7 @@ implementation
 
 uses
   uniGUIVars, MainModule, uniGUIApplication, uniGUIFrame, ULogin, ServerModule,
-  UController;
+  UController, UUsuarioProfile;
 
 function MainForm: TMainForm;
 begin
@@ -95,6 +110,17 @@ end;
 procedure TMainForm.btExpandTreeClick(Sender: TObject);
 begin
 NavTree.FullExpand;
+end;
+
+procedure TMainForm.btSairClick(Sender: TObject);
+begin
+  MessageDlg('Confirma troca de usuário?',mtConfirmation,mbYesNo,pConfirmaLoggof);
+end;
+
+procedure TMainForm.btUsuarioConfigClick(Sender: TObject);
+begin
+  fdUsuario.Edit;
+  FUsuarioProfile.ShowModalN;
 end;
 
 procedure TMainForm.NavTreeClick(Sender: TObject);
@@ -126,10 +152,10 @@ begin
         Ts.OnClose := TabSheetClose;
         Ts.Tag := NativeInt(Nd);
         Ts.ImageIndex := Nd.ImageIndex;
+        Ts.Caption := Nd.Text;
 
-        if Nd.ImageIndex = 1 then begin
-          FClassName := 'TFSocioManutencao' ;
-          Ts.Caption := 'Sócios';
+        if Nd.Text = 'USUÁRIOS' then begin
+          FClassName := 'TFUsuarioPermisPrograma' ;
         end
 
         ;
@@ -149,6 +175,19 @@ begin
   end;
 
 
+end;
+
+procedure TMainForm.pConfirmaLoggof(Sender: TComponent; AResult: Integer);
+var
+sArqImgLogin : string;
+begin
+  if AResult = mrYes then begin
+    btCloseAllTabs.OnClick(Sender);
+    sArqImgLogin := UniServerModule.FilesFolderPath + 'empresa/imgLogin/' + fdEmpresa.FieldByName('imagemLogin').AsString;
+    if FileExists(sArqImgLogin) then
+      FLogin.img_empresa.Picture.LoadFromFile(sArqImgLogin);
+    FLogin.ShowModalN;
+  end;
 end;
 
 procedure TMainForm.SearchEditChange(Sender: TObject);
@@ -216,13 +255,25 @@ begin
   iCodEmpresa := StrToIntDef(uniApplication.Parameters.Values['Empresa'],0);
   iCodEstabel := 0; //para implementações futuras
 
+  try
+    UniMainModule.conexaoDB.Connected := False;
+    UniMainModule.conexaoDB.Connected := True;
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao conectar no sistema: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      UniSession.Terminate();
+      Exit;
+    end;
+  end;
+
   fdEmpresa.Close;
   fdEmpresa.SQL.Clear;
   fdEmpresa.SQL.Add('select * from gcEmpresa where codEmpresa = ' + IntToStr(iCodEmpresa));
   fdEmpresa.Active := True;
   if fdEmpresa.IsEmpty then begin
     MessageDlg('Empresa não cadastrada!',mtError,[mbOK],nil);
-    Application.Terminate;
+    //Application.Terminate;
+    UniSession.Terminate();
     Exit;
   end;
 
@@ -235,7 +286,6 @@ begin
 
   FLogin.edt_login.SetFocus;
   FLogin.ShowModalN;
-
 
 end;
 

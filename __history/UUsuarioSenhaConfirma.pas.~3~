@@ -1,0 +1,36 @@
+unit UUsuarioSenhaConfirma;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm, uniLabel, uniGUIBaseClasses, uniEdit;
+
+type
+  TFUsuarioSenhaConfirma = class(TUniForm)
+    edt_nova_senha: TUniEdit;
+    UniLabel5: TUniLabel;
+    UniEdit1: TUniEdit;
+    UniLabel1: TUniLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma;
+begin
+  Result := TFUsuarioSenhaConfirma(UniMainModule.GetFormInstance(TFUsuarioSenhaConfirma));
+end;
+
+end.

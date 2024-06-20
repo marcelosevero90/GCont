@@ -1,7 +1,7 @@
 object FLogin: TFLogin
   Left = 0
   Top = 0
-  ClientHeight = 469
+  ClientHeight = 508
   ClientWidth = 623
   Caption = 'FLogin'
   BorderStyle = bsNone
@@ -13,7 +13,7 @@ object FLogin: TFLogin
   TextHeight = 13
   object UniPanel1: TUniPanel
     Left = 128
-    Top = 32
+    Top = 56
     Width = 345
     Height = 369
     Hint = ''
@@ -26,7 +26,7 @@ object FLogin: TFLogin
       Width = 193
       Hint = ''
       CharCase = ecUpperCase
-      Text = 'admin'
+      Text = 'ADMIN'
       ParentFont = False
       Font.Charset = ANSI_CHARSET
       Font.Height = -16
@@ -177,7 +177,7 @@ object FLogin: TFLogin
   end
   object UniLabel5: TUniLabel
     Left = 224
-    Top = 418
+    Top = 442
     Width = 151
     Height = 13
     Hint = ''
@@ -189,7 +189,7 @@ object FLogin: TFLogin
   end
   object UniLabel6: TUniLabel
     Left = 177
-    Top = 437
+    Top = 461
     Width = 248
     Height = 13
     Hint = ''
@@ -202,6 +202,6 @@ object FLogin: TFLogin
   object fdAux: TFDQuery
     Connection = UniMainModule.conexaoDB
     Left = 504
-    Top = 144
+    Top = 168
   end
 end

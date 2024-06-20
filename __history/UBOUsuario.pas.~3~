@@ -1,0 +1,102 @@
+unit UBOUsuario;
+
+interface
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, System.IniFiles, IdHTTP,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,  JSon;
+
+  function fBOSocio_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+
+
+implementation
+
+uses MainModule;
+
+function fBOSocio_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+var
+fqFKTab : TFDQuery;
+begin
+  Result := '';
+  try
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    try
+
+      if dsRegistros.IsEmpty then begin
+        Result := Result + 'Não foram encontrados registros para manutenção! |';
+        Exit;
+      end;
+
+      if sAcao = 'DELETE' then begin
+
+
+      end
+      else begin
+
+        if dsRegistros.State = dsInsert then begin
+
+          if (dsRegistros.FieldByName('COD_SOCIO').AsInteger = 0 ) or
+             (dsRegistros.FieldByName('COD_SOCIO').IsNull)         then begin
+            Result := Result + 'Código do sócio deve ser informado! |';
+          end;
+        end;
+
+        if (dsRegistros.FieldByName('SITUACAO').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('SITUACAO').IsNull)         then begin
+          Result := Result + 'Situação deve ser informada! |';
+        end;
+        if (dsRegistros.FieldByName('GERA_FATURA_COB').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('GERA_FATURA_COB').IsNull)         then begin
+          Result := Result + 'Geração da fatura de cobrança deve ser indicada! |';
+        end;
+
+        if (dsRegistros.FieldByName('NOME_SOCIO').AsString = '') or
+           (dsRegistros.FieldByName('NOME_SOCIO').IsNull)       then begin
+          Result := Result + 'Nome do sócio deve ser informado! |';
+        end;
+        if (dsRegistros.FieldByName('CPF').AsString = '') or
+           (dsRegistros.FieldByName('NOME_SOCIO').IsNull)       then begin
+          Result := Result + 'CPF deve ser informado! |';
+        end;
+        if (dsRegistros.FieldByName('DATA_IMPLANTACAO').IsNull)  then begin
+          Result := Result + 'Data Implantação deve ser informada! |';
+        end;
+        if (not dsRegistros.FieldByName('COD_CIDADE_IBGE').IsNull)    and
+           (dsRegistros.FieldByName('COD_CIDADE_IBGE').AsInteger > 0) then begin
+
+           fqFKTab.Close;
+           fqFKTab.SQL.Clear;
+           fqFKTab.SQL.Add(' select COD_CIDADE_IBGE from CIDADE ');
+           fqFKTab.SQL.Add(' where COD_CIDADE_IBGE = ' + IntToStr(dsRegistros.FieldByName('COD_CIDADE_IBGE').AsInteger) );
+           fqFKTab.Active := True;
+           if fqFKTab.IsEmpty then
+             Result := Result + 'Cidade informada não encontrada! |';
+           fqFKTab.Close;
+        end;
+      end;
+
+      if Result = '' then
+        Result := 'OK';
+
+    except
+      on e : exception do begin
+        Result := 'Erro ao gravar registro: ' + e.message;
+      end;
+
+    end;
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+
+
+end;
+
+end.

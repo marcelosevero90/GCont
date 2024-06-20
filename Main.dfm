@@ -14,7 +14,7 @@ object MainForm: TMainForm
   object UniPanel1: TUniPanel
     Left = 0
     Top = 0
-    Width = 233
+    Width = 277
     Height = 516
     Hint = ''
     Align = alLeft
@@ -28,7 +28,7 @@ object MainForm: TMainForm
     object NavTree: TUniTreeView
       Left = 1
       Top = 52
-      Width = 231
+      Width = 275
       Height = 463
       Hint = ''
       Items.NodeData = {
@@ -89,12 +89,13 @@ object MainForm: TMainForm
       BorderStyle = ubsNone
       OnClick = NavTreeClick
       ExplicitLeft = 2
-      ExplicitTop = 47
+      ExplicitTop = 58
+      ExplicitWidth = 231
     end
     object UniToolBar1: TUniToolBar
       Left = 1
       Top = 1
-      Width = 231
+      Width = 275
       Height = 29
       Hint = ''
       ShowHint = True
@@ -107,8 +108,7 @@ object MainForm: TMainForm
       TabOrder = 2
       ParentColor = False
       Color = clBtnFace
-      ExplicitTop = 49
-      ExplicitWidth = 195
+      ExplicitWidth = 231
       object btExpandTree: TUniToolButton
         Left = 0
         Top = 0
@@ -128,7 +128,6 @@ object MainForm: TMainForm
         Caption = 'btCollapseTree'
         TabOrder = 2
         OnClick = btCollapseTreeClick
-        ExplicitLeft = 25
       end
       object UniToolButton3: TUniToolButton
         Left = 46
@@ -169,7 +168,7 @@ object MainForm: TMainForm
     object SearchEdit: TUniComboBox
       Left = 1
       Top = 30
-      Width = 231
+      Width = 275
       Hint = ''
       Text = ''
       Align = alTop
@@ -188,12 +187,11 @@ object MainForm: TMainForm
         end>
       OnChange = SearchEditChange
       OnTriggerEvent = SearchEditTriggerEvent
-      ExplicitTop = 78
-      ExplicitWidth = 195
+      ExplicitWidth = 231
     end
   end
   object UniSplitter1: TUniSplitter
-    Left = 233
+    Left = 277
     Top = 0
     Width = 6
     Height = 516
@@ -201,8 +199,7 @@ object MainForm: TMainForm
     Align = alLeft
     ParentColor = False
     Color = clBtnFace
-    ExplicitLeft = 197
-    ExplicitHeight = 533
+    ExplicitLeft = 233
   end
   object sbMenu: TUniStatusBar
     Left = 0
@@ -213,79 +210,56 @@ object MainForm: TMainForm
     Panels = <
       item
         Alignment = taCenter
-        Width = 300
+        Width = 200
       end
       item
-        Width = 200
+        Width = 350
+      end
+      item
+        Text = 'Vers'#227'o: 1.01.0002'
+        Width = 50
       end>
     SizeGrip = False
     Align = alBottom
     Anchors = [akLeft, akRight, akBottom]
     ParentColor = False
     Color = clWindow
-    ExplicitTop = 518
   end
   object UniContainerPanel2: TUniContainerPanel
-    Left = 239
+    Left = 283
     Top = 0
-    Width = 748
+    Width = 704
     Height = 516
     Hint = ''
     ParentColor = False
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
-    ExplicitLeft = 163
-    ExplicitWidth = 824
-    ExplicitHeight = 533
+    ExplicitLeft = 239
+    ExplicitWidth = 748
     object UniContainerPanel3: TUniContainerPanel
       Left = 0
       Top = 0
-      Width = 748
+      Width = 704
       Height = 41
       Hint = ''
       ParentColor = False
       Align = alTop
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
-      ExplicitWidth = 784
+      ExplicitWidth = 748
       object btUsuarioConfig: TUniBitBtn
-        Left = 584
+        Left = 520
         Top = 0
-        Width = 164
+        Width = 132
         Height = 41
         Hint = ''
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0CDCDCDCCCCCCCCCCCCCC
-          CCCCCCCCCCCCCCCCCCCCCCCDCDCDF0F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFC2AB95A85611A7520AA7520AA75209A75209A7520AA7520AA85611C2AB
-          95FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB15F16D7975AE2A76DE2A66CE2
-          A56CE2A56CE2A66CE3A76DD8975BB15F17FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFC07633E8B98DDF9F5DDF9C59DF9A55DF9A55DF9C59E09F5DE8BA8FB868
-          20FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCA8648EDCBAAEAAD6BEAAF6FF6
-          FAFEECF0F1EAB06FEBAE6CEFCDADC07229FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFD39559F4DFCDF6BF7DFFF1DFFFFEFEF5F4F3ECDDC8F8C27FF5E1CFCA7D
-          34FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD5924FEBC49FFFECD6B3D9EF5D
-          A1C53C7FA47A9CB1FFF0D9EBC5A0D69451FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFEBB886F0AA63BDC3BB6099B8437A9892948BF2AE68EBB987FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDDDD7CADC478
-          BADE6AABCF6290A8E6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFF5976969AE2FF86C7E877B6D86DAED06983A0FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF063465AFF7FF96
-          DAF887C8E77FC1E005285BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFF0E3F6F2261905488B27CB3D5679BBE0E2E5EFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF124675307DAF4E
-          8EBC517FAC2D4B77113261FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFF395E862577A93C88BA3C7AA9224A75395881FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEE5EC2655811A
-          588A19518227507DDEE5ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         Caption = ''
         Align = alRight
         Anchors = [akTop, akRight, akBottom]
         TabOrder = 1
+        OnClick = btUsuarioConfigClick
+        ExplicitLeft = 564
       end
       object imgEmpresa: TUniImage
         Left = 0
@@ -297,11 +271,51 @@ object MainForm: TMainForm
         Align = alLeft
         Anchors = [akLeft, akTop, akBottom]
       end
+      object btSair: TUniBitBtn
+        Left = 652
+        Top = 0
+        Width = 52
+        Height = 41
+        Hint = 'Fazer Loggof'
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFEDEDEDCDCDCDCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+          CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCA0B2C04B7DA368A4D95C5C5C5D5B5C
+          5E5B5B5E5A5A5D5A5A5B5A5B5A5B5B5A5B5B5A5B5B5B5A5A5C59565768764E7E
+          A44C80AC5082AB65A2D5FFFFFFFFFFFFFFFFFF3A6BA16B69666F68696C6A696C
+          6A696C6A696C6A686E67624C89BA4E85B24D83AE5D8CB2629ED1FFFFFFFFFFFF
+          CCCCCC009147068A4E6E606469636467646367646367646268615B4F8ABB5086
+          B44F84B16895B95F9BCDFFFFFFCCCCCC00894552DCB0008E477257606B5B6067
+          5E6064606062605F645D57518DBE528AB75187B4739FC25D97C9CCCCCC008744
+          65D7B400DAA2008641008B44008F461C7D50645A5C605C5A6058525490C2558C
+          BA4E81AD7EA6C85A94C4008A4874DABD00CD9C00CC9C00D29E00D5A05FF0D000
+          91466353585D57565B534D5794C5588EBC47749B88AFCF5790C0008A4886DEC8
+          00C59C00C49B63DCC85FDECA5EE4CF0092475E4F55585353574F4A5A96CA5B8F
+          BE22B9F795B5D3548DBCFFFFFF0087439BE0D100C1A000863F008D4400924717
+          7A4C584E5154504F524B455B9ACD5C91C120B7F59EBCD75189B8FFFFFFFFFFFF
+          008843A2E6DA0090475B414B57474D544A4E514C4E4F4D4C4D46415E9CD25C95
+          C55990C1A6C4DF4E86B5FFFFFFFFFFFFFFFFFF00904603874A5244494E484A4D
+          494A4C4A4A4C48484A423D60A0D55D98C95894C6AFCCE64B83B0FFFFFFFFFFFF
+          FFFFFF4C7AAE47423F4A4443484644484644484644474542433C365FA1D85C9A
+          CC5896C9B8D3EB4980ACFFFFFFFFFFFFFFFFFF4C7EAF443832433B37433D3843
+          3D38433D38423B363C332CB9DAF57FB0DA5495CCC0DAEF467CA8FFFFFFFFFFFF
+          FFFFFF83A6C34B81AE4B83B04A83B04A83B04A83B04A82AF447DA9709CBFB9D5
+          EBB3D1EAC1DBF24279A5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF2F9CEE3F53F75A1}
+        Caption = ''
+        Align = alRight
+        Anchors = [akTop, akRight, akBottom]
+        TabOrder = 3
+        OnClick = btSairClick
+        ExplicitLeft = 696
+      end
     end
     object pgControlAdmin: TUniPageControl
       Left = 0
       Top = 41
-      Width = 748
+      Width = 704
       Height = 475
       Hint = ''
       ActivePage = UniTabSheet1
@@ -309,14 +323,12 @@ object MainForm: TMainForm
       Align = alClient
       Anchors = [akLeft, akTop, akRight, akBottom]
       TabOrder = 1
-      ExplicitWidth = 824
-      ExplicitHeight = 492
+      ExplicitWidth = 748
       object UniTabSheet1: TUniTabSheet
         Hint = ''
         ImageIndex = 2
         Caption = 'Home'
-        ExplicitWidth = 816
-        ExplicitHeight = 464
+        ExplicitWidth = 740
       end
     end
   end
@@ -1245,7 +1257,52 @@ object MainForm: TMainForm
   end
   object fdUsuario: TFDQuery
     Connection = UniMainModule.conexaoDB
+    SQL.Strings = (
+      'select * from gcUsuarioMestre')
     Left = 291
     Top = 225
+    object fdUsuariocodEmpresa: TIntegerField
+      FieldName = 'codEmpresa'
+      Required = True
+    end
+    object fdUsuariocodEstabel: TIntegerField
+      FieldName = 'codEstabel'
+      Required = True
+    end
+    object fdUsuariocodUsuario: TStringField
+      FieldName = 'codUsuario'
+      Required = True
+    end
+    object fdUsuarionomeUsuario: TStringField
+      FieldName = 'nomeUsuario'
+      Required = True
+      Size = 100
+    end
+    object fdUsuariosenhaUsuario: TStringField
+      FieldName = 'senhaUsuario'
+      Required = True
+      Size = 100
+    end
+    object fdUsuariotipoUsuario: TIntegerField
+      FieldName = 'tipoUsuario'
+      Required = True
+    end
+    object fdUsuarioaltSenhaProxAcesso: TIntegerField
+      FieldName = 'altSenhaProxAcesso'
+    end
+    object fdUsuariodataUltAltAcesso: TDateField
+      FieldName = 'dataUltAltAcesso'
+    end
+    object fdUsuariosituacao: TIntegerField
+      FieldName = 'situacao'
+    end
+    object fdUsuarioemail: TStringField
+      FieldName = 'email'
+      Size = 100
+    end
+    object fdUsuariotelefone: TStringField
+      FieldName = 'telefone'
+      Size = 45
+    end
   end
 end

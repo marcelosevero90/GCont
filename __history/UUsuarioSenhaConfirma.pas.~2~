@@ -1,0 +1,32 @@
+unit UUsuarioSenhaConfirma;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm;
+
+type
+  TFUsuarioSenhaConfirma = class(TUniForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma;
+begin
+  Result := TFUsuarioSenhaConfirma(UniMainModule.GetFormInstance(TFUsuarioSenhaConfirma));
+end;
+
+end.
