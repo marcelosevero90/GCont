@@ -1,0 +1,103 @@
+unit UEmpresa;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, uniRadioGroup, uniDBRadioGroup, uniLabel, uniEdit,
+  uniDBEdit, uniScrollBox, uniButton, uniBitBtn, uniToolBar, uniGUIBaseClasses,
+  Data.DB, uniGroupBox, uniMultiItem, uniComboBox, uniDBComboBox,
+  uniDBLookupComboBox, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
+
+type
+  TFEmpresa = class(TUniFrame)
+    UniToolBar2: TUniToolBar;
+    UniToolButton4: TUniToolButton;
+    btConfAlter: TUniBitBtn;
+    sbUsuarioManut: TUniScrollBox;
+    edtRazaoSocial: TUniDBEdit;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    edtCodEmp: TUniDBEdit;
+    UniLabel11: TUniLabel;
+    edtEmail: TUniDBEdit;
+    UniLabel1: TUniLabel;
+    edtTelef: TUniDBEdit;
+    dsEmpresa: TDataSource;
+    UniLabel2: TUniLabel;
+    UniDBEdit1: TUniDBEdit;
+    UniGroupBox1: TUniGroupBox;
+    UniDBLookupComboBox1: TUniDBLookupComboBox;
+    UniLabel3: TUniLabel;
+    UniDBEdit2: TUniDBEdit;
+    UniLabel4: TUniLabel;
+    UniDBEdit3: TUniDBEdit;
+    UniLabel5: TUniLabel;
+    UniDBEdit4: TUniDBEdit;
+    UniLabel6: TUniLabel;
+    UniDBEdit5: TUniDBEdit;
+    UniLabel7: TUniLabel;
+    UniDBEdit6: TUniDBEdit;
+    fdCidade: TFDQuery;
+    dsCidade: TDataSource;
+    procedure UniFrameCreate(Sender: TObject);
+    procedure btConfAlterClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, MainModule, UBOEmpresa;
+
+
+procedure TFEmpresa.btConfAlterClick(Sender: TObject);
+var
+sRespValid : string;
+begin
+
+  sRespValid := fBOEmpresa_ValidaPostDelete(MainForm.fdEmpresa ,'INS_UPD');
+  if sRespValid <> 'OK' then begin
+
+    sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+    MessageDlg('Erro ao gravar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+
+    MainForm.fdEmpresa.Post;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+  MessageDlg('Registro atualizado com sucesso!' ,mtInformation,[mbOK],nil);
+
+end;
+
+procedure TFEmpresa.UniFrameCreate(Sender: TObject);
+begin
+
+  fdCidade.Close;
+  fdCidade.Active := True;
+
+  edtRazaoSocial.SetFocus;
+
+end;
+
+initialization
+  RegisterClass(TFEmpresa);
+
+end.

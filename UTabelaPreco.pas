@@ -1,0 +1,810 @@
+unit UTabelaPreco;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniGUIBaseClasses, uniImageList,
+  uniDBComboBox, uniDBLookupComboBox, uniRadioGroup, uniDBRadioGroup, uniDBEdit,
+  uniScrollBox, uniCheckBox, uniLabel, Vcl.Imaging.pngimage, uniImage, uniPanel,
+  uniMultiItem, uniComboBox, uniEdit, uniGroupBox, uniDBNavigator, uniButton,
+  uniBitBtn, uniToolBar, uniBasicGrid, uniDBGrid, uniPageControl,
+  uniDateTimePicker, uniDBDateTimePicker;
+
+type
+  TFTabelaPreco = class(TUniFrame)
+    pgMenu: TUniPageControl;
+    tsLista: TUniTabSheet;
+    dbLista: TUniDBGrid;
+    UniToolBar1: TUniToolBar;
+    UniToolButton3: TUniToolButton;
+    UniToolButton2: TUniToolButton;
+    UniToolButton1: TUniToolButton;
+    UniToolButton5: TUniToolButton;
+    UniToolButton7: TUniToolButton;
+    btAtualizarDados: TUniBitBtn;
+    btFiltro: TUniBitBtn;
+    dnNaveg: TUniDBNavigator;
+    btNovoReg: TUniBitBtn;
+    btRelatCSV: TUniBitBtn;
+    UniGroupBox1: TUniGroupBox;
+    edtFiltroPesqRapida: TUniEdit;
+    cbCampoFiltro: TUniComboBox;
+    UniPanel1: TUniPanel;
+    gbFiltroParam: TUniGroupBox;
+    imgDel: TUniImage;
+    cbAtivosFiltro: TUniCheckBox;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    imgVis: TUniImage;
+    imgEdit: TUniImage;
+    imgItens: TUniImage;
+    tsManut: TUniTabSheet;
+    UniToolBar2: TUniToolBar;
+    UniToolButton4: TUniToolButton;
+    btCancelaAlter: TUniBitBtn;
+    btConfAlter: TUniBitBtn;
+    sbManut: TUniScrollBox;
+    edtNome: TUniDBEdit;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    edtCod: TUniDBEdit;
+    UniLabel1: TUniLabel;
+    UniDBRadioGroup1: TUniDBRadioGroup;
+    UniNativeImageList1: TUniNativeImageList;
+    fqAuxiliar: TFDQuery;
+    dsTabPreco: TDataSource;
+    fdTabPreco: TFDQuery;
+    fdTabPrecocodEmpresa: TIntegerField;
+    fdTabPrecocodEstabel: TIntegerField;
+    fdTabPrecocodTabPreco: TIntegerField;
+    fdTabPreconomeTabPreco: TStringField;
+    fdTabPrecodtIniValidade: TDateField;
+    fdTabPrecodtFimValidade: TDateField;
+    fdTabPrecosituacao: TIntegerField;
+    fdTabPrecoFC_IMG_EDIT: TStringField;
+    fdTabPrecoFC_IMG_VIS: TStringField;
+    fdTabPrecoFC_IMG_DEL: TStringField;
+    fdTabPrecoFC_DSC_SIT: TStringField;
+    tsTabItens: TUniTabSheet;
+    UniLabel2: TUniLabel;
+    UniDBDateTimePicker1: TUniDBDateTimePicker;
+    UniDBDateTimePicker2: TUniDBDateTimePicker;
+    fdTabPrecoFC_ITENS: TStringField;
+    UniGroupBox2: TUniGroupBox;
+    UniDBEdit1: TUniDBEdit;
+    UniDBEdit2: TUniDBEdit;
+    fdTabPreItem: TFDQuery;
+    dsTabPreItem: TDataSource;
+    fdTabPreItemcodEmpresa: TIntegerField;
+    fdTabPreItemcodEstabel: TIntegerField;
+    fdTabPreItemcodTabPreco: TIntegerField;
+    fdTabPreItemcodItem: TStringField;
+    fdTabPreItemsituacao: TIntegerField;
+    fdTabPreItempreco: TBCDField;
+    fdTabPreItemFC_IMG_EDIT: TStringField;
+    fdTabPreItemFC_DSC_SIT: TStringField;
+    fdTabPreItemFC_IMG_DEL: TStringField;
+    fdTabPreItemFC_DESC_ITEM: TStringField;
+    fdItem: TFDQuery;
+    pgTabItens: TUniPageControl;
+    tsTabItLista: TUniTabSheet;
+    tsTabItManut: TUniTabSheet;
+    UniPanel4: TUniPanel;
+    btNovoItem: TUniBitBtn;
+    btCancelItem: TUniBitBtn;
+    dbItens: TUniDBGrid;
+    lcbItemTabPre: TUniDBLookupComboBox;
+    UniDBRadioGroup2: TUniDBRadioGroup;
+    UniLabel7: TUniLabel;
+    edtPrecoTabPreItem: TUniDBEdit;
+    dsItem: TDataSource;
+    fdItemcodEmpresa: TIntegerField;
+    fdItemcodEstabel: TIntegerField;
+    fdItemcodItem: TStringField;
+    fdItemdescricao: TStringField;
+    fdItemcodItemFamilia: TIntegerField;
+    fdItemdataImplantacao: TDateField;
+    fdItemtipoControle: TIntegerField;
+    fdItemsituacao: TIntegerField;
+    UniPanel5: TUniPanel;
+    UniBitBtn1: TUniBitBtn;
+    UniBitBtn2: TUniBitBtn;
+    UniLabel3: TUniLabel;
+    edtFiltroItemTabPre: TUniEdit;
+    UniLabel4: TUniLabel;
+    procedure UniFrameCreate(Sender: TObject);
+    procedure edtFiltroPesqRapidaKeyPress(Sender: TObject; var Key: Char);
+    procedure edtFiltroPesqRapidaChange(Sender: TObject);
+    procedure dbListaFieldImage(const Column: TUniDBGridColumn;
+      const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+      var ATransparent: TUniTransparentOption);
+    procedure dbListaColumnSort(Column: TUniDBGridColumn; Direction: Boolean);
+    procedure dbListaCellClick(Column: TUniDBGridColumn);
+    procedure btRelatCSVClick(Sender: TObject);
+    procedure btNovoRegClick(Sender: TObject);
+    procedure btConfAlterClick(Sender: TObject);
+    procedure btCancelaAlterClick(Sender: TObject);
+    procedure btAtualizarDadosClick(Sender: TObject);
+    procedure btFiltroClick(Sender: TObject);
+    procedure btCancelItemClick(Sender: TObject);
+    procedure fdTabPreItemCalcFields(DataSet: TDataSet);
+    procedure fdTabPrecoCalcFields(DataSet: TDataSet);
+    procedure btNovoItemClick(Sender: TObject);
+    procedure dbItensFieldImage(const Column: TUniDBGridColumn;
+      const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+      var ATransparent: TUniTransparentOption);
+    procedure dbItensCellClick(Column: TUniDBGridColumn);
+    procedure UniBitBtn1Click(Sender: TObject);
+    procedure UniBitBtn2Click(Sender: TObject);
+    procedure edtFiltroItemTabPreKeyPress(Sender: TObject; var Key: Char);
+    procedure edtFiltroItemTabPreChange(Sender: TObject);
+    procedure edtCodKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure pDeleteConfirmar(Sender: TComponent; AResult:Integer);
+    procedure SortColumn(const FieldName: string; Dir: Boolean);
+    procedure pFiltroRapido;
+    procedure pConfirmaRegKeyPress(Sender: TObject; var Key: Char);
+    procedure pDeleteItemConfirmar(Sender: TComponent; AResult:Integer);
+    procedure pFiltroRapItem;
+
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, MainModule, ServerModule, UController, UBOTabelaPreco,
+  UBOTabPrecoItem;
+
+
+
+procedure TFTabelaPreco.btAtualizarDadosClick(Sender: TObject);
+var
+  sSQL, sSitFiltro : string;
+begin
+
+  try
+    fdTabPreco.Active := True;
+
+    sSQL := ' select * from gcTabelaPreco '
+          + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+          + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel);
+
+    if cbAtivosFiltro.Checked then
+      sSQL := sSQL + ' and situacao = 1 ';
+
+    fdTabPreco.Close;
+    fdTabPreco.SQL.Clear;
+    fdTabPreco.SQL.Add(sSQL);
+    fdTabPreco.Active := True;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao atualizar registros: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+
+end;
+
+procedure TFTabelaPreco.btCancelaAlterClick(Sender: TObject);
+begin
+  if fdTabPreco.State in [dsEdit,dsInsert] then
+    fdTabPreco.Cancel;
+
+  tsManut.TabVisible := False;
+  tsLista.TabVisible := True;
+  pgMenu.TabIndex := 0;
+end;
+
+procedure TFTabelaPreco.btCancelItemClick(Sender: TObject);
+begin
+
+  fdTabPreItem.Cancel;
+
+  tsTabItens.TabVisible := False;
+  tsLista.TabVisible := True ;
+  pgMenu.TabIndex     := 0;
+end;
+
+procedure TFTabelaPreco.btConfAlterClick(Sender: TObject);
+var
+sRespValid : string;
+begin
+
+  sRespValid := fBOTabPreco_ValidaPostDelete(fdTabPreco,'INS_UPD');
+  if sRespValid <> 'OK' then begin
+
+    sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+    MessageDlg('Erro ao gravar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+
+    fdTabPreco.Post;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+  tsManut.TabVisible := False;
+  tsLista.TabVisible := True;
+  pgMenu.TabIndex := 0;
+
+
+end;
+
+procedure TFTabelaPreco.btFiltroClick(Sender: TObject);
+begin
+  if btFiltro.ImageIndex = 10 then begin
+    gbFiltroParam.Visible := True;
+    btFiltro.ImageIndex := 11;
+  end
+  else begin
+    gbFiltroParam.Visible := False;
+    btFiltro.ImageIndex := 10;
+  end;
+end;
+
+procedure TFTabelaPreco.btNovoItemClick(Sender: TObject);
+begin
+
+  fdTabPreItem.Insert;
+  fdTabPreItemcodEmpresa.AsInteger  := fdTabPrecocodEmpresa.AsInteger;
+  fdTabPreItemcodEstabel.AsInteger  := fdTabPrecocodEstabel.AsInteger;
+  fdTabPreItemcodTabPreco.AsInteger := fdTabPrecocodTabPreco.AsInteger;
+  fdTabPreItemsituacao.AsInteger    := 1;
+  fdTabPreItempreco.AsFloat         := 0;
+
+  lcbItemTabPre.Enabled   := True;
+  tsTabItManut.TabVisible := True;
+  tsTabItLista.TabVisible := False;
+
+  lcbItemTabPre.SetFocus;
+
+  pgTabItens.TabIndex     := 1;
+
+end;
+
+procedure TFTabelaPreco.btNovoRegClick(Sender: TObject);
+begin
+  fdTabPreco.Insert;
+  fdTabPrecocodEmpresa.AsInteger   := MainForm.iCodEmpresa;
+  fdTabPrecocodEstabel.AsInteger   := MainForm.iCodEstabel;
+  fdTabPrecosituacao.AsInteger     := 1;
+  fdTabPrecodtIniValidade.AsDateTime := Date;
+  fdTabPrecodtFimValidade.AsDateTime := Date + 365;
+
+  fqAuxiliar.Close;
+  fqAuxiliar.SQL.Clear;
+  fqAuxiliar.SQL.Add(' select max(codTabPreco) as seqReg from gcTabelaPreco ' +
+                     ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                     '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel));
+  fqAuxiliar.Active := True;
+  if fqAuxiliar.IsEmpty then
+    fdTabPrecocodTabPreco.AsInteger := 1
+  else
+    fdTabPrecocodTabPreco.AsInteger := fqAuxiliar.FieldByName('seqReg').AsInteger + 1;
+
+
+  sbManut.Enabled       := True;
+  edtCod.Enabled       := True;
+  tsManut.Caption      := 'Manutenção (Inclusão)';
+  tsManut.TabVisible   := True;
+  btConfAlter.Enabled    := True;
+  edtCod.SetFocus;
+  tsLista.TabVisible   := False ;
+
+  edtNome.SetFocus;
+
+  pgMenu.TabIndex := 1;
+end;
+
+procedure TFTabelaPreco.btRelatCSVClick(Sender: TObject);
+var
+sArqCSV, sNomeAux, sRet : string;
+begin
+
+  Randomize;
+  repeat
+    sArqCSV   := UniServerModule.FilesFolderPath ;
+    sNomeAux  := IntToStr(MainForm.iCodEmpresa) + '_TabPreco_' +
+                 StringReplace(FormatDateTime('dd/mm/yyyy',Now),'/','',[rfReplaceAll]) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '.csv';
+
+    sArqCSV := sArqCSV + sNomeAux;
+    if not FileExists(sArqCSV) then
+      Break;
+  until (not FileExists(sArqCSV));
+
+  sRet:= fImpressaoCSV(fdTabPreco,sArqCSV);
+  if sRet <> 'OK' then begin
+    MessageDlg('Erro ao gerar arquivo CSV com mensagem: ' + chr(10) + sRet ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+    UniSession.SendFile(sArqCSV);
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao enviar arquivo: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+    end;
+  end;
+
+end;
+
+procedure TFTabelaPreco.dbItensCellClick(Column: TUniDBGridColumn);
+var
+sRespValid : string;
+begin
+  if Column.FieldName = 'FC_IMG_EDIT' then begin
+    if fdTabPreItem.IsEmpty then
+      Exit;
+
+
+    fdTabPreItem.Edit;
+
+    edtPrecoTabPreItem.SetFocus;
+
+    lcbItemTabPre.Enabled   := False;
+    tsTabItManut.TabVisible := True;
+    tsTabItLista.TabVisible := False;
+    pgTabItens.TabIndex     := 1;
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_DEL' then begin
+    if fdTabPreItem.IsEmpty then
+      Exit;
+
+    sRespValid := fBOTabPreItem_ValidaPostDelete(fdTabPreItem,'DELETE');
+    if sRespValid <> 'OK' then begin
+
+      sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+      MessageDlg('Erro ao eliminar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+      Exit;
+    end;
+
+    MessageDlg('Tem certeza que deseja eliminar o Item da Tab Preço abaixo?' + chr(10) + fdTabPreconomeTabPreco.AsString  ,mtConfirmation,mbYesNo, pDeleteItemConfirmar);
+
+  end;
+
+end;
+
+procedure TFTabelaPreco.dbItensFieldImage(const Column: TUniDBGridColumn;
+  const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+  var ATransparent: TUniTransparentOption);
+begin
+  if SameText(AField.FieldName, 'FC_IMG_EDIT') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgEdit.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_DEL') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgDel.Picture.Graphic;
+  end;
+end;
+
+procedure TFTabelaPreco.dbListaCellClick(Column: TUniDBGridColumn);
+var
+sRespValid : string;
+begin
+
+  if Column.FieldName = 'FC_IMG_EDIT' then begin
+    //ShowMessageN('EDITAR');
+    if fdTabPreco.IsEmpty then
+      Exit;
+
+    fdTabPreco.Edit;
+
+    sbManut.Enabled          := True;
+    edtCod.Enabled    := False;
+    tsManut.Caption          := 'Manutenção (Edição)';
+    tsManut.TabVisible       := True;
+    btConfAlter.Enabled      := True;
+    tsLista.TabVisible       := False ;
+    edtNome.SetFocus;
+
+    pgMenu.TabIndex := 1;
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_VIS' then begin
+    //ShowMessageN('VISUALIZA');
+    if fdTabPreco.IsEmpty then
+      Exit;
+
+    sbManut.Enabled       := False;
+    tsManut.Caption      := 'Manutenção (Visualização)';
+    tsManut.TabVisible   := True;
+    btConfAlter.Enabled         := False;
+    tsLista.TabVisible   := False ;
+
+    pgMenu.TabIndex := 1;
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_DEL' then begin
+    //ShowMessageN('DELETE');
+    if fdTabPreco.IsEmpty then
+      Exit;
+
+
+    sRespValid := fBOTabPreco_ValidaPostDelete(fdTabPreco,'DELETE');
+    if sRespValid <> 'OK' then begin
+
+      sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+      MessageDlg('Erro ao eliminar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+      Exit;
+    end;
+
+    MessageDlg('Tem certeza que deseja eliminar a Tab Preço abaixo?' + chr(10) + fdTabPreconomeTabPreco.AsString  ,mtConfirmation,mbYesNo, pDeleteConfirmar);
+
+  end
+  else
+  if Column.FieldName = 'FC_ITENS' then begin
+
+    edtFiltroItemTabPre.Clear;
+
+    fdItem.Close;
+    fdItem.SQL.Clear;
+    fdItem.SQL.Add(' select * from gcItem '
+                    + ' where codEmpresa  = ' + IntToStr(MainForm.iCodEmpresa)
+                    + '   and codEstabel  = ' + IntToStr(MainForm.iCodEstabel)
+                    );
+    fdItem.Active := True;
+
+    fdTabPreItem.Close;
+    fdTabPreItem.SQL.Clear;
+    fdTabPreItem.SQL.Add( ' select * from gcTabPrecoItem '
+                        + ' where codEmpresa  = ' + IntToStr(MainForm.iCodEmpresa)
+                        + '   and codEstabel  = ' + IntToStr(MainForm.iCodEstabel)
+                        +'    and codTabPreco = ' + IntToStr(fdTabPrecocodTabPreco.AsInteger))
+                        ;
+    fdTabPreItem.Active := True;
+
+    tsTabItManut.TabVisible := False;
+    tsTabItLista.TabVisible := True;
+    pgTabItens.TabIndex     := 0;
+
+
+    tsTabItens.TabVisible   := True;
+    tsLista.TabVisible   := False ;
+
+    pgMenu.TabIndex := 2;
+
+
+  end;
+
+
+end;
+
+procedure TFTabelaPreco.dbListaColumnSort(Column: TUniDBGridColumn;
+  Direction: Boolean);
+begin
+SortColumn(Column.FieldName, Direction);
+end;
+
+procedure TFTabelaPreco.dbListaFieldImage(const Column: TUniDBGridColumn;
+  const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+  var ATransparent: TUniTransparentOption);
+begin
+  if SameText(AField.FieldName, 'FC_IMG_EDIT') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgEdit.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_VIS') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgVis.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_DEL') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgDel.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_ITENS') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgItens.Picture.Graphic;
+  end;
+end;
+
+procedure TFTabelaPreco.edtFiltroPesqRapidaChange(Sender: TObject);
+begin
+  if Trim(edtFiltroPesqRapida.Text) = '' then begin
+    fdTabPreco.Filtered  := False;
+    fdTabPreco.filter    := '';
+  end;
+end;
+
+procedure TFTabelaPreco.edtFiltroPesqRapidaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Trim(edtFiltroPesqRapida.Text) = '' then begin
+    fdTabPreco.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    pFiltroRapido;
+  end;
+end;
+
+procedure TFTabelaPreco.fdTabPrecoCalcFields(DataSet: TDataSet);
+begin
+  if DataSet.FieldByName('situacao').AsInteger = 1 then
+    DataSet.FieldByName('FC_DSC_SIT').AsString := 'Ativo'
+  else
+    DataSet.FieldByName('FC_DSC_SIT').AsString := 'Inativo';
+end;
+
+procedure TFTabelaPreco.fdTabPreItemCalcFields(DataSet: TDataSet);
+begin
+
+  if DataSet.FieldByName('situacao').AsInteger = 1 then
+    DataSet.FieldByName('FC_DSC_SIT').AsString := 'Ativo'
+  else
+    DataSet.FieldByName('FC_DSC_SIT').AsString := 'Inativo';
+
+  DataSet.FieldByName('FC_DESC_ITEM').AsString := '';
+  if fdItem.Locate('codItem',DataSet.FieldByName('codItem').AsString,[loCaseInsensitive]) then
+    DataSet.FieldByName('FC_DESC_ITEM').AsString := fdItem.FieldByName('descricao').AsString;
+
+end;
+
+procedure TFTabelaPreco.pConfirmaRegKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+
+    btConfAlter.ShowMask('Gravando...');
+    UniSession.Synchronize();
+
+    btConfAlter.OnClick(Sender);
+
+    btConfAlter.HideMask;
+    UniSession.Synchronize();
+  end;
+end;
+
+procedure TFTabelaPreco.pDeleteConfirmar(Sender: TComponent; AResult: Integer);
+begin
+  if AResult = mrYes then begin
+
+    try
+
+      fdTabPreco.Delete;
+
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao eliminar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TFTabelaPreco.pDeleteItemConfirmar(Sender: TComponent;
+  AResult: Integer);
+begin
+  if AResult = mrYes then begin
+
+    try
+
+      fdTabPreItem.Delete;
+
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao eliminar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TFTabelaPreco.pFiltroRapido;
+begin
+  fdTabPreco.Filtered  := False;
+  if Trim(edtFiltroPesqRapida.Text) <> '' then begin
+
+    if cbCampoFiltro.ItemIndex = 0 then begin
+      fdTabPreco.Filter    := '    (upper(codTabPreco)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+                                 + ' or (upper(nomeTabPreco) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 1 then begin
+      fdTabPreco.Filter    := '    (upper(codTabPreco)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 2 then begin
+      fdTabPreco.Filter    := ' (upper(nomeTabPreco) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end;
+
+    fdTabPreco.Filtered  := True;
+  end;
+end;
+
+procedure TFTabelaPreco.pFiltroRapItem;
+begin
+  fdTabPreItem.Filtered  := False;
+  if Trim(edtFiltroItemTabPre.Text) <> '' then begin
+
+
+    fdTabPreItem.Filter    := '    (upper(codItem)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroItemTabPre.Text) + '%') + ') '
+                               + ' or (upper(FC_DESC_ITEM) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroItemTabPre.Text) + '%') + ') '
+    ;
+
+
+
+    fdTabPreItem.Filtered  := True;
+  end;
+end;
+
+procedure TFTabelaPreco.SortColumn(const FieldName: string; Dir: Boolean);
+begin
+  if Dir then
+    fdTabPreco.IndexName := FieldName+'_index_asc'
+  else
+    fdTabPreco.IndexName := FieldName+'_index_des';
+end;
+
+procedure TFTabelaPreco.UniBitBtn1Click(Sender: TObject);
+var
+sRespValid : string;
+begin
+
+  sRespValid := fBOTabPreItem_ValidaPostDelete(fdTabPreItem, 'INS_UPD');
+  if sRespValid <> 'OK' then begin
+
+    sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+    MessageDlg('Erro ao gravar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+
+    fdTabPreItem.Post;
+
+    tsTabItManut.TabVisible := False;
+    tsTabItLista.TabVisible := True ;
+    pgTabItens.TabIndex     := 0;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+end;
+
+procedure TFTabelaPreco.UniBitBtn2Click(Sender: TObject);
+begin
+  fdTabPreItem.Cancel;
+
+  tsTabItManut.TabVisible := False;
+  tsTabItLista.TabVisible := True ;
+  pgTabItens.TabIndex     := 0;
+end;
+
+procedure TFTabelaPreco.edtCodKeyPress(Sender: TObject; var Key: Char);
+begin
+pConfirmaRegKeyPress(sender,Key);
+end;
+
+procedure TFTabelaPreco.edtFiltroItemTabPreChange(Sender: TObject);
+begin
+  if Trim(edtFiltroItemTabPre.Text) = '' then begin
+    fdTabPreItem.Filtered  := False;
+    fdTabPreItem.filter    := '';
+  end;
+end;
+
+procedure TFTabelaPreco.edtFiltroItemTabPreKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Trim(edtFiltroItemTabPre.Text) = '' then begin
+    fdTabPreItem.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    pFiltroRapItem;
+  end;
+end;
+
+procedure TFTabelaPreco.UniFrameCreate(Sender: TObject);
+var
+  I: Integer;
+  IndexnameAsc : string;
+  IndexnameDes : string;
+  idxOrdAsc,idxOrdDes  : TFDIndex;
+begin
+
+  tsManut.TabVisible  := False;
+  tsTabItens.TabVisible  := False;
+  pgMenu.TabIndex  := 0;
+
+
+  with fdTabPreco do
+  begin
+    for I := 0 to FieldCount-1 do
+    begin
+
+      IndexnameAsc := Fields[I].FieldName+'_index_asc';
+      IndexnameDes := Fields[I].FieldName+'_index_des';
+
+      idxOrdAsc := TFDIndex.Create(fdTabPreco.Indexes);
+      idxOrdAsc.Name      := IndexnameAsc;
+      idxOrdAsc.Fields    := Fields[I].FieldName;
+      idxOrdAsc.Options   := [];
+      idxOrdAsc.Selected  := True;
+      idxOrdAsc.Active    := True;
+
+      idxOrdDes := TFDIndex.Create(fdTabPreco.Indexes);
+      idxOrdDes.Name      := IndexnameDes;
+      idxOrdDes.Fields    := Fields[I].FieldName;
+      idxOrdDes.Options   := [soDescending];
+      idxOrdDes.Selected  := True;
+      idxOrdDes.Active    := True;
+    end;
+  end;
+
+  with fdTabPreItem do
+  begin
+    for I := 0 to FieldCount-1 do
+    begin
+
+      IndexnameAsc := Fields[I].FieldName+'_index_asc';
+      IndexnameDes := Fields[I].FieldName+'_index_des';
+
+      idxOrdAsc := TFDIndex.Create(fdTabPreItem.Indexes);
+      idxOrdAsc.Name      := IndexnameAsc;
+      idxOrdAsc.Fields    := Fields[I].FieldName;
+      idxOrdAsc.Options   := [];
+      idxOrdAsc.Selected  := True;
+      idxOrdAsc.Active    := True;
+
+      idxOrdDes := TFDIndex.Create(fdTabPreItem.Indexes);
+      idxOrdDes.Name      := IndexnameDes;
+      idxOrdDes.Fields    := Fields[I].FieldName;
+      idxOrdDes.Options   := [soDescending];
+      idxOrdDes.Selected  := True;
+      idxOrdDes.Active    := True;
+    end;
+  end;
+
+  fdTabPreItem.IndexName := 'idxOrdCodAsc';
+
+  fdTabPreco.IndexName := 'idxOrdCodAsc';
+  btAtualizarDados.OnClick(Sender);
+
+end;
+
+initialization
+  RegisterClass(TFTabelaPreco);
+
+
+end.

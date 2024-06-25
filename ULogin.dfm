@@ -22,8 +22,9 @@ object FLogin: TFLogin
     Color = clWhite
     object edt_login: TUniEdit
       Left = 80
-      Top = 170
+      Top = 167
       Width = 193
+      Height = 25
       Hint = ''
       CharCase = ecUpperCase
       Text = 'ADMIN'
@@ -35,9 +36,10 @@ object FLogin: TFLogin
       Color = clBtnFace
     end
     object edt_senha: TUniEdit
-      Left = 80
-      Top = 210
+      Left = 79
+      Top = 207
       Width = 193
+      Height = 25
       Hint = ''
       PasswordChar = '*'
       Text = '123'

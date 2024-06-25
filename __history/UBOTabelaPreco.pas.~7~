@@ -1,0 +1,101 @@
+unit UBOTabelaPreco;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, System.IniFiles, IdHTTP,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,  JSon;
+
+  function fBOTabPreco_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+
+implementation
+
+uses Main, MainModule;
+
+function fBOTabPreco_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+var
+  fqFKTab : TFDQuery;
+begin
+  Result := '';
+  try
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    try
+
+      if dsRegistros.IsEmpty then begin
+        Result := Result + 'Não foram encontrados registros para manutenção! |';
+        Exit;
+      end;
+
+      if sAcao = 'DELETE' then begin
+
+
+      end
+      else begin
+
+        if dsRegistros.State = dsInsert then begin
+
+          if (dsRegistros.FieldByName('codTabPreco').AsInteger = 0 ) or
+             (dsRegistros.FieldByName('codTabPreco').IsNull)         then begin
+            Result := Result + 'Código da Tab Preço deve ser informado! |';
+          end
+          else begin
+            fqFKTab.Close;
+            fqFKTab.SQL.Clear;
+            fqFKTab.SQL.Add(' select codTabPreco from gcTabelaPreco ' +
+                            ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                            '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                            '   and codTabPreco  = ' + IntToStr(dsRegistros.FieldByName('codTabPreco').AsInteger)
+                            );
+            fqFKTab.Active := True;
+            if not fqFKTab.IsEmpty then begin
+              Result := Result + 'Código ' + dsRegistros.FieldByName('codTabPreco').AsString + ' já está cadastrado! |';
+            end;
+          end;
+        end;
+        if (dsRegistros.FieldByName('nomeTabPreco').AsString = '' ) or
+           (dsRegistros.FieldByName('nomeTabPreco').IsNull)         then begin
+          Result := Result + 'Nome da Tab Preço deve ser informado! |';
+        end;
+        if (dsRegistros.FieldByName('situacao').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('situacao').IsNull)         then begin
+          Result := Result + 'Situação deve ser informado! |';
+        end;
+        if (dsRegistros.FieldByName('dtIniValidade').IsNull)         then begin
+          Result := Result + 'Início da Validade deve ser informada! |';
+        end;
+        if (dsRegistros.FieldByName('dtFimValidade').IsNull)         then begin
+          Result := Result + 'Fim da Validade deve ser informada! |';
+        end;
+
+        if (dsRegistros.FieldByName('dtIniValidade').AsDateTime > dsRegistros.FieldByName('dtFimValidade').AsDateTime) then begin
+          Result := Result + 'Fim da Validade deve ser maior que a data inicial! |';
+        end;
+
+      end;
+
+      if Result = '' then
+        Result := 'OK';
+
+    except
+      on e : exception do begin
+        Result := 'Erro ao gravar registro: ' + e.message;
+      end;
+    end;
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+
+
+end;
+
+
+end.

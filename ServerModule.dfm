@@ -48,8 +48,8 @@ object UniServerModule: TUniServerModule
   SSL.SSLOptions.Mode = sslmUnassigned
   SSL.SSLOptions.VerifyMode = []
   SSL.SSLOptions.VerifyDepth = 0
-  ConnectionFailureRecovery.ErrorMessage = 'Connection Error'
-  ConnectionFailureRecovery.RetryMessage = 'Retrying...'
+  ConnectionFailureRecovery.ErrorMessage = 'Erro de Conex'#227'o.'
+  ConnectionFailureRecovery.RetryMessage = 'Reconectando...'
   Height = 150
   Width = 215
 end

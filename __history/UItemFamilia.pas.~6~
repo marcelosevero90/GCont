@@ -1,0 +1,190 @@
+unit UItemFamilia;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniGUIBaseClasses, uniImageList,
+  uniLabel, uniDBEdit, uniScrollBox, Vcl.Imaging.pngimage, uniImage, uniPanel,
+  uniMultiItem, uniComboBox, uniEdit, uniGroupBox, uniDBNavigator, uniButton,
+  uniBitBtn, uniToolBar, uniBasicGrid, uniDBGrid, uniPageControl;
+
+type
+  TFItemFamilia = class(TUniFrame)
+    pgMenu: TUniPageControl;
+    tsLista: TUniTabSheet;
+    dbLista: TUniDBGrid;
+    UniToolBar1: TUniToolBar;
+    UniToolButton3: TUniToolButton;
+    UniToolButton2: TUniToolButton;
+    UniToolButton1: TUniToolButton;
+    UniToolButton5: TUniToolButton;
+    UniToolButton7: TUniToolButton;
+    btAtualizarDados: TUniBitBtn;
+    btFiltro: TUniBitBtn;
+    dnNaveg: TUniDBNavigator;
+    btNovoReg: TUniBitBtn;
+    btRelatCSV: TUniBitBtn;
+    UniGroupBox1: TUniGroupBox;
+    edtFiltroPesqRapida: TUniEdit;
+    cbCampoFiltro: TUniComboBox;
+    UniPanel1: TUniPanel;
+    gbFiltroParam: TUniGroupBox;
+    imgDel: TUniImage;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    imgVis: TUniImage;
+    imgEdit: TUniImage;
+    imgPermis: TUniImage;
+    tsManut: TUniTabSheet;
+    UniToolBar2: TUniToolBar;
+    UniToolButton4: TUniToolButton;
+    btCancelaAlter: TUniBitBtn;
+    btConfAlter: TUniBitBtn;
+    sbManut: TUniScrollBox;
+    edtNome: TUniDBEdit;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    edtCod: TUniDBEdit;
+    UniNativeImageList1: TUniNativeImageList;
+    fqAuxiliar: TFDQuery;
+    dsItemFamilia: TDataSource;
+    fdItemFamilia: TFDQuery;
+    fdItemFamiliacodEmpresa: TIntegerField;
+    fdItemFamiliacodEstabel: TIntegerField;
+    fdItemFamiliacodItemFamilia: TIntegerField;
+    fdItemFamiliadescricao: TStringField;
+    fdItemFamiliaFC_IMG_EDIT: TStringField;
+    fdItemFamiliaFC_IMG_VIS: TStringField;
+    fdItemFamiliaFC_IMG_DEL: TStringField;
+    procedure UniFrameCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure pDeleteConfirmar(Sender: TComponent; AResult:Integer);
+    procedure SortColumn(const FieldName: string; Dir: Boolean);
+    procedure pFiltroRapido;
+    procedure pConfirmaRegKeyPress(Sender: TObject; var Key: Char);
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, MainModule;
+
+
+
+procedure TFItemFamilia.pConfirmaRegKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    btConfAlter.ShowMask('Gravando...');
+    UniSession.Synchronize();
+
+    btConfAlter.OnClick(Sender);
+
+    btConfAlter.ShowMask('Gravando...');
+    UniSession.Synchronize();
+  end;
+end;
+
+procedure TFItemFamilia.pDeleteConfirmar(Sender: TComponent; AResult: Integer);
+begin
+  if AResult = mrYes then begin
+
+    try
+
+      fdFormaPagto.Delete;
+
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao eliminar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TFItemFamilia.pFiltroRapido;
+begin
+  fdFormaPagto.Filtered  := False;
+  if Trim(edtFiltroPesqRapida.Text) <> '' then begin
+
+    if cbCampoFiltro.ItemIndex = 0 then begin
+      fdFormaPagto.Filter    := '    (upper(codFormaPagto)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+                                 + ' or (upper(nomeFormaPagto) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 1 then begin
+      fdFormaPagto.Filter    := '    (upper(codFormaPagto)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 2 then begin
+      fdFormaPagto.Filter    := ' (upper(nomeFormaPagto) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end;
+
+    fdFormaPagto.Filtered  := True;
+  end;
+end;
+
+procedure TFItemFamilia.SortColumn(const FieldName: string; Dir: Boolean);
+begin
+  if Dir then
+    fdFormaPagto.IndexName := FieldName+'_index_asc'
+  else
+    fdFormaPagto.IndexName := FieldName+'_index_des';
+end;
+
+procedure TFItemFamilia.UniFrameCreate(Sender: TObject);
+var
+  I: Integer;
+  IndexnameAsc : string;
+  IndexnameDes : string;
+  idxOrdAsc,idxOrdDes  : TFDIndex;
+begin
+
+  tsManut.TabVisible  := False;
+  pgMenu.TabIndex  := 0;
+
+
+  with fdItemFamilia do
+  begin
+    for I := 0 to FieldCount-1 do
+    begin
+
+      IndexnameAsc := Fields[I].FieldName+'_index_asc';
+      IndexnameDes := Fields[I].FieldName+'_index_des';
+
+      idxOrdAsc := TFDIndex.Create(fdItemFamilia.Indexes);
+      idxOrdAsc.Name      := IndexnameAsc;
+      idxOrdAsc.Fields    := Fields[I].FieldName;
+      idxOrdAsc.Options   := [];
+      idxOrdAsc.Selected  := True;
+      idxOrdAsc.Active    := True;
+
+      idxOrdDes := TFDIndex.Create(fdItemFamilia.Indexes);
+      idxOrdDes.Name      := IndexnameDes;
+      idxOrdDes.Fields    := Fields[I].FieldName;
+      idxOrdDes.Options   := [soDescending];
+      idxOrdDes.Selected  := True;
+      idxOrdDes.Active    := True;
+    end;
+  end;
+
+  fdItemFamilia.IndexName := 'idxOrdCodAsc';
+  btAtualizarDados.OnClick(Sender);
+
+end;
+
+initialization
+  RegisterClass(TFItemFamilia);
+
+end.

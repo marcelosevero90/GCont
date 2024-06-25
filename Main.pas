@@ -11,7 +11,8 @@ uses
   uniTreeView, uniImage, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniMemo, uniDBMemo, uniBasicGrid,
+  uniDBGrid, uniGroupBox;
 
 type
   TMainForm = class(TUniForm)
@@ -51,6 +52,19 @@ type
     fdUsuarioemail: TStringField;
     fdUsuariotelefone: TStringField;
     btSair: TUniBitBtn;
+    gbMsg: TUniGroupBox;
+    dbMensagem: TUniDBGrid;
+    UniPanel2: TUniPanel;
+    mmMensagem: TUniDBMemo;
+    fdMensagem: TFDQuery;
+    dsMensagem: TDataSource;
+    fdMensagemidMensagem: TIntegerField;
+    fdMensagemcodEmpresa: TIntegerField;
+    fdMensagemdtIniValid: TDateField;
+    fdMensagemdtFimValid: TDateField;
+    fdMensagemmensagem: TStringField;
+    fdMensagemimportante: TIntegerField;
+    fdMensagemtitulo: TStringField;
     procedure NavTreeClick(Sender: TObject);
     procedure TabSheetClose(Sender: TObject; var AllowClose: Boolean);
     procedure SearchEditChange(Sender: TObject);
@@ -62,6 +76,8 @@ type
     procedure UniFormCreate(Sender: TObject);
     procedure btSairClick(Sender: TObject);
     procedure btUsuarioConfigClick(Sender: TObject);
+    procedure dbMensagemDrawColumnCell(Sender: TObject; ACol, ARow: Integer;
+      Column: TUniDBGridColumn; Attribs: TUniCellAttribs);
   private
     { Private declarations }
   public
@@ -73,6 +89,7 @@ type
     PSString: string;
     procedure SearchTree(const AText: string);
     procedure pConfirmaLoggof(Sender: TComponent; AResult:Integer);
+    procedure pFecharAplicacao(Sender: TComponent; AResult:Integer);
   end;
 
 function MainForm: TMainForm;
@@ -123,6 +140,17 @@ begin
   FUsuarioProfile.ShowModalN;
 end;
 
+procedure TMainForm.dbMensagemDrawColumnCell(Sender: TObject; ACol,
+  ARow: Integer; Column: TUniDBGridColumn; Attribs: TUniCellAttribs);
+begin
+  if fdMensagemimportante.AsInteger = 1 then
+  begin
+    Attribs.Font.Style:=[fsbold];
+    Attribs.Font.Color:=clRed; //font color
+    //Attribs.Color:=clGreen; //background color
+  end;
+end;
+
 procedure TMainForm.NavTreeClick(Sender: TObject);
 var
   Nd : TUniTreeNode;
@@ -157,6 +185,60 @@ begin
         if Nd.Text = 'USUÁRIOS' then begin
           FClassName := 'TFUsuarioPermisPrograma' ;
         end
+        else
+        if Nd.Text = 'EMPRESA' then begin
+          FClassName := 'TFEmpresa' ;
+        end
+        else
+        if Nd.Text = 'BANCOS' then begin
+          FClassName := 'TFBanco' ;
+        end
+        else
+        if Nd.Text = 'FORMAS DE PAGAMENTO' then begin
+          FClassName := 'TFFormasPagamento' ;
+        end
+        else
+        if Nd.Text = 'UNIDADES DE MEDIDA' then begin
+          FClassName := 'TFUnidadeMedida' ;
+        end
+        else
+        if Nd.Text = 'PORTADORES FINANCEIRO' then begin
+          FClassName := 'TFPortadorFinanceiro' ;
+        end
+        else
+        if Nd.Text = 'CONDIÇÕES DE PAGAMENTO' then begin
+          FClassName := 'TFCondPagamento' ;
+        end
+        else
+        if Nd.Text = 'OPERADORES' then begin
+          FClassName := 'TFOperadorMaqEquip' ;
+        end
+        else
+        if Nd.Text = 'FAMÍLIA ITENS' then begin
+          FClassName := 'TFItemFamilia' ;
+        end
+        else
+        if Nd.Text = 'TABELAS DE PREÇO' then begin
+          FClassName := 'TFTabelaPreco' ;
+        end
+        else
+        if Nd.Text = 'MÁQUINAS/EQUIPAMENTOS' then begin
+          FClassName := 'TFMaquinaEquipamento' ;
+        end
+        else
+        if Nd.Text = 'ITENS' then begin
+          FClassName := 'TFItem' ;
+        end
+        else
+        if Nd.Text = 'EMITENTES' then begin
+          FClassName := 'TFEmitente' ;
+        end
+        else
+        if Nd.Text = 'MANUTENÇÃO ORDEM DE SERVIÇO' then begin
+          FClassName := 'TFOrdemServicoManutencao' ;
+        end
+
+
 
         ;
 
@@ -188,6 +270,11 @@ begin
       FLogin.img_empresa.Picture.LoadFromFile(sArqImgLogin);
     FLogin.ShowModalN;
   end;
+end;
+
+procedure TMainForm.pFecharAplicacao(Sender: TComponent; AResult: Integer);
+begin
+UniSession.Terminate();
 end;
 
 procedure TMainForm.SearchEditChange(Sender: TObject);
@@ -271,9 +358,9 @@ begin
   fdEmpresa.SQL.Add('select * from gcEmpresa where codEmpresa = ' + IntToStr(iCodEmpresa));
   fdEmpresa.Active := True;
   if fdEmpresa.IsEmpty then begin
-    MessageDlg('Empresa não cadastrada!',mtError,[mbOK],nil);
+    MessageDlg('Empresa não informada, verifique o endereço do portal ou entre em contato com o superte, o sistema será encerrado!',mtError,[mbOK],pFecharAplicacao);
     //Application.Terminate;
-    UniSession.Terminate();
+    //
     Exit;
   end;
 

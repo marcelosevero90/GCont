@@ -37,6 +37,7 @@ type
     { Public declarations }
     procedure pAtualizaInfoMenuUsuario;
     procedure pUsuarioPermisProg;
+    procedure pMensagens;
   end;
 
 function FLogin: TFLogin;
@@ -144,6 +145,7 @@ begin
 
   pAtualizaInfoMenuUsuario;
   pUsuarioPermisProg;
+  pMensagens;
   ModalResult := mrOk;
 end;
 
@@ -167,6 +169,22 @@ begin
   MainForm.btUsuarioConfig.Caption  := sNomeUsuario;
   MainForm.sbMenu.Panels[0].Text    := MainForm.fdUsuario.FieldByName('nomeUsuario').AsString;
   MainForm.sbMenu.Panels[1].Text    := MainForm.fdEmpresa.FieldByName('codEmpresa').AsString + ' - ' + MainForm.fdEmpresa.FieldByName('razaoSocial').AsString;
+end;
+
+procedure TFLogin.pMensagens;
+begin
+  MainForm.gbMsg.Visible := False;
+  MainForm.fdMensagem.Close;
+  MainForm.fdMensagem.SQL.Clear;
+  MainForm.fdMensagem.SQL.Add(  ' select * from gcMensagem '
+                              + ' where (codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                              + '    or  codEmpresa = 0) '
+                              + '   and dtIniValid <= current_date '
+                              + '   and dtFimValid >= current_date ')  ;
+  MainForm.fdMensagem.Active := True;
+  MainForm.fdMensagem.First;
+  if not MainForm.fdMensagem.IsEmpty then
+    MainForm.gbMsg.Visible := True;
 end;
 
 procedure TFLogin.pUsuarioPermisProg;

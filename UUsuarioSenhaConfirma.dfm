@@ -66,8 +66,6 @@ object FUsuarioSenhaConfirma: TFUsuarioSenhaConfirma
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 4
     Caption = ''
-    ExplicitLeft = -169
-    ExplicitWidth = 569
     object btConf: TUniBitBtn
       Left = 16
       Top = 6

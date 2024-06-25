@@ -174,6 +174,86 @@
             <FormType>dfm</FormType>
             <DesignClass>TUniForm</DesignClass>
         </DCCReference>
+        <DCCReference Include="UEmpresa.pas">
+            <Form>FEmpresa</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOEmpresa.pas"/>
+        <DCCReference Include="UBanco.pas">
+            <Form>FBanco</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOBanco.pas"/>
+        <DCCReference Include="UFormasPagamento.pas">
+            <Form>FFormasPagamento</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOFormasPagamento.pas"/>
+        <DCCReference Include="UUnidadeMedida.pas">
+            <Form>FUnidadeMedida</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOUnidadeMedida.pas"/>
+        <DCCReference Include="UPortadorFinanceiro.pas">
+            <Form>FPortadorFinanceiro</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOPortadorFinanceiro.pas"/>
+        <DCCReference Include="UCondPagamento.pas">
+            <Form>FCondPagamento</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOCondPagto.pas"/>
+        <DCCReference Include="UOperadorMaqEquip.pas">
+            <Form>FOperadorMaqEquip</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOOperadorMaqEquip.pas"/>
+        <DCCReference Include="UItemFamilia.pas">
+            <Form>FItemFamilia</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOItemFamilia.pas"/>
+        <DCCReference Include="UTabelaPreco.pas">
+            <Form>FTabelaPreco</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOTabelaPreco.pas"/>
+        <DCCReference Include="UBOTabPrecoItem.pas"/>
+        <DCCReference Include="UMaquinaEquipamento.pas">
+            <Form>FMaquinaEquipamento</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOMaquinaEquipamento.pas"/>
+        <DCCReference Include="UItem.pas">
+            <Form>FItem</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOItem.pas"/>
+        <DCCReference Include="UEmitente.pas">
+            <Form>FEmitente</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOEmitente.pas"/>
+        <DCCReference Include="UBOEmitenteEndereco.pas"/>
+        <DCCReference Include="UBOEmitenteContaBancaria.pas"/>
+        <DCCReference Include="UOrdemServicoManutencao.pas">
+            <Form>FOrdemServicoManutencao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

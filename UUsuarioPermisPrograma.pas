@@ -19,7 +19,7 @@ type
   TFUsuarioPermisPrograma = class(TUniFrame)
     pgUsuario: TUniPageControl;
     tsUsuarioLista: TUniTabSheet;
-    dbSocio: TUniDBGrid;
+    dbLista: TUniDBGrid;
     UniToolBar1: TUniToolBar;
     UniToolButton3: TUniToolButton;
     UniToolButton2: TUniToolButton;
@@ -111,16 +111,16 @@ type
     cbConsultaOS: TUniCheckBox;
     UniToolButton7: TUniToolButton;
     btRelatCSV: TUniBitBtn;
-    procedure dbSocioFieldImage(const Column: TUniDBGridColumn;
+    procedure dbListaFieldImage(const Column: TUniDBGridColumn;
       const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
       var ATransparent: TUniTransparentOption);
-    procedure dbSocioColumnSort(Column: TUniDBGridColumn; Direction: Boolean);
+    procedure dbListaColumnSort(Column: TUniDBGridColumn; Direction: Boolean);
     procedure UniFrameCreate(Sender: TObject);
     procedure btAtualizarDadosClick(Sender: TObject);
     procedure edtFiltroPesqRapidaChange(Sender: TObject);
     procedure edtFiltroPesqRapidaKeyPress(Sender: TObject; var Key: Char);
     procedure btFiltroClick(Sender: TObject);
-    procedure dbSocioCellClick(Column: TUniDBGridColumn);
+    procedure dbListaCellClick(Column: TUniDBGridColumn);
     procedure cbCampoFiltroChange(Sender: TObject);
     procedure btNovoUsuarioClick(Sender: TObject);
     procedure btConfAlterClick(Sender: TObject);
@@ -329,7 +329,7 @@ begin
   pFiltroRapido;
 end;
 
-procedure TFUsuarioPermisPrograma.dbSocioCellClick(Column: TUniDBGridColumn);
+procedure TFUsuarioPermisPrograma.dbListaCellClick(Column: TUniDBGridColumn);
 var
 sRespValid : string;
 begin
@@ -409,13 +409,13 @@ begin
 
 end;
 
-procedure TFUsuarioPermisPrograma.dbSocioColumnSort(Column: TUniDBGridColumn;
+procedure TFUsuarioPermisPrograma.dbListaColumnSort(Column: TUniDBGridColumn;
   Direction: Boolean);
 begin
   SortColumn(Column.FieldName, Direction);
 end;
 
-procedure TFUsuarioPermisPrograma.dbSocioFieldImage(const Column: TUniDBGridColumn;
+procedure TFUsuarioPermisPrograma.dbListaFieldImage(const Column: TUniDBGridColumn;
   const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
   var ATransparent: TUniTransparentOption);
 begin
@@ -503,7 +503,7 @@ begin
 
     if fqAuxiliar.FieldByName('codPrograma').AsString = 'ITENS' then
       cbItem.Checked := True;
-    if fqAuxiliar.FieldByName('codPrograma').AsString = 'ITENS FAMÍLIA' then
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'FAMÍLIA ITENS' then
       cbItemFam.Checked := True;
     if fqAuxiliar.FieldByName('codPrograma').AsString = 'ITENS FORNECEDORES' then
       cbItemForn.Checked := True;
@@ -634,10 +634,12 @@ begin
                       + '   and codUsuario = ' + QuotedStr(fdUsuarioMestrecodUsuario.AsString)  );
     fqAuxiliar.ExecSQL;
 
+    if cbEmitente.Checked then
+      pInsertPermisUsuario('EMITENTES');
     if cbItem.Checked then
       pInsertPermisUsuario('ITENS');
     if cbItemFam.Checked = True     then
-        pInsertPermisUsuario('ITENS FAMÍLIA');
+        pInsertPermisUsuario('FAMÍLIA ITENS');
     if cbItemForn.Checked = True    then
         pInsertPermisUsuario('ITENS FORNECEDORES');
     if cbMaqEquip.Checked = True    then

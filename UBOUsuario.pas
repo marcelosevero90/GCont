@@ -36,6 +36,17 @@ begin
 
       if sAcao = 'DELETE' then begin
 
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codUsuario from gcOperadorMaqEquip ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codUsuario = ' + QuotedStr(dsRegistros.FieldByName('codUsuario').AsString)
+                        );
+        fqFKTab.Active := True;
+        if not fqFKTab.IsEmpty then begin
+          Result := Result + 'Usuário ' + dsRegistros.FieldByName('codUsuario').AsString + ' vinculado a um Operador, não pode ser eliminado! |';
+        end;
 
       end
       else begin
