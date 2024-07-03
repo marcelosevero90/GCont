@@ -69,9 +69,6 @@ type
     UniCheckBox1: TUniCheckBox;
     UniNumberEdit1: TUniNumberEdit;
     UniLabel5: TUniLabel;
-    UniLabel6: TUniLabel;
-    UniDBEdit1: TUniDBEdit;
-    fdTitulosAReceber: TFDQuery;
   private
     { Private declarations }
   public

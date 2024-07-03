@@ -21,6 +21,10 @@ object UniFrame1: TUniFrame1
     object tsLista: TUniTabSheet
       Hint = ''
       Caption = 'Listagem'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 256
+      ExplicitHeight = 128
       DesignSize = (
         986
         515)
@@ -49,6 +53,7 @@ object UniFrame1: TUniFrame1
         TabOrder = 1
         ParentColor = False
         Color = clBtnFace
+        ExplicitWidth = 953
         object UniToolButton3: TUniToolButton
           Left = 137
           Top = 0
@@ -175,6 +180,7 @@ object UniFrame1: TUniFrame1
         Align = alTop
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 2
+        ExplicitWidth = 953
         object edtFiltroPesqRapida: TUniEdit
           Left = 8
           Top = 21
@@ -213,6 +219,7 @@ object UniFrame1: TUniFrame1
         TabOrder = 3
         BorderStyle = ubsNone
         Caption = ''
+        ExplicitWidth = 953
       end
       object gbFiltroParam: TUniGroupBox
         Left = 0
@@ -426,6 +433,8 @@ object UniFrame1: TUniFrame1
         TabOrder = 5
         BorderStyle = ubsNone
         Caption = ''
+        ExplicitTop = 209
+        ExplicitWidth = 953
       end
       object UniPanel3: TUniPanel
         Left = 0
@@ -438,6 +447,7 @@ object UniFrame1: TUniFrame1
         TabOrder = 6
         BorderStyle = ubsNone
         Caption = ''
+        ExplicitWidth = 953
       end
       object imgVis: TUniImage
         Left = 823
@@ -544,6 +554,8 @@ object UniFrame1: TUniFrame1
       Hint = ''
       TabVisible = False
       Caption = 'Manuten'#231#227'o'
+      ExplicitWidth = 953
+      ExplicitHeight = 429
       object UniToolBar2: TUniToolBar
         Left = 0
         Top = 0
@@ -555,6 +567,7 @@ object UniFrame1: TUniFrame1
         TabOrder = 0
         ParentColor = False
         Color = clBtnFace
+        ExplicitWidth = 953
         object UniToolButton4: TUniToolButton
           Left = 133
           Top = 0
@@ -604,8 +617,9 @@ object UniFrame1: TUniFrame1
         Align = alClient
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 1
-        ExplicitTop = 28
-        ScrollHeight = 176
+        ExplicitWidth = 953
+        ExplicitHeight = 400
+        ScrollHeight = 119
         ScrollWidth = 530
         object edtNome: TUniDBEdit
           Left = 26
@@ -613,6 +627,7 @@ object UniFrame1: TUniFrame1
           Width = 504
           Height = 22
           Hint = ''
+          DataField = 'nomeFormaPagto'
           DataSource = dsTitulosAReceber
           CharCase = ecUpperCase
           TabOrder = 1
@@ -646,25 +661,6 @@ object UniFrame1: TUniFrame1
           DataSource = dsTitulosAReceber
           CharCase = ecUpperCase
           TabOrder = 0
-        end
-        object UniLabel6: TUniLabel
-          Left = 26
-          Top = 135
-          Width = 31
-          Height = 13
-          Hint = ''
-          Caption = 'Nome:'
-          TabOrder = 4
-        end
-        object UniDBEdit1: TUniDBEdit
-          Left = 26
-          Top = 154
-          Width = 504
-          Height = 22
-          Hint = ''
-          DataSource = dsTitulosAReceber
-          CharCase = ecUpperCase
-          TabOrder = 5
         end
       end
     end
@@ -1125,9 +1121,5 @@ object UniFrame1: TUniFrame1
   object dsTitulosAReceber: TDataSource
     Left = 628
     Top = 288
-  end
-  object fdTitulosAReceber: TFDQuery
-    Left = 724
-    Top = 312
   end
 end
