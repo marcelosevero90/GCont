@@ -1,0 +1,13 @@
+object FCaixaTextoGlobal: TFCaixaTextoGlobal
+  Left = 0
+  Top = 0
+  ClientHeight = 288
+  ClientWidth = 528
+  Caption = 'FCaixaTextoGlobal'
+  BorderStyle = bsSingle
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  PixelsPerInch = 96
+  TextHeight = 13
+end

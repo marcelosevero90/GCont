@@ -111,6 +111,7 @@ type
     cbConsultaOS: TUniCheckBox;
     UniToolButton7: TUniToolButton;
     btRelatCSV: TUniBitBtn;
+    cbEmitDadosBanco: TUniCheckBox;
     procedure dbListaFieldImage(const Column: TUniDBGridColumn;
       const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
       var ATransparent: TUniTransparentOption);
@@ -527,7 +528,8 @@ begin
       cbManutOS.Checked := True;
     if fqAuxiliar.FieldByName('codPrograma').AsString = 'CONSULTA ORDENS DE SERVIÇO' then
       cbConsultaOS.Checked := True;
-
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'EMITENTE DADOS BANCÁRIOS' then
+      cbEmitDadosBanco.Checked := True;
 
     fqAuxiliar.Next;
   end;
@@ -662,6 +664,10 @@ begin
         pInsertPermisUsuario('MANUTENÇÃO ORDEM DE SERVIÇO');
     if cbConsultaOS.Checked = True  then
         pInsertPermisUsuario('CONSULTA ORDENS DE SERVIÇO');
+    if cbEmitDadosBanco.Checked then
+      pInsertPermisUsuario('EMITENTE DADOS BANCÁRIOS');
+
+
 
   except
     on e : exception do begin

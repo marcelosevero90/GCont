@@ -46,7 +46,12 @@ uses
   UBOEmitente in 'UBOEmitente.pas',
   UBOEmitenteEndereco in 'UBOEmitenteEndereco.pas',
   UBOEmitenteContaBancaria in 'UBOEmitenteContaBancaria.pas',
-  UOrdemServicoManutencao in 'UOrdemServicoManutencao.pas' {FOrdemServicoManutencao: TUniFrame};
+  UOrdemServicoManutencao in 'UOrdemServicoManutencao.pas' {FOrdemServicoManutencao: TUniFrame},
+  UBOOrdemServico in 'UBOOrdemServico.pas',
+  UBOOrdemServItem in 'UBOOrdemServItem.pas',
+  UCaixaTextoGlobal in 'UCaixaTextoGlobal.pas' {FCaixaTextoGlobal: TUniForm},
+  UOrdemServicoDetalhes in 'UOrdemServicoDetalhes.pas' {FOrdemServicoDetalhes: TUniForm},
+  UTitulosAReceberManutencao in 'UTitulosAReceberManutencao.pas' {UniFrame1: TUniFrame};
 
 {$R *.res}
 

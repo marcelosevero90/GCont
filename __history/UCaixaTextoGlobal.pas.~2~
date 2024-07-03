@@ -1,0 +1,32 @@
+unit UCaixaTextoGlobal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIForm;
+
+type
+  TFCaixaTextoGlobal = class(TUniForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function FCaixaTextoGlobal: TFCaixaTextoGlobal;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  MainModule, uniGUIApplication;
+
+function FCaixaTextoGlobal: TFCaixaTextoGlobal;
+begin
+  Result := TFCaixaTextoGlobal(UniMainModule.GetFormInstance(TFCaixaTextoGlobal));
+end;
+
+end.

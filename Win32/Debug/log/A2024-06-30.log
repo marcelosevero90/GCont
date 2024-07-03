@@ -1,0 +1,64 @@
+GCont.exe: 00000A64: 15:05:00 []:>--------------------------------------------------------------<
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:Server First Init.
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:Cache Folder Erased. <105> Files deleted.
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00000A64: 15:05:00 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00001B3C: 15:08:10 [127.0.0.1]:EDatabaseError : fdOrdServDetalhe: Type mismatch for field 'codUsuarConclusao', expecting: Integer actual: String : Addr: $0062C73E
+GCont.exe: 0000393C: 15:10:00 []:>--------------------------------------------------------------<
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:Server First Init.
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:Cache Folder Erased. <103> Files deleted.
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 0000393C: 15:10:00 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00003678: 15:11:51 []:>--------------------------------------------------------------<
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:Server First Init.
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:Cache Folder Erased. <102> Files deleted.
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00003678: 15:11:51 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00003658: 15:16:38 []:>--------------------------------------------------------------<
+GCont.exe: 00003658: 15:16:38 [TUniServerModule]:Server First Init.
+GCont.exe: 00003658: 15:16:38 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00003658: 15:16:38 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00003658: 15:16:38 [TUniServerModule]:Cache Folder Erased. <101> Files deleted.
+GCont.exe: 00003658: 15:16:39 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00003658: 15:16:39 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00002FC0: 15:20:49 []:>--------------------------------------------------------------<
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:Server First Init.
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:Cache Folder Erased. <117> Files deleted.
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00002FC0: 15:20:49 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 0000129C: 15:25:26 []:>--------------------------------------------------------------<
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:Server First Init.
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:Cache Folder Erased. <101> Files deleted.
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 0000129C: 15:25:26 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00003D04: 15:30:03 []:>--------------------------------------------------------------<
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:Server First Init.
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:Cache Folder Erased. <116> Files deleted.
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00003D04: 15:30:03 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00003BD4: 15:31:33 []:>--------------------------------------------------------------<
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:Server First Init.
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:Cache Folder Erased. <115> Files deleted.
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00003BD4: 15:31:33 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00003164: 15:34:41 []:>--------------------------------------------------------------<
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:Server First Init.
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:Cache Folder Erased. <116> Files deleted.
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00003164: 15:34:41 [TUniServerModule]:HTTP Server Started. Port: 8077

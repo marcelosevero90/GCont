@@ -706,6 +706,22 @@ begin
     if fdEmitente.IsEmpty then
       Exit;
 
+
+     fqAuxiliar.Close;
+     fqAuxiliar.SQL.Clear;
+     fqAuxiliar.SQL.Add(  ' select codUsuario from gcUsuarioPermisPrograma '
+                        + ' where codEmpresa  = ' + IntToStr(MainForm.iCodEmpresa)
+                        + '   and codEstabel  = ' + IntToStr(MainForm.iCodEstabel)
+                        + '   and codUsuario  = ' + QuotedStr (MainForm.sCodUsuario)
+                        + '   and codPrograma = ' + QuotedStr ('EMITENTE DADOS BANCÁRIOS'));
+     fqAuxiliar.Active := True;
+    //sRespValid := fqAuxiliar.SQL.Text;
+
+    if fqAuxiliar.IsEmpty then begin
+      MessageDlg('Você não possuí permissão para acessar as contas do emitente!' ,mtError,[mbOK],nil);
+      Exit;
+    end;
+
     edtFiltroItemEnder.Clear;
 
 

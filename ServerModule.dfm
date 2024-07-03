@@ -17,7 +17,7 @@ object UniServerModule: TUniServerModule
     '<p style="text-align:center;color:#0000A0">[###message###]</p>'
     
       '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
-      '>Aplica'#231#227'o Reiniciada</a></p>'
+      '>Reiniciar Aplica'#231#227'o</a></p>'
     '</body>'
     '</html>')
   ServerMessages.InvalidSessionTemplate.Strings = (
@@ -26,7 +26,7 @@ object UniServerModule: TUniServerModule
     '<p style="text-align:center;color:#0000A0">[###message###]</p>'
     
       '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
-      '>Aplica'#231#227'o Reiniciada</a></p>'
+      '>Reiniciar Aplica'#231#227'o</a></p>'
     '</body>'
     '</html>')
   ServerMessages.TerminateTemplate.Strings = (
@@ -35,7 +35,7 @@ object UniServerModule: TUniServerModule
     '<p style="text-align:center;color:#0000A0">[###message###]</p>'
     
       '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
-      '>Aplica'#231#227'o Reiniciada</a></p>'
+      '>Reiniciar Aplica'#231#227'o</a></p>'
     '</body>'
     '</html>')
   ServerMessages.InvalidSessionMessage = 'Sess'#227'o Inv'#225'lida ou Timeout.'

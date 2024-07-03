@@ -11,7 +11,7 @@ object FCondPagamento: TFCondPagamento
     Width = 984
     Height = 522
     Hint = ''
-    ActivePage = tsLista
+    ActivePage = tsManut
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0

@@ -11,7 +11,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
     Width = 1034
     Height = 538
     Hint = ''
-    ActivePage = tsLista
+    ActivePage = tsManut
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
@@ -610,7 +610,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'Nome Usu'#225'rio:'
-          TabOrder = 7
+          TabOrder = 6
         end
         object UniLabel10: TUniLabel
           Left = 26
@@ -619,7 +619,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'C'#243'digo:'
-          TabOrder = 8
+          TabOrder = 7
         end
         object edtCod: TUniDBEdit
           Left = 26
@@ -652,7 +652,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'Banco:'
-          TabOrder = 9
+          TabOrder = 8
         end
         object UniLabel5: TUniLabel
           Left = 26
@@ -661,7 +661,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'Ag'#234'ncia:'
-          TabOrder = 10
+          TabOrder = 9
         end
         object UniDBEdit2: TUniDBEdit
           Left = 26
@@ -681,7 +681,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'Conta Corrente:'
-          TabOrder = 11
+          TabOrder = 10
         end
         object UniLabel7: TUniLabel
           Left = 26
@@ -690,18 +690,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           Height = 13
           Hint = ''
           Caption = 'Saldo Inicial:'
-          TabOrder = 12
-        end
-        object UniDBEdit4: TUniDBEdit
-          Left = 26
-          Top = 294
-          Width = 121
-          Height = 22
-          Hint = ''
-          DataField = 'vlSaldoInicial'
-          DataSource = dsPortador
-          TabOrder = 5
-          OnKeyPress = UniDBEdit2KeyPress
+          TabOrder = 11
         end
         object UniDBLookupComboBox1: TUniDBLookupComboBox
           Left = 26
@@ -727,13 +716,25 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
           DataField = 'tipoPortador'
           DataSource = dsPortador
           Caption = 'Tipo'
-          TabOrder = 6
+          TabOrder = 5
           Items.Strings = (
             'Caixa'
             'Banco')
           Values.Strings = (
             '1'
             '2')
+        end
+        object UniDBFormattedNumberEdit1: TUniDBFormattedNumberEdit
+          Left = 26
+          Top = 294
+          Width = 121
+          Height = 22
+          Hint = ''
+          DataField = 'vlSaldoInicial'
+          DataSource = dsPortador
+          TabOrder = 12
+          DecimalSeparator = ','
+          ThousandSeparator = '.'
         end
       end
     end

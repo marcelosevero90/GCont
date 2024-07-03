@@ -90,7 +90,6 @@ type
     UniDBEdit2: TUniDBEdit;
     UniLabel6: TUniLabel;
     UniLabel7: TUniLabel;
-    UniDBEdit4: TUniDBEdit;
     UniDBLookupComboBox1: TUniDBLookupComboBox;
     rbTipo: TUniDBRadioGroup;
     fdBcoLista: TFDQuery;
@@ -99,6 +98,7 @@ type
     fdBcoListacodEstabel: TIntegerField;
     fdBcoListacodBanco: TIntegerField;
     fdBcoListanomeBanco: TStringField;
+    UniDBFormattedNumberEdit1: TUniDBFormattedNumberEdit;
     procedure UniFrameCreate(Sender: TObject);
     procedure btAtualizarDadosClick(Sender: TObject);
     procedure fdPortadorCalcFields(DataSet: TDataSet);

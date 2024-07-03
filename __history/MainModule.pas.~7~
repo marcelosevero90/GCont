@@ -1,0 +1,82 @@
+unit MainModule;
+
+interface
+
+uses
+  uniGUIMainModule, SysUtils, Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet;
+
+type
+  TUniMainModule = class(TUniGUIMainModule)
+    conexaoDB: TFDConnection;
+    fdTitulosAReceber: TFDQuery;
+    fdTitulosARecebercodEmpresa: TIntegerField;
+    fdTitulosARecebercodEstabel: TIntegerField;
+    fdTitulosARecebercodTituloAReceber: TIntegerField;
+    fdTitulosAReceberdescricao: TStringField;
+    fdTitulosARecebercodEmitente: TIntegerField;
+    fdTitulosARecebercodFormaPagto: TIntegerField;
+    fdTitulosARecebersituacao: TIntegerField;
+    fdTitulosAReceberdtVencimento: TDateField;
+    fdTitulosAReceberdtEmissao: TDateField;
+    fdTitulosAReceberdtTransacao: TDateField;
+    fdTitulosARecebercodUsuarImplant: TStringField;
+    fdTitulosAReceberobservacao: TStringField;
+    fdTitulosARecebervalorOriginal: TBCDField;
+    fdTitulosARecebervalorTituloReceber: TBCDField;
+    fdTitulosARecebervalorDesconto: TBCDField;
+    fdTitulosARecebervalorJuros: TBCDField;
+    fdTitulosARecebervalorMulta: TBCDField;
+    fdTitulosARecebercodPortador: TIntegerField;
+    fdTitulosAReceberdoctoReferencia: TStringField;
+    fdTitulosAReceberindOrigem: TIntegerField;
+    fdTitulosARecebercodOrdemServico: TIntegerField;
+    fdTitulosARecebercodUsuarLiquid: TStringField;
+    fdTitulosAReceberdtCancelamento: TDateField;
+    fdTitulosAReceberdtLiquidacao: TDateField;
+    fdTitulosARecebercodUsuarCancela: TStringField;
+    fdTitulosAReceberparcela: TIntegerField;
+    fdPortador: TFDQuery;
+    fdPortadorcodEmpresa: TIntegerField;
+    fdPortadorcodEstabel: TIntegerField;
+    fdPortadorcodPortador: TIntegerField;
+    fdPortadornomePortador: TStringField;
+    fdPortadorcodBanco: TIntegerField;
+    fdPortadoragencia: TStringField;
+    fdPortadorcontaCorrente: TStringField;
+    fdPortadortipoPortador: TIntegerField;
+    fdPortadorvlSaldoInicial: TBCDField;
+    fdPortadorvlSaldoAtual: TBCDField;
+    fdPortadorpercMultaAtraso: TBCDField;
+    fdPortadorpercJuroDia: TBCDField;
+    fdPortadorpercDesctoAntecip: TBCDField;
+    fdTitulosAReceberpercMultaAtraso: TBCDField;
+    fdTitulosAReceberpercJuroDia: TBCDField;
+    fdTitulosAReceberpercDesctoAntecip: TBCDField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+function UniMainModule: TUniMainModule;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UniGUIVars, ServerModule, uniGUIApplication;
+
+function UniMainModule: TUniMainModule;
+begin
+  Result := TUniMainModule(UniApplication.UniMainModule)
+end;
+
+initialization
+  RegisterMainModuleClass(TUniMainModule);
+end.

@@ -14,7 +14,7 @@ object MainForm: TMainForm
   object UniPanel1: TUniPanel
     Left = 0
     Top = 0
-    Width = 277
+    Width = 329
     Height = 516
     Hint = ''
     Align = alLeft
@@ -22,13 +22,13 @@ object MainForm: TMainForm
     TabOrder = 0
     TitleAlign = taCenter
     Title = 'Menu'
-    Caption = 'UniPanel1'
+    Caption = ''
     Collapsible = True
     CollapseDirection = cdLeft
     object NavTree: TUniTreeView
       Left = 1
       Top = 52
-      Width = 275
+      Width = 327
       Height = 463
       Hint = ''
       Items.NodeData = {
@@ -85,11 +85,12 @@ object MainForm: TMainForm
       Color = clWindow
       BorderStyle = ubsNone
       OnClick = NavTreeClick
+      ExplicitWidth = 280
     end
     object UniToolBar1: TUniToolBar
       Left = 1
       Top = 1
-      Width = 275
+      Width = 327
       Height = 29
       Hint = ''
       ShowHint = True
@@ -102,6 +103,7 @@ object MainForm: TMainForm
       TabOrder = 2
       ParentColor = False
       Color = clBtnFace
+      ExplicitWidth = 275
       object btExpandTree: TUniToolButton
         Left = 0
         Top = 0
@@ -161,7 +163,7 @@ object MainForm: TMainForm
     object SearchEdit: TUniComboBox
       Left = 1
       Top = 30
-      Width = 275
+      Width = 327
       Hint = ''
       Text = ''
       Align = alTop
@@ -180,10 +182,11 @@ object MainForm: TMainForm
         end>
       OnChange = SearchEditChange
       OnTriggerEvent = SearchEditTriggerEvent
+      ExplicitWidth = 275
     end
   end
   object UniSplitter1: TUniSplitter
-    Left = 277
+    Left = 329
     Top = 0
     Width = 6
     Height = 516
@@ -191,6 +194,7 @@ object MainForm: TMainForm
     Align = alLeft
     ParentColor = False
     Color = clBtnFace
+    ExplicitLeft = 277
   end
   object sbMenu: TUniStatusBar
     Left = 0
@@ -221,27 +225,30 @@ object MainForm: TMainForm
     Color = clWindow
   end
   object UniContainerPanel2: TUniContainerPanel
-    Left = 283
+    Left = 335
     Top = 0
-    Width = 704
+    Width = 652
     Height = 516
     Hint = ''
     ParentColor = False
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
+    ExplicitLeft = 283
+    ExplicitWidth = 704
     object UniContainerPanel3: TUniContainerPanel
       Left = 0
       Top = 0
-      Width = 704
+      Width = 652
       Height = 41
       Hint = ''
       ParentColor = False
       Align = alTop
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 0
+      ExplicitWidth = 704
       object btUsuarioConfig: TUniBitBtn
-        Left = 520
+        Left = 468
         Top = 0
         Width = 132
         Height = 41
@@ -253,6 +260,7 @@ object MainForm: TMainForm
         Font.Style = [fsUnderline]
         TabOrder = 1
         OnClick = btUsuarioConfigClick
+        ExplicitLeft = 520
       end
       object imgEmpresa: TUniImage
         Left = 0
@@ -265,7 +273,7 @@ object MainForm: TMainForm
         Anchors = [akLeft, akTop, akBottom]
       end
       object btSair: TUniBitBtn
-        Left = 652
+        Left = 600
         Top = 0
         Width = 52
         Height = 41
@@ -302,12 +310,13 @@ object MainForm: TMainForm
         Anchors = [akTop, akRight, akBottom]
         TabOrder = 3
         OnClick = btSairClick
+        ExplicitLeft = 652
       end
     end
     object pgControlAdmin: TUniPageControl
       Left = 0
       Top = 41
-      Width = 704
+      Width = 652
       Height = 475
       Hint = ''
       ActivePage = UniTabSheet1
@@ -315,12 +324,14 @@ object MainForm: TMainForm
       Align = alClient
       Anchors = [akLeft, akTop, akRight, akBottom]
       TabOrder = 1
+      ExplicitWidth = 704
       object UniTabSheet1: TUniTabSheet
         Hint = ''
         ImageIndex = 2
         Caption = 'Home'
+        ExplicitWidth = 696
         DesignSize = (
-          696
+          644
           447)
         object gbMsg: TUniGroupBox
           Left = 16
@@ -368,7 +379,7 @@ object MainForm: TMainForm
             BorderStyle = ubsNone
             Caption = ''
             object mmMensagem: TUniDBMemo
-              Left = 3
+              Left = 5
               Top = 0
               Width = 337
               Height = 132
@@ -1362,6 +1373,102 @@ object MainForm: TMainForm
       'select * from gcEmpresa')
     Left = 291
     Top = 169
+    object fdEmpresacodEmpresa: TIntegerField
+      FieldName = 'codEmpresa'
+      Origin = 'codEmpresa'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdEmpresarazaoSocial: TStringField
+      FieldName = 'razaoSocial'
+      Origin = 'razaoSocial'
+      Required = True
+      Size = 100
+    end
+    object fdEmpresacgc: TStringField
+      FieldName = 'cgc'
+      Origin = 'cgc'
+      Required = True
+      Size = 45
+    end
+    object fdEmpresasituacao: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'situacao'
+      Origin = 'situacao'
+    end
+    object fdEmpresanomeFantasia: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nomeFantasia'
+      Origin = 'nomeFantasia'
+      Size = 100
+    end
+    object fdEmpresainscEstadual: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'inscEstadual'
+      Origin = 'inscEstadual'
+      Size = 15
+    end
+    object fdEmpresaimagemLogin: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'imagemLogin'
+      Origin = 'imagemLogin'
+      Size = 100
+    end
+    object fdEmpresaimagemMenu: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'imagemMenu'
+      Origin = 'imagemMenu'
+      Size = 100
+    end
+    object fdEmpresaemail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 100
+    end
+    object fdEmpresatelefone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'telefone'
+      Origin = 'telefone'
+    end
+    object fdEmpresacodCidade: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codCidade'
+      Origin = 'codCidade'
+    end
+    object fdEmpresaendereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      Size = 100
+    end
+    object fdEmpresacep: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cep'
+      Origin = 'cep'
+      Size = 10
+    end
+    object fdEmpresabairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'bairro'
+      Origin = 'bairro'
+    end
+    object fdEmpresacomplemento: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'complemento'
+      Origin = 'complemento'
+    end
+    object fdEmpresanroEndereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nroEndereco'
+      Origin = 'nroEndereco'
+      Size = 10
+    end
+    object fdEmpresatpPrecoPadraoOS: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'tpPrecoPadraoOS'
+      Origin = 'tpPrecoPadraoOS'
+    end
   end
   object fdUsuario: TFDQuery
     Connection = UniMainModule.conexaoDB

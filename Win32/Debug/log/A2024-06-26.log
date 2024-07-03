@@ -1,0 +1,23 @@
+GCont.exe: 000075C8: 20:34:03 []:>--------------------------------------------------------------<
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:Server First Init.
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:Cache Folder Erased. <58> Files deleted.
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 000075C8: 20:34:03 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 000047B0: 22:19:08 []:>--------------------------------------------------------------<
+GCont.exe: 000047B0: 22:19:08 [TUniServerModule]:Server First Init.
+GCont.exe: 000047B0: 22:19:08 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 000047B0: 22:19:08 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 000047B0: 22:19:08 [TUniServerModule]:Cache Folder Erased. <80> Files deleted.
+GCont.exe: 000047B0: 22:19:08 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 000047B0: 22:19:09 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 00008654: 22:20:52 [127.0.0.1]:EDatabaseError : fdEmitEndereco: Field 'codLocal' not found : Addr: $0062C68E
+GCont.exe: 00005BF0: 22:24:33 []:>--------------------------------------------------------------<
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:Server First Init.
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:Cache Folder Erased. <84> Files deleted.
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00005BF0: 22:24:33 [TUniServerModule]:HTTP Server Started. Port: 8077
+GCont.exe: 0000399C: 22:25:05 [127.0.0.1]:EDatabaseError : fdEmitEndereco: Field 'codLocal' not found : Addr: $0062C68E

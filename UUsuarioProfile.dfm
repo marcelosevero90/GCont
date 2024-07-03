@@ -33,10 +33,11 @@ object FUsuarioProfile: TFUsuarioProfile
       Width = 189
       Height = 22
       Hint = ''
-      Enabled = False
       DataField = 'codUsuario'
       DataSource = dsUsuario
       TabOrder = 2
+      TabStop = False
+      ReadOnly = True
     end
     object UniLabel2: TUniLabel
       Left = 40
@@ -65,8 +66,8 @@ object FUsuarioProfile: TFUsuarioProfile
       Hint = ''
       Enabled = False
       Items.Strings = (
-        'Comum'
-        'Super')
+        'Normal'
+        'Administrador')
       ItemIndex = 0
       Caption = 'Tipo do Usu'#225'rio'
       TabOrder = 5
@@ -221,8 +222,8 @@ object FUsuarioProfile: TFUsuarioProfile
     end
   end
   object gbNovaSenha: TUniGroupBox
-    Left = 156
-    Top = 32
+    Left = 204
+    Top = 48
     Width = 479
     Height = 289
     Hint = ''

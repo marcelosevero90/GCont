@@ -1,0 +1,208 @@
+object UniMainModule: TUniMainModule
+  OldCreateOrder = False
+  Theme = 'neptune'
+  MonitoredKeys.Keys = <>
+  EnableSynchronousOperations = True
+  ServerMessages.UnavailableErrMsg = 'Erro de Comunica'#231#227'o'
+  ServerMessages.LoadingMessage = 'Carregando...'
+  ServerMessages.ExceptionTemplate.Strings = (
+    '<html>'
+    '<body bgcolor="#dfe8f6">'
+    
+      '<p style="text-align:center;color:#A05050">Ocorreu uma Excess'#227'o ' +
+      'na Aplica'#231#227'o:</p>'
+    '<p style="text-align:center;color:#0000A0">[###message###]</p>'
+    
+      '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
+      '>Reiniciar Aplica'#231#227'o</a></p>'
+    '</body>'
+    '</html>')
+  ServerMessages.InvalidSessionTemplate.Strings = (
+    '<html>'
+    '<body bgcolor="#dfe8f6">'
+    '<p style="text-align:center;color:#0000A0">[###message###]</p>'
+    
+      '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
+      '>Reiniciar Aplica'#231#227'o</a></p>'
+    '</body>'
+    '</html>')
+  ServerMessages.TerminateTemplate.Strings = (
+    '<html>'
+    '<body bgcolor="#dfe8f6">'
+    '<p style="text-align:center;color:#0000A0">[###message###]</p>'
+    
+      '<p style="text-align:center;color:#A05050"><a href="[###url###]"' +
+      '>Reiniciar Aplica'#231#227'o</a></p>'
+    '</body>'
+    '</html>')
+  ServerMessages.InvalidSessionMessage = 'Sess'#227'o Inv'#225'lida ou Timeout.'
+  ServerMessages.TerminateMessage = 'Sess'#227'o Web Terminada.'
+  Height = 228
+  Width = 255
+  object conexaoDB: TFDConnection
+    ConnectionName = 'sql10573275'
+    Params.Strings = (
+      'DriverID=MySQL'
+      'Server=sql10.freemysqlhosting.net'
+      'User_Name=sql10573275'
+      'Password=NImipu9AU2'
+      'Database=sql10573275')
+    Connected = True
+    LoginPrompt = False
+    Left = 72
+    Top = 48
+  end
+  object fdTitulosAReceber: TFDQuery
+    Connection = conexaoDB
+    SQL.Strings = (
+      'select * from gcTitulosAReceber')
+    Left = 72
+    Top = 123
+    object fdTitulosARecebercodEmpresa: TIntegerField
+      FieldName = 'codEmpresa'
+      Origin = 'codEmpresa'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdTitulosARecebercodEstabel: TIntegerField
+      FieldName = 'codEstabel'
+      Origin = 'codEstabel'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdTitulosARecebercodTituloAReceber: TIntegerField
+      FieldName = 'codTituloAReceber'
+      Origin = 'codTituloAReceber'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdTitulosAReceberdescricao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Size = 100
+    end
+    object fdTitulosARecebercodEmitente: TIntegerField
+      FieldName = 'codEmitente'
+      Origin = 'codEmitente'
+      Required = True
+    end
+    object fdTitulosARecebercodFormaPagto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codFormaPagto'
+      Origin = 'codFormaPagto'
+    end
+    object fdTitulosARecebersituacao: TIntegerField
+      FieldName = 'situacao'
+      Origin = 'situacao'
+      Required = True
+    end
+    object fdTitulosAReceberdtVencimento: TDateField
+      FieldName = 'dtVencimento'
+      Origin = 'dtVencimento'
+      Required = True
+    end
+    object fdTitulosAReceberdtEmissao: TDateField
+      FieldName = 'dtEmissao'
+      Origin = 'dtEmissao'
+      Required = True
+    end
+    object fdTitulosAReceberdtTransacao: TDateField
+      FieldName = 'dtTransacao'
+      Origin = 'dtTransacao'
+      Required = True
+    end
+    object fdTitulosARecebercodUsuarImplant: TStringField
+      FieldName = 'codUsuarImplant'
+      Origin = 'codUsuarImplant'
+      Required = True
+    end
+    object fdTitulosAReceberobservacao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'observacao'
+      Origin = 'observacao'
+      Size = 500
+    end
+    object fdTitulosARecebervalorOriginal: TBCDField
+      FieldName = 'valorOriginal'
+      Origin = 'valorOriginal'
+      Required = True
+      Precision = 15
+      Size = 2
+    end
+    object fdTitulosARecebervalorTituloReceber: TBCDField
+      FieldName = 'valorTituloReceber'
+      Origin = 'valorTituloReceber'
+      Required = True
+      Precision = 15
+      Size = 2
+    end
+    object fdTitulosARecebervalorDesconto: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valorDesconto'
+      Origin = 'valorDesconto'
+      Precision = 15
+      Size = 2
+    end
+    object fdTitulosARecebervalorJuros: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valorJuros'
+      Origin = 'valorJuros'
+      Precision = 15
+      Size = 2
+    end
+    object fdTitulosARecebervalorMulta: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valorMulta'
+      Origin = 'valorMulta'
+      Precision = 15
+      Size = 2
+    end
+    object fdTitulosARecebercodPortador: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codPortador'
+      Origin = 'codPortador'
+    end
+    object fdTitulosAReceberdoctoReferencia: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'doctoReferencia'
+      Origin = 'doctoReferencia'
+      Size = 100
+    end
+    object fdTitulosAReceberindOrigem: TIntegerField
+      FieldName = 'indOrigem'
+      Origin = 'indOrigem'
+      Required = True
+    end
+    object fdTitulosARecebercodOrdemServico: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codOrdemServico'
+      Origin = 'codOrdemServico'
+    end
+    object fdTitulosARecebercodUsuarLiquid: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codUsuarLiquid'
+      Origin = 'codUsuarLiquid'
+    end
+    object fdTitulosAReceberdtCancelamento: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dtCancelamento'
+      Origin = 'dtCancelamento'
+    end
+    object fdTitulosAReceberdtLiquidacao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dtLiquidacao'
+      Origin = 'dtLiquidacao'
+    end
+    object fdTitulosARecebercodUsuarCancela: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codUsuarCancela'
+      Origin = 'codUsuarCancela'
+    end
+    object fdTitulosAReceberparcela: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'parcela'
+      Origin = 'parcela'
+    end
+  end
+end

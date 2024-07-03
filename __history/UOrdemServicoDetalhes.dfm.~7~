@@ -1,0 +1,660 @@
+object FOrdemServicoDetalhes: TFOrdemServicoDetalhes
+  Left = 0
+  Top = 0
+  ClientHeight = 572
+  ClientWidth = 947
+  Caption = 'Ordem de Servi'#231'o - Detalhes'
+  BorderStyle = bsSingle
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pgMenu: TUniPageControl
+    Left = 0
+    Top = 336
+    Width = 947
+    Height = 236
+    Hint = ''
+    ActivePage = tsItens
+    Align = alBottom
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 0
+    object tsItens: TUniTabSheet
+      Hint = ''
+      Caption = 'Itens'
+    end
+  end
+  object UniGroupBox1: TUniGroupBox
+    Left = 0
+    Top = 0
+    Width = 947
+    Height = 336
+    Hint = ''
+    Caption = 'Ordem de Servi'#231'o'
+    Align = alClient
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 1
+    ExplicitTop = -6
+    object UniLabel10: TUniLabel
+      Left = 26
+      Top = 26
+      Width = 76
+      Height = 13
+      Hint = ''
+      Caption = 'N'#250'mero Ordem:'
+      TabOrder = 1
+    end
+    object UniLabel9: TUniLabel
+      Left = 184
+      Top = 26
+      Width = 50
+      Height = 13
+      Hint = ''
+      Caption = 'Descri'#231#227'o:'
+      TabOrder = 2
+    end
+    object edtCod: TUniDBEdit
+      Left = 26
+      Top = 45
+      Width = 151
+      Height = 22
+      Hint = ''
+      Enabled = False
+      DataField = 'codOrdemServico'
+      CharCase = ecUpperCase
+      TabOrder = 3
+    end
+    object edtDesc: TUniDBEdit
+      Left = 184
+      Top = 45
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'descricao'
+      CharCase = ecUpperCase
+      TabOrder = 4
+    end
+    object UniLabel1: TUniLabel
+      Left = 26
+      Top = 80
+      Width = 89
+      Height = 13
+      Hint = ''
+      Caption = 'Data Implanta'#231#227'o:'
+      TabOrder = 5
+    end
+    object dtImplant: TUniDBDateTimePicker
+      Left = 26
+      Top = 99
+      Width = 120
+      Hint = ''
+      DataField = 'dataImplantacao'
+      DateTime = 45469.000000000000000000
+      DateFormat = 'dd/MM/yyyy'
+      TimeFormat = 'HH:mm:ss'
+      TabOrder = 6
+    end
+    object UniLabel6: TUniLabel
+      Left = 26
+      Top = 134
+      Width = 62
+      Height = 13
+      Hint = ''
+      Caption = 'Observa'#231#227'o:'
+      TabOrder = 7
+    end
+    object mmObs: TUniDBMemo
+      Left = 26
+      Top = 153
+      Width = 269
+      Height = 89
+      Hint = ''
+      DataField = 'observacao'
+      DataSource = dsOrdServDetalhe
+      ScrollBars = ssVertical
+      TabOrder = 8
+    end
+    object rgTipoPreco: TUniDBRadioGroup
+      Left = 301
+      Top = 153
+      Width = 139
+      Height = 89
+      Hint = ''
+      DataField = 'tipoPreco'
+      DataSource = dsOrdServDetalhe
+      Caption = 'Tipo Pre'#231'o'
+      TabOrder = 9
+      Items.Strings = (
+        'Tabela de Pre'#231'o'
+        'Informado')
+      Values.Strings = (
+        '1'
+        '2')
+    end
+    object UniDBRadioGroup1: TUniDBRadioGroup
+      Left = 455
+      Top = 153
+      Width = 139
+      Height = 89
+      Hint = ''
+      DataField = 'situacao'
+      DataSource = dsOrdServDetalhe
+      Caption = 'Situa'#231#227'o'
+      TabOrder = 10
+      Items.Strings = (
+        'Aberta'
+        'Conclu'#237'da'
+        'Cancelada')
+      Values.Strings = (
+        '1'
+        '2')
+    end
+    object UniDBFormattedNumberEdit1: TUniDBFormattedNumberEdit
+      Left = 160
+      Top = 99
+      Width = 121
+      Height = 22
+      Hint = ''
+      DataField = 'valorTotal'
+      DataSource = dsOrdServDetalhe
+      TabOrder = 11
+      DecimalSeparator = ','
+      ThousandSeparator = '.'
+    end
+    object UniLabel2: TUniLabel
+      Left = 160
+      Top = 80
+      Width = 55
+      Height = 13
+      Hint = ''
+      Caption = 'Valor Total:'
+      TabOrder = 12
+    end
+    object UniLabel3: TUniLabel
+      Left = 26
+      Top = 250
+      Width = 50
+      Height = 13
+      Hint = ''
+      Caption = 'Operador:'
+      TabOrder = 13
+    end
+    object UniDBEdit1: TUniDBEdit
+      Left = 26
+      Top = 269
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeOperador'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 14
+    end
+    object UniLabel4: TUniLabel
+      Left = 305
+      Top = 250
+      Width = 110
+      Height = 13
+      Hint = ''
+      Caption = 'M'#225'quina/Equipamento:'
+      TabOrder = 15
+    end
+    object UniDBEdit2: TUniDBEdit
+      Left = 305
+      Top = 269
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeMaqEquip'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 16
+    end
+    object UniLabel5: TUniLabel
+      Left = 584
+      Top = 250
+      Width = 120
+      Height = 13
+      Hint = ''
+      Caption = 'Condi'#231#227'o de Pagamento:'
+      TabOrder = 17
+    end
+    object UniDBEdit3: TUniDBEdit
+      Left = 584
+      Top = 269
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeCondPag'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 18
+    end
+    object UniLabel7: TUniLabel
+      Left = 293
+      Top = 80
+      Width = 81
+      Height = 13
+      Hint = ''
+      Caption = 'Tabela de Pre'#231'o:'
+      TabOrder = 19
+    end
+    object UniDBEdit4: TUniDBEdit
+      Left = 293
+      Top = 99
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeTabPre'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 20
+    end
+    object UniLabel8: TUniLabel
+      Left = 463
+      Top = 26
+      Width = 46
+      Height = 13
+      Hint = ''
+      Caption = 'Emitente:'
+      TabOrder = 21
+    end
+    object UniDBEdit5: TUniDBEdit
+      Left = 463
+      Top = 45
+      Width = 273
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeEmit'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 22
+    end
+    object UniLabel11: TUniLabel
+      Left = 572
+      Top = 80
+      Width = 106
+      Height = 13
+      Hint = ''
+      Caption = 'Forma de Pagamento:'
+      TabOrder = 23
+    end
+    object UniDBEdit6: TUniDBEdit
+      Left = 572
+      Top = 99
+      Width = 285
+      Height = 22
+      Hint = ''
+      DataField = 'codNomeEmit'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 24
+    end
+    object UniLabel12: TUniLabel
+      Left = 612
+      Top = 144
+      Width = 37
+      Height = 13
+      Hint = ''
+      Caption = 'Cidade:'
+      TabOrder = 25
+    end
+    object UniDBEdit7: TUniDBEdit
+      Left = 612
+      Top = 163
+      Width = 245
+      Height = 22
+      Hint = ''
+      DataField = 'nomeCidade'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 26
+    end
+    object UniDBEdit8: TUniDBEdit
+      Left = 612
+      Top = 220
+      Width = 117
+      Height = 22
+      Hint = ''
+      DataField = 'codUsuarImplant'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 27
+    end
+    object UniLabel13: TUniLabel
+      Left = 612
+      Top = 201
+      Width = 102
+      Height = 13
+      Hint = ''
+      Caption = 'Usu'#225'rio Implanta'#231#227'o:'
+      TabOrder = 28
+    end
+    object UniDBEdit9: TUniDBEdit
+      Left = 735
+      Top = 220
+      Width = 122
+      Height = 22
+      Hint = ''
+      DataField = 'codUsuarCancelamento'
+      DataSource = dsOrdServDetalhe
+      CharCase = ecUpperCase
+      TabOrder = 29
+    end
+    object UniLabel14: TUniLabel
+      Left = 735
+      Top = 201
+      Width = 81
+      Height = 13
+      Hint = ''
+      Caption = 'Usu'#225'rio Cancela:'
+      TabOrder = 30
+    end
+  end
+  object fdOrdServDetalhe: TFDQuery
+    Connection = UniMainModule.conexaoDB
+    SQL.Strings = (
+      'select gcOrdemServico.*,'
+      
+        'concat(gcEmitente.codEmitente,'#39' - '#39',gcEmitente.nomeEmitente) as ' +
+        'codNomeEmit,'
+      
+        'concat(gcOperadorMaqEquip.codOperador,'#39' - '#39',gcOperadorMaqEquip.n' +
+        'omeOperador) as codNomeOperador,'
+      
+        'concat(gcFormaPagamento.codFormaPagto,'#39' - '#39',gcFormaPagamento.nom' +
+        'eFormaPagto) as codNomeFormaPag,'
+      
+        'concat(gcCondicaoPagamento.codCondPagto,'#39' - '#39',gcCondicaoPagament' +
+        'o.nomeCondPagto) as codNomeCondPag,'
+      
+        'concat(gcTabelaPreco.codTabPreco,'#39' - '#39',gcTabelaPreco.nomeTabPrec' +
+        'o) as codNomeTabPre,'
+      
+        'concat(gcMaquinaEquipamento.codMaqEquip,'#39' - '#39',gcMaquinaEquipamen' +
+        'to.nomeMaqEquip) as codNomeMaqEquip,'
+      'concat(gcCidade.nomeCidade,'#39' - '#39',gcCidade.uf) as nomeCidade'
+      'from gcOrdemServico'
+      
+        'inner join gcEmitente on (gcEmitente.codEmpresa = gcOrdemServico' +
+        '.codEmpresa and '
+      #9#9#9#9#9#9'  gcEmitente.codEstabel = gcOrdemServico.codEstabel and '
+      #9#9#9#9#9#9'  gcEmitente.codEmitente = gcOrdemServico.codEmitente) '
+      
+        'inner join gcOperadorMaqEquip on (gcOperadorMaqEquip.codEmpresa ' +
+        '= gcOrdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcOperadorMaqEquip.codEstabel = gcOrdemServico.codEstabe' +
+        'l and '
+      
+        #9#9#9#9#9#9'  gcOperadorMaqEquip.codOperador = gcOrdemServico.codOpera' +
+        'dor) '
+      
+        'left outer join gcFormaPagamento on (gcFormaPagamento.codEmpresa' +
+        ' = gcOrdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcFormaPagamento.codEstabel = gcOrdemServico.codEstabel ' +
+        'and '
+      
+        #9#9#9#9#9#9'  gcFormaPagamento.codFormaPagto = gcOrdemServico.codForma' +
+        'Pagto) '
+      
+        'inner join gcCondicaoPagamento on (gcCondicaoPagamento.codEmpres' +
+        'a = gcOrdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcCondicaoPagamento.codEstabel = gcOrdemServico.codEstab' +
+        'el and '
+      
+        #9#9#9#9#9#9'  gcCondicaoPagamento.codCondPagto = gcOrdemServico.codCon' +
+        'dPagto)                                  '
+      
+        'left outer join gcTabelaPreco on (gcTabelaPreco.codEmpresa = gcO' +
+        'rdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcTabelaPreco.codEstabel = gcOrdemServico.codEstabel and' +
+        ' '
+      
+        #9#9#9#9#9#9'  gcTabelaPreco.codTabPreco = gcOrdemServico.codTabPreco) ' +
+        '   '
+      
+        'inner join gcMaquinaEquipamento on (gcMaquinaEquipamento.codEmpr' +
+        'esa = gcOrdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcMaquinaEquipamento.codEstabel = gcOrdemServico.codEsta' +
+        'bel and '
+      
+        #9#9#9#9#9#9'  gcMaquinaEquipamento.codMaqEquip = gcOrdemServico.codMaq' +
+        'Equip)                           '
+      
+        'left outer join gcEmitenteEndereco on (gcEmitenteEndereco.codEmp' +
+        'resa = gcOrdemServico.codEmpresa and '
+      
+        #9#9#9#9#9#9'  gcEmitenteEndereco.codEstabel = gcOrdemServico.codEstabe' +
+        'l and '
+      
+        #9#9#9#9#9#9'  gcEmitenteEndereco.codEmitente = gcOrdemServico.codEmite' +
+        'nte and '
+      
+        '                          gcEmitenteEndereco.codLocal = gcOrdemS' +
+        'ervico.codLocal)                          '
+      
+        'left outer join gcCidade on (gcCidade.codCidade = gcEmitenteEnde' +
+        'reco.codCidade )     '
+      ''
+      'where gcOrdemServico.codEmpresa = :pCodEmpresa'
+      'and gcOrdemServico.codEstabel = :pCodEstabel'
+      'and gcOrdemServico.codOrdemServico = :pCodOrdemServico')
+    Left = 544
+    Top = 80
+    ParamData = <
+      item
+        Name = 'PCODEMPRESA'
+        DataType = ftInteger
+        FDDataType = dtUInt32
+        ParamType = ptInput
+      end
+      item
+        Name = 'PCODESTABEL'
+        DataType = ftInteger
+        FDDataType = dtUInt32
+        ParamType = ptInput
+      end
+      item
+        Name = 'PCODORDEMSERVICO'
+        DataType = ftInteger
+        FDDataType = dtUInt32
+        ParamType = ptInput
+      end>
+    object fdOrdServDetalhecodEmpresa: TIntegerField
+      FieldName = 'codEmpresa'
+      Origin = 'codEmpresa'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdOrdServDetalhecodEstabel: TIntegerField
+      FieldName = 'codEstabel'
+      Origin = 'codEstabel'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdOrdServDetalhecodOrdemServico: TIntegerField
+      FieldName = 'codOrdemServico'
+      Origin = 'codOrdemServico'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object fdOrdServDetalhedescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Required = True
+      Size = 100
+    end
+    object fdOrdServDetalheobservacao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'observacao'
+      Origin = 'observacao'
+      Size = 1000
+    end
+    object fdOrdServDetalhetipoOrdem: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'tipoOrdem'
+      Origin = 'tipoOrdem'
+    end
+    object fdOrdServDetalhedataImplantacao: TDateField
+      FieldName = 'dataImplantacao'
+      Origin = 'dataImplantacao'
+      Required = True
+    end
+    object fdOrdServDetalhevalorTotal: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'valorTotal'
+      Origin = 'valorTotal'
+      Precision = 15
+      Size = 2
+    end
+    object fdOrdServDetalhesituacao: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'situacao'
+      Origin = 'situacao'
+    end
+    object fdOrdServDetalhedataConclusao: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dataConclusao'
+      Origin = 'dataConclusao'
+    end
+    object fdOrdServDetalhecodOperador: TIntegerField
+      FieldName = 'codOperador'
+      Origin = 'codOperador'
+      Required = True
+    end
+    object fdOrdServDetalhecodEmitente: TIntegerField
+      FieldName = 'codEmitente'
+      Origin = 'codEmitente'
+      Required = True
+    end
+    object fdOrdServDetalhecodLocal: TStringField
+      FieldName = 'codLocal'
+      Origin = 'codLocal'
+      Required = True
+    end
+    object fdOrdServDetalhecodFormaPagto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codFormaPagto'
+      Origin = 'codFormaPagto'
+    end
+    object fdOrdServDetalhecodCondPagto: TIntegerField
+      FieldName = 'codCondPagto'
+      Origin = 'codCondPagto'
+      Required = True
+    end
+    object fdOrdServDetalhetipoPreco: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'tipoPreco'
+      Origin = 'tipoPreco'
+    end
+    object fdOrdServDetalhecodTabPreco: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codTabPreco'
+      Origin = 'codTabPreco'
+    end
+    object fdOrdServDetalhecodMaqEquip: TIntegerField
+      FieldName = 'codMaqEquip'
+      Origin = 'codMaqEquip'
+      Required = True
+    end
+    object fdOrdServDetalhemotivoCancelamento: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'motivoCancelamento'
+      Origin = 'motivoCancelamento'
+      Size = 100
+    end
+    object fdOrdServDetalhedataCancelamento: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dataCancelamento'
+      Origin = 'dataCancelamento'
+    end
+    object fdOrdServDetalhemsgAlerta: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'msgAlerta'
+      Origin = 'msgAlerta'
+      Size = 100
+    end
+    object fdOrdServDetalhecodUsuarConclusao: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codUsuarConclusao'
+      Origin = 'codUsuarConclusao'
+    end
+    object fdOrdServDetalhecodUsuarImplant: TStringField
+      FieldName = 'codUsuarImplant'
+      Origin = 'codUsuarImplant'
+      Required = True
+    end
+    object fdOrdServDetalhecodUsuarCancelamento: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codUsuarCancelamento'
+      Origin = 'codUsuarCancelamento'
+    end
+    object fdOrdServDetalhecodNomeEmit: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeEmit'
+      Origin = 'codNomeEmit'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 114
+    end
+    object fdOrdServDetalhecodNomeOperador: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeOperador'
+      Origin = 'codNomeOperador'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 114
+    end
+    object fdOrdServDetalhecodNomeFormaPag: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeFormaPag'
+      Origin = 'codNomeFormaPag'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 64
+    end
+    object fdOrdServDetalhecodNomeCondPag: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeCondPag'
+      Origin = 'codNomeCondPag'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 64
+    end
+    object fdOrdServDetalhecodNomeTabPre: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeTabPre'
+      Origin = 'codNomeTabPre'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 64
+    end
+    object fdOrdServDetalhecodNomeMaqEquip: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codNomeMaqEquip'
+      Origin = 'codNomeMaqEquip'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 114
+    end
+    object fdOrdServDetalhenomeCidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nomeCidade'
+      Origin = 'nomeCidade'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 58
+    end
+  end
+  object dsOrdServDetalhe: TDataSource
+    DataSet = fdOrdServDetalhe
+    Left = 648
+    Top = 80
+  end
+end

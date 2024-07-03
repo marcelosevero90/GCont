@@ -102,6 +102,7 @@ begin
           Result := Result + 'Situação deve ser informada! |';
         end;
 
+
       end;
 
       if Result = '' then

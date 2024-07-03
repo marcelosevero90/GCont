@@ -53,7 +53,6 @@ object FEmpresa: TFEmpresa
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     ExplicitTop = 28
-    ExplicitHeight = 510
     ScrollHeight = 449
     ScrollWidth = 525
     object edtRazaoSocial: TUniDBEdit
@@ -62,11 +61,12 @@ object FEmpresa: TFEmpresa
       Width = 423
       Height = 22
       Hint = ''
-      Enabled = False
       DataField = 'razaoSocial'
       DataSource = dsEmpresa
       CharCase = ecUpperCase
       TabOrder = 0
+      TabStop = False
+      ReadOnly = True
     end
     object UniLabel9: TUniLabel
       Left = 26
@@ -92,11 +92,12 @@ object FEmpresa: TFEmpresa
       Width = 70
       Height = 22
       Hint = ''
-      Enabled = False
       DataField = 'codEmpresa'
       DataSource = dsEmpresa
       CharCase = ecUpperCase
       TabOrder = 2
+      TabStop = False
+      ReadOnly = True
     end
     object UniLabel11: TUniLabel
       Left = 26
@@ -148,7 +149,7 @@ object FEmpresa: TFEmpresa
     object UniDBEdit1: TUniDBEdit
       Left = 26
       Top = 104
-      Width = 423
+      Width = 499
       Height = 22
       Hint = ''
       DataField = 'nomeFantasia'
@@ -159,7 +160,7 @@ object FEmpresa: TFEmpresa
     object UniGroupBox1: TUniGroupBox
       Left = 26
       Top = 240
-      Width = 423
+      Width = 499
       Height = 209
       Hint = ''
       Caption = 'Endere'#231'o'
@@ -167,7 +168,7 @@ object FEmpresa: TFEmpresa
       object UniDBLookupComboBox1: TUniDBLookupComboBox
         Left = 16
         Top = 24
-        Width = 385
+        Width = 465
         Hint = ''
         ListField = 'fc_cid_uf'
         ListSource = dsCidade
@@ -191,11 +192,12 @@ object FEmpresa: TFEmpresa
       object UniDBEdit2: TUniDBEdit
         Left = 16
         Top = 71
-        Width = 313
+        Width = 394
         Height = 22
         Hint = ''
         DataField = 'endereco'
         DataSource = dsEmpresa
+        CharCase = ecUpperCase
         TabOrder = 3
       end
       object UniLabel4: TUniLabel
@@ -229,7 +231,7 @@ object FEmpresa: TFEmpresa
       object UniDBEdit4: TUniDBEdit
         Left = 280
         Top = 119
-        Width = 121
+        Width = 130
         Height = 22
         Hint = ''
         DataField = 'cep'
@@ -237,7 +239,7 @@ object FEmpresa: TFEmpresa
         TabOrder = 8
       end
       object UniLabel6: TUniLabel
-        Left = 335
+        Left = 416
         Top = 52
         Width = 41
         Height = 13
@@ -246,7 +248,7 @@ object FEmpresa: TFEmpresa
         TabOrder = 9
       end
       object UniDBEdit5: TUniDBEdit
-        Left = 335
+        Left = 416
         Top = 71
         Width = 65
         Height = 22
@@ -274,6 +276,23 @@ object FEmpresa: TFEmpresa
         DataSource = dsEmpresa
         TabOrder = 10
       end
+    end
+    object rgTpPrecoPadOS: TUniDBRadioGroup
+      Left = 340
+      Top = 146
+      Width = 185
+      Height = 79
+      Hint = ''
+      DataField = 'tpPrecoPadraoOS'
+      DataSource = dsEmpresa
+      Caption = 'Tipo Pre'#231'o Ord Servi'#231'o'
+      TabOrder = 11
+      Items.Strings = (
+        'Tabela de Pre'#231'o'
+        'Informado')
+      Values.Strings = (
+        '1'
+        '2')
     end
   end
   object dsEmpresa: TDataSource

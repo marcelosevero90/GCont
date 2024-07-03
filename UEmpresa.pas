@@ -45,6 +45,7 @@ type
     fdCidade: TFDQuery;
     dsCidade: TDataSource;
     UniNativeImageList1: TUniNativeImageList;
+    rgTpPrecoPadOS: TUniDBRadioGroup;
     procedure UniFrameCreate(Sender: TObject);
     procedure btConfAlterClick(Sender: TObject);
     procedure UniFrameDestroy(Sender: TObject);
