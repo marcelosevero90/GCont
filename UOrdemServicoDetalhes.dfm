@@ -100,7 +100,7 @@ object FOrdemServicoDetalhes: TFOrdemServicoDetalhes
       Hint = ''
       Enabled = False
       DataField = 'codOrdemServico'
-      DataSource = dsOrdemServItem
+      DataSource = dsOrdServDetalhe
       CharCase = ecUpperCase
       TabOrder = 3
       TabStop = False
@@ -113,7 +113,7 @@ object FOrdemServicoDetalhes: TFOrdemServicoDetalhes
       Height = 22
       Hint = ''
       DataField = 'descricao'
-      DataSource = dsOrdemServItem
+      DataSource = dsOrdServDetalhe
       CharCase = ecUpperCase
       TabOrder = 4
       TabStop = False

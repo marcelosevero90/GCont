@@ -734,6 +734,21 @@ begin
     if fdOrdemServico.IsEmpty then
       Exit;
 
+    fqAuxiliar.Close;
+    fqAuxiliar.SQL.Clear;
+    fqAuxiliar.SQL.Add( ' select * from gcUsuarioPermisPrograma ' +
+                       ' where codEmpresa   = ' + IntToStr(MainForm.iCodEmpresa) +
+                       '   and codEstabel   = ' + IntToStr(MainForm.iCodEstabel) +
+                       '   and codUsuario   = ' + QuotedStr(MainForm.sCodUsuario) +
+                       '   and codPrograma  = ' + QuotedStr('EFETIVA CANCELA OS')
+    );
+    fqAuxiliar.Active := True;
+    if fqAuxiliar.IsEmpty then begin
+      MessageDlg('Usuário não possuí permissão para Cancelar OS!' ,mtError,[mbOK],nil);
+      Exit;
+    end;
+
+
     if fdOrdemServicosituacao.AsInteger < 3 then begin
 
       sMsgAux := '';
@@ -768,6 +783,20 @@ begin
   if Column.FieldName = 'FC_IMG_EFETIVA' then begin
     if fdOrdemServico.IsEmpty then
       Exit;
+
+    fqAuxiliar.Close;
+    fqAuxiliar.SQL.Clear;
+    fqAuxiliar.SQL.Add( ' select * from gcUsuarioPermisPrograma ' +
+                       ' where codEmpresa   = ' + IntToStr(MainForm.iCodEmpresa) +
+                       '   and codEstabel   = ' + IntToStr(MainForm.iCodEstabel) +
+                       '   and codUsuario   = ' + QuotedStr(MainForm.sCodUsuario) +
+                       '   and codPrograma  = ' + QuotedStr('EFETIVA CANCELA OS')
+    );
+    fqAuxiliar.Active := True;
+    if fqAuxiliar.IsEmpty then begin
+      MessageDlg('Usuário não possuí permissão para Efetivar OS!' ,mtError,[mbOK],nil);
+      Exit;
+    end;
 
     if fdOrdemServicosituacao.AsInteger = 1 then begin
 

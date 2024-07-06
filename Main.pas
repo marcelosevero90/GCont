@@ -254,8 +254,14 @@ begin
         if Nd.Text = 'MANUTENÇÃO ORDEM DE SERVIÇO' then begin
           FClassName := 'TFOrdemServicoManutencao' ;
         end
-
-
+        else
+        if Nd.Text = 'MANUTENÇÃO TÍTULOS A RECEBER' then begin
+          FClassName := 'TFTitulosAReceberManutencao' ;
+        end
+        else
+        if Nd.Text = 'LIQUIDAÇÃO TÍTULOS A RECEBER' then begin
+          FClassName := 'TFTitulosAReceberLiquidacao' ;
+        end
 
         ;
 

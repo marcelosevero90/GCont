@@ -11,7 +11,7 @@ object FPortadorFinanceiro: TFPortadorFinanceiro
     Width = 1034
     Height = 538
     Hint = ''
-    ActivePage = tsManut
+    ActivePage = tsLista
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0

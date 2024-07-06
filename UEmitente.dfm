@@ -11,7 +11,7 @@ object FEmitente: TFEmitente
     Width = 925
     Height = 502
     Hint = ''
-    ActivePage = tsEndereco
+    ActivePage = tsLista
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0

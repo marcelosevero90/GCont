@@ -1,0 +1,1003 @@
+unit UTitulosAReceberLiquidacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, uniEdit, uniBasicGrid, uniDBGrid,
+  uniDateTimePicker, uniGUIBaseClasses, uniImageList, uniDBDateTimePicker,
+  uniMultiItem, uniComboBox, uniDBComboBox, uniDBLookupComboBox, uniDBEdit,
+  uniMemo, uniDBMemo, uniLabel, uniScrollBox, uniToolBar, Vcl.Imaging.pngimage,
+  uniImage, uniPanel, uniGroupBox, uniButton, uniBitBtn, uniPageControl,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, uniRadioGroup, uniDBRadioGroup;
+
+type
+  TFTitulosAReceberLiquidacao = class(TUniFrame)
+    pgMenu: TUniPageControl;
+    tsLista: TUniTabSheet;
+    UniToolBar1: TUniToolBar;
+    btAtualizarDados: TUniBitBtn;
+    UniGroupBox1: TUniGroupBox;
+    UniPanel1: TUniPanel;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    imgVis: TUniImage;
+    imgEdit: TUniImage;
+    imgCancel: TUniImage;
+    tsManut: TUniTabSheet;
+    sbManut: TUniScrollBox;
+    pgManutTitAR: TUniPageControl;
+    tsDadosTitGeral: TUniTabSheet;
+    UniScrollBox1: TUniScrollBox;
+    UniNativeImageList1: TUniNativeImageList;
+    UniLabel2: TUniLabel;
+    dtImplantIni: TUniDateTimePicker;
+    dtImplantFim: TUniDateTimePicker;
+    UniLabel1: TUniLabel;
+    dtVenctoIni: TUniDateTimePicker;
+    dtVenctoFim: TUniDateTimePicker;
+    UniGroupBox2: TUniGroupBox;
+    dbEmitFiltro: TUniDBGrid;
+    UniPanel5: TUniPanel;
+    UniGroupBox3: TUniGroupBox;
+    UniGroupBox4: TUniGroupBox;
+    UniLabel5: TUniLabel;
+    edtOSIniFiltro: TUniNumberEdit;
+    edtOSFimFiltro: TUniNumberEdit;
+    btMarcaTdsEmit: TUniBitBtn;
+    btDesmarcaTdsEmit: TUniBitBtn;
+    UniPanel6: TUniPanel;
+    UniBitBtn3: TUniBitBtn;
+    UniBitBtn4: TUniBitBtn;
+    UniPanel7: TUniPanel;
+    UniBitBtn5: TUniBitBtn;
+    UniBitBtn6: TUniBitBtn;
+    edtPesqEmitRap: TUniEdit;
+    edtPesqPortRap: TUniEdit;
+    edtPesqFormaPagRap: TUniEdit;
+    fdFormaPagto: TFDQuery;
+    fdFormaPagtocodEmpresa: TIntegerField;
+    fdFormaPagtocodEstabel: TIntegerField;
+    fdFormaPagtocodFormaPagto: TIntegerField;
+    fdFormaPagtonomeFormaPagto: TStringField;
+    dsFormaPagto: TDataSource;
+    fdEmitente: TFDQuery;
+    fdEmitentecodEmpresa: TIntegerField;
+    fdEmitentecodEstabel: TIntegerField;
+    fdEmitentecodEmitente: TIntegerField;
+    fdEmitentenomeEmitente: TStringField;
+    fdEmitentecgc: TStringField;
+    fdEmitentesituacao: TIntegerField;
+    fdEmitenteidentificacao: TIntegerField;
+    fdEmitenteemail: TStringField;
+    fdEmitentetelefone: TStringField;
+    fdEmitentecelular: TStringField;
+    fdEmitentedataImplantacao: TDateField;
+    dsEmitente: TDataSource;
+    fdPortador: TFDQuery;
+    fdPortadorcodEmpresa: TIntegerField;
+    fdPortadorcodEstabel: TIntegerField;
+    fdPortadorcodPortador: TIntegerField;
+    fdPortadornomePortador: TStringField;
+    fdPortadorcodBanco: TIntegerField;
+    fdPortadoragencia: TStringField;
+    fdPortadorcontaCorrente: TStringField;
+    fdPortadortipoPortador: TIntegerField;
+    fdPortadorvlSaldoInicial: TBCDField;
+    fdPortadorvlSaldoAtual: TBCDField;
+    fdPortadorpercMultaAtraso: TBCDField;
+    fdPortadorpercJuroDia: TBCDField;
+    fdPortadorpercDesctoAntecip: TBCDField;
+    dsPortador: TDataSource;
+    fdEmitenteFC_SELEC: TBooleanField;
+    fdPortadorFC_SELEC: TBooleanField;
+    dbPortadFiltro: TUniDBGrid;
+    UniDBGrid1: TUniDBGrid;
+    fdFormaPagtoFC_SELEC: TBooleanField;
+    fdTitulosAReceberLista: TFDQuery;
+    fdTitulosAReceberListacodEmpresa: TIntegerField;
+    fdTitulosAReceberListacodEstabel: TIntegerField;
+    fdTitulosAReceberListacodTituloAReceber: TIntegerField;
+    fdTitulosAReceberListadescricao: TStringField;
+    fdTitulosAReceberListacodEmitente: TIntegerField;
+    fdTitulosAReceberListacodFormaPagto: TIntegerField;
+    fdTitulosAReceberListasituacao: TIntegerField;
+    fdTitulosAReceberListadtVencimento: TDateField;
+    fdTitulosAReceberListadtEmissao: TDateField;
+    fdTitulosAReceberListadtTransacao: TDateField;
+    fdTitulosAReceberListacodUsuarImplant: TStringField;
+    fdTitulosAReceberListaobservacao: TStringField;
+    fdTitulosAReceberListavalorOriginal: TBCDField;
+    fdTitulosAReceberListavalorTituloReceber: TBCDField;
+    fdTitulosAReceberListavalorDesconto: TBCDField;
+    fdTitulosAReceberListavalorJuros: TBCDField;
+    fdTitulosAReceberListavalorMulta: TBCDField;
+    fdTitulosAReceberListacodPortador: TIntegerField;
+    fdTitulosAReceberListadoctoReferencia: TStringField;
+    fdTitulosAReceberListaindOrigem: TIntegerField;
+    fdTitulosAReceberListacodOrdemServico: TIntegerField;
+    fdTitulosAReceberListacodUsuarLiquid: TStringField;
+    fdTitulosAReceberListadtCancelamento: TDateField;
+    fdTitulosAReceberListadtLiquidacao: TDateField;
+    fdTitulosAReceberListacodUsuarCancela: TStringField;
+    fdTitulosAReceberListaFC_IMG_EDIT: TStringField;
+    fdTitulosAReceberListaparcela: TIntegerField;
+    fdTitulosAReceberListapercMultaAtraso: TBCDField;
+    fdTitulosAReceberListapercJuroDia: TBCDField;
+    fdTitulosAReceberListapercDesctoAntecip: TBCDField;
+    fdTitulosAReceberListamotivoCancela: TStringField;
+    dsTitulosAReceberLista: TDataSource;
+    dbLista: TUniDBGrid;
+    fdTitulosAReceberListaFC_SELEC: TBooleanField;
+    UniToolBar3: TUniToolBar;
+    UniToolButton1: TUniToolButton;
+    UniBitBtn1: TUniBitBtn;
+    btEfetivar: TUniBitBtn;
+    fdTitulosAReceberListanomeEmitente: TStringField;
+    fdTitulosAReceberListanomeFormaPagto: TStringField;
+    fdTitulosAReceberListanomePortador: TStringField;
+    tsManutTitAR: TUniTabSheet;
+    UniToolButton2: TUniToolButton;
+    btMarcaTdsTitLiq: TUniBitBtn;
+    btDesmarcaTdsTitLiq: TUniBitBtn;
+    UniLabel10: TUniLabel;
+    edtCod: TUniDBEdit;
+    UniLabel9: TUniLabel;
+    edtNome: TUniDBEdit;
+    UniToolBar2: TUniToolBar;
+    UniToolButton4: TUniToolButton;
+    btCancelaAlter: TUniBitBtn;
+    btConfAlter: TUniBitBtn;
+    UniLabel21: TUniLabel;
+    edtPercMulta: TUniDBFormattedNumberEdit;
+    UniLabel22: TUniLabel;
+    edtPercJuros: TUniDBFormattedNumberEdit;
+    UniLabel23: TUniLabel;
+    edtPercDescto: TUniDBFormattedNumberEdit;
+    UniLabel3: TUniLabel;
+    edtVlMulta: TUniDBFormattedNumberEdit;
+    UniLabel4: TUniLabel;
+    edtVlJuros: TUniDBFormattedNumberEdit;
+    UniLabel6: TUniLabel;
+    edtVlDescto: TUniDBFormattedNumberEdit;
+    UniLabel7: TUniLabel;
+    UniDBFormattedNumberEdit4: TUniDBFormattedNumberEdit;
+    UniLabel8: TUniLabel;
+    UniDBFormattedNumberEdit8: TUniDBFormattedNumberEdit;
+    fdTitulosAReceberListaFC_VL_JUROS: TFloatField;
+    fdTitulosAReceberListaFC_VL_MULTA: TFloatField;
+    fdTitulosAReceberListaFC_VL_DESCTO: TFloatField;
+    fdTitulosAReceberListaFC_VL_TOTAL: TFloatField;
+    fdTitulosMovtoAReceber: TFDQuery;
+    fdTitulosMovtoARecebercodEmpresa: TIntegerField;
+    fdTitulosMovtoARecebercodEstabel: TIntegerField;
+    fdTitulosMovtoARecebercodTituloAReceber: TIntegerField;
+    fdTitulosMovtoARecebersequencia: TIntegerField;
+    fdTitulosMovtoARecebertipoMovto: TIntegerField;
+    fdTitulosMovtoAReceberdescricao: TStringField;
+    fdTitulosMovtoAReceberdtMovto: TDateField;
+    fdTitulosMovtoARecebercodUsuarMovto: TStringField;
+    fdTitulosMovtoARecebervalorMovto: TBCDField;
+    fdTitulosMovtoAReceberdescHistorico: TStringField;
+    dsTitulosMovtoAReceber: TDataSource;
+    fqAuxiliar: TFDQuery;
+    rgMulta: TUniDBRadioGroup;
+    rgJuros: TUniDBRadioGroup;
+    rgDesconto: TUniDBRadioGroup;
+    fdTitulosAReceberListaFC_IND_MULTA: TIntegerField;
+    fdTitulosAReceberListaFC_IND_JUROS: TIntegerField;
+    fdTitulosAReceberListaFC_IND_DESCONTO: TIntegerField;
+    fdPortadLiq: TFDQuery;
+    fdPortadLiqcodEmpresa: TIntegerField;
+    fdPortadLiqcodEstabel: TIntegerField;
+    fdPortadLiqcodPortador: TIntegerField;
+    fdPortadLiqnomePortador: TStringField;
+    fdPortadLiqcodBanco: TIntegerField;
+    fdPortadLiqagencia: TStringField;
+    fdPortadLiqcontaCorrente: TStringField;
+    fdPortadLiqtipoPortador: TIntegerField;
+    fdPortadLiqvlSaldoInicial: TBCDField;
+    fdPortadLiqvlSaldoAtual: TBCDField;
+    fdPortadLiqpercMultaAtraso: TBCDField;
+    fdPortadLiqpercJuroDia: TBCDField;
+    fdPortadLiqpercDesctoAntecip: TBCDField;
+    procedure UniFrameCreate(Sender: TObject);
+    procedure edtPesqEmitRapKeyPress(Sender: TObject; var Key: Char);
+    procedure edtPesqEmitRapChange(Sender: TObject);
+    procedure btMarcaTdsEmitClick(Sender: TObject);
+    procedure btDesmarcaTdsEmitClick(Sender: TObject);
+    procedure UniBitBtn3Click(Sender: TObject);
+    procedure UniBitBtn4Click(Sender: TObject);
+    procedure edtPesqPortRapKeyPress(Sender: TObject; var Key: Char);
+    procedure edtPesqPortRapChange(Sender: TObject);
+    procedure UniBitBtn5Click(Sender: TObject);
+    procedure UniBitBtn6Click(Sender: TObject);
+    procedure edtPesqFormaPagRapKeyPress(Sender: TObject; var Key: Char);
+    procedure edtPesqFormaPagRapChange(Sender: TObject);
+    procedure UniBitBtn1Click(Sender: TObject);
+    procedure btAtualizarDadosClick(Sender: TObject);
+    procedure dbListaFieldImage(const Column: TUniDBGridColumn;
+      const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+      var ATransparent: TUniTransparentOption);
+    procedure btMarcaTdsTitLiqClick(Sender: TObject);
+    procedure btDesmarcaTdsTitLiqClick(Sender: TObject);
+    procedure btCancelaAlterClick(Sender: TObject);
+    procedure dbListaCellClick(Column: TUniDBGridColumn);
+    procedure edtPercMultaExit(Sender: TObject);
+    procedure edtPercJurosExit(Sender: TObject);
+    procedure edtPercDesctoExit(Sender: TObject);
+    procedure edtVlMultaExit(Sender: TObject);
+    procedure edtVlJurosExit(Sender: TObject);
+    procedure edtVlDesctoExit(Sender: TObject);
+    procedure btConfAlterClick(Sender: TObject);
+    procedure btEfetivarClick(Sender: TObject);
+    procedure rgMultaClick(Sender: TObject);
+    procedure rgJurosClick(Sender: TObject);
+    procedure rgDescontoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    procedure pCalcVlTit;
+    procedure pCalcTotalTitGeral;
+    procedure pConfirmaAtualizacao(Sender: TComponent; AResult:Integer);
+    procedure pConfirmaEfetivacao(Sender: TComponent; AResult:Integer);
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, MainModule;
+
+
+const SQLTitAcrAR = 'select gcTitulosAReceber.*, ' +
+' gcEmitente.nomeEmitente, '               +
+' gcFormaPagamento.nomeFormaPagto, '         +
+' gcPortador.nomePortador '                    +
+' from gcTitulosAReceber '                       +
+' inner join gcEmitente on '                       +
+' (gcEmitente.codEmpresa = gcTitulosAReceber.codEmpresa '  +
+' and '                                                      +
+' gcEmitente.codEstabel = gcTitulosAReceber.codEstabel and '   +
+' gcEmitente.codEmitente = gcTitulosAReceber.codEmitente) '    +
+' left outer join gcFormaPagamento on '                          +
+' (gcFormaPagamento.codEmpresa = gcTitulosAReceber.codEmpresa and  '  +
+' gcFormaPagamento.codEstabel = gcTitulosAReceber.codEstabel and '  +
+' gcFormaPagamento.codFormaPagto = gcTitulosAReceber.codFormaPagto) ' +
+' inner join gcPortador on '                                           +
+' (gcPortador.codEmpresa = gcTitulosAReceber.codEmpresa and  '  +
+' gcPortador.codEstabel = gcTitulosAReceber.codEstabel and '  +
+' gcPortador.codPortador = gcTitulosAReceber.codPortador) ';
+
+
+
+
+procedure TFTitulosAReceberLiquidacao.btAtualizarDadosClick(Sender: TObject);
+var
+sEmits, sPortads, sFormasPags, SqlExec : string;
+i : integer;
+begin
+  if not fdEmitente.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
+    MessageDlg('Selecione um ou mais Clientes para Liquidação!',mtError,[mbOK],nil);
+    Exit;
+  end;
+  if not fdPortador.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
+    MessageDlg('Selecione um ou mais Portadores para Liquidação!',mtError,[mbOK],nil);
+    Exit;
+  end;
+  if not fdFormaPagto.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
+    MessageDlg('Selecione uma ou mais Formas Pagto para Liquidação!',mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  edtPesqEmitRap.Clear;
+  edtPesqPortRap.Clear;
+  edtPesqFormaPagRap.Clear;
+
+  sEmits        := '';
+  sPortads      := '';
+  sFormasPags   := '';
+
+  fdEmitente.Filtered := False;
+  fdEmitente.Filter   := ' FC_SELEC = true ';
+  fdEmitente.Filtered := True;
+
+  fdPortador.Filtered := False;
+  fdPortador.Filter   := ' FC_SELEC = true ';
+  fdPortador.Filtered := True;
+
+  fdFormaPagto.Filtered := False;
+  fdFormaPagto.Filter   := ' FC_SELEC = true ';
+  fdFormaPagto.Filtered := True;
+
+  fdEmitente.First;
+  for I := 0 to fdEmitente.RecordCount - 1 do begin
+    sEmits := sEmits + IntToStr(fdEmitentecodEmitente.AsInteger) + ',';
+    fdEmitente.Next;
+  end;
+  fdPortador.First;
+  for I := 0 to fdPortador.RecordCount - 1 do begin
+    sPortads := sPortads + IntToStr(fdPortadorcodPortador.AsInteger) + ',';
+    fdPortador.Next;
+  end;
+  fdFormaPagto.First;
+  for I := 0 to fdFormaPagto.RecordCount - 1 do begin
+    sFormasPags := sFormasPags + IntToStr(fdFormaPagtocodFormaPagto.AsInteger) + ',';
+    fdFormaPagto.Next;
+  end;
+
+  sEmits        := Trim(sEmits);
+  sPortads      := Trim(sPortads);
+  sFormasPags   := Trim(sFormasPags);
+
+  if sEmits <> '' then begin
+    sEmits := Copy(sEmits,1,length(sEmits)- 1);
+  end;
+  if sPortads <> '' then begin
+    sPortads := Copy(sPortads,1,length(sPortads)- 1);
+  end;
+  if sFormasPags <> '' then begin
+    sFormasPags := Copy(sFormasPags,1,length(sFormasPags)- 1);
+  end;
+
+  SqlExec := SQLTitAcrAR
+          + ' where gcTitulosAReceber.codEmpresa    = ' + IntToStr(MainForm.iCodEmpresa)
+          + '   and gcTitulosAReceber.codEstabel    = ' + IntToStr(MainForm.iCodEstabel)
+          + '   and gcTitulosAReceber.situacao      = 1 ' //aberta
+          + '   and gcTitulosAReceber.dtVencimento >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtVenctoIni.DateTime))
+          + '   and gcTitulosAReceber.dtVencimento <= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtVenctoFim.DateTime))
+          + '   and gcTitulosAReceber.dtEmissao    >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtImplantIni.DateTime))
+          + '   and gcTitulosAReceber.dtEmissao    <= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtImplantFim.DateTime))
+          + '   and ((gcTitulosAReceber.codOrdemServico >= ' + IntToStr(Trunc(edtOSIniFiltro.Value))
+          + '   and   gcTitulosAReceber.codOrdemServico <= ' + IntToStr(Trunc(edtOSFimFiltro.Value)) + ') or gcTitulosAReceber.codOrdemServico is null) ' ;
+
+  if sEmits <> '' then begin
+    SqlExec := SqlExec + ' and gcTitulosAReceber.codEmitente in (' + sEmits + ')';
+  end;
+  if sPortads <> '' then begin
+    SqlExec := SqlExec + ' and gcTitulosAReceber.codPortador in (' + sPortads + ')';
+  end;
+  if sFormasPags <> '' then begin
+    SqlExec := SqlExec + ' and gcTitulosAReceber.codFormaPagto in (' + sFormasPags + ')';
+  end;
+
+  fdTitulosAReceberLista.Close;
+  fdTitulosAReceberLista.SQL.Clear;
+  fdTitulosAReceberLista.SQL.Add(SqlExec);
+  fdTitulosAReceberLista.Active := True;
+
+
+  fdEmitente.Filtered := False;
+  fdPortador.Filtered := False;
+  fdFormaPagto.Filtered := False;
+
+  if fdTitulosAReceberLista.IsEmpty then begin
+    fdTitulosAReceberLista.Close;
+    MessageDlg('Nenhum registro de Título encontrado para a seleção informada!',mtError,[mbOK],nil);
+    Exit;
+  end;
+
+
+  //btMarcaTdsTitLiq.OnClick(Sender); //marca todos
+
+  pCalcTotalTitGeral;
+
+  sbManut.Enabled      := True;
+  tsManut.TabVisible   := True;
+  tsLista.TabVisible   := False ;
+  tsManutTitAR.TabVisible   := False ;
+  pgManutTitAR.TabIndex := 0;
+
+
+  pgMenu.TabIndex := 1;
+
+
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.btCancelaAlterClick(Sender: TObject);
+begin
+
+  fdTitulosAReceberLista.Cancel;
+
+  tsManutTitAR.TabVisible := False;
+  tsDadosTitGeral.TabVisible := True;
+  pgManutTitAR.TabIndex := 0;
+end;
+
+procedure TFTitulosAReceberLiquidacao.btConfAlterClick(Sender: TObject);
+begin
+MessageDlg('Tem certeza que deseja Confirmar o Título?',mtConfirmation,mbYesNo, pConfirmaAtualizacao);
+end;
+
+procedure TFTitulosAReceberLiquidacao.btDesmarcaTdsEmitClick(Sender: TObject);
+var
+i:integer;
+begin
+  fdEmitente.First;
+  for I := 0 to fdEmitente.RecordCount - 1 do begin
+    fdEmitente.Edit;
+    fdEmitenteFC_SELEC.AsBoolean := False;
+    fdEmitente.Post;
+    fdEmitente.Next;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.btMarcaTdsEmitClick(Sender: TObject);
+var
+i:integer;
+begin
+  fdEmitente.First;
+  for I := 0 to fdEmitente.RecordCount - 1 do begin
+    fdEmitente.Edit;
+    fdEmitenteFC_SELEC.AsBoolean := True;
+    fdEmitente.Post;
+    fdEmitente.Next;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.dbListaCellClick(
+  Column: TUniDBGridColumn);
+var
+sRespValid : string;
+begin
+  if Column.FieldName = 'FC_IMG_EDIT' then begin
+    //ShowMessageN('EDITAR');
+    if fdTitulosAReceberLista.IsEmpty then
+      Exit;
+
+    {rgMulta.ItemIndex := 0;
+    rgJuros.ItemIndex := 0;
+    rgDesconto.ItemIndex := 0;
+    edtVlMulta.Enabled  := False;
+    edtVlJuros.Enabled  := False;
+    edtVlDescto.Enabled := False;}
+
+
+    fdTitulosAReceberLista.Edit;
+
+    edtPercDescto.OnExit(nil);
+    edtPercMulta.OnExit(nil);
+    edtPercJuros.OnExit(nil);
+
+    rgMulta.OnClick(nil);
+    rgJuros.OnClick(nil);
+    rgDesconto.OnClick(nil);
+
+    pCalcVlTit;
+
+    tsManutTitAR.TabVisible     := True;
+    tsDadosTitGeral.TabVisible  := False;
+    pgManutTitAR.TabIndex       := 1;
+    edtPercMulta.SetFocus;
+
+  end;
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.dbListaFieldImage(
+  const Column: TUniDBGridColumn; const AField: TField; var OutImage: TGraphic;
+  var DoNotDispose: Boolean; var ATransparent: TUniTransparentOption);
+begin
+  if SameText(AField.FieldName, 'FC_IMG_EDIT') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgEdit.Picture.Graphic;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPercDesctoExit(Sender: TObject);
+begin
+  if fdTitulosAReceberLista.State in [dsInsert,dsEdit] then begin
+    if fdTitulosAReceberListaFC_IND_DESCONTO.AsInteger = 1 then begin
+      fdTitulosAReceberListaFC_VL_DESCTO.AsFloat :=
+      fdTitulosAReceberListavalorOriginal.AsFloat * (fdTitulosAReceberListapercDesctoAntecip.AsFloat / 100);
+    end;
+    pCalcVlTit;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPercJurosExit(Sender: TObject);
+begin
+  if fdTitulosAReceberLista.State in [dsInsert,dsEdit] then begin
+    if fdTitulosAReceberListaFC_IND_JUROS.AsInteger = 1 then begin
+      fdTitulosAReceberListaFC_VL_JUROS.AsFloat :=
+      fdTitulosAReceberListavalorOriginal.AsFloat * (fdTitulosAReceberListapercJuroDia.AsFloat / 100);
+    end;
+    pCalcVlTit;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPercMultaExit(Sender: TObject);
+begin
+  if fdTitulosAReceberLista.State in [dsInsert,dsEdit] then begin    
+    if fdTitulosAReceberListaFC_IND_MULTA.AsInteger = 1 then begin
+      fdTitulosAReceberListaFC_VL_MULTA.AsFloat :=
+      fdTitulosAReceberListavalorOriginal.AsFloat * (fdTitulosAReceberListapercMultaAtraso.AsFloat / 100);
+    end;
+    pCalcVlTit;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqEmitRapChange(Sender: TObject);
+begin
+  if Trim(edtPesqEmitRap.Text) = '' then begin
+    fdEmitente.Filtered  := False;
+    fdEmitente.filter    := '';
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqEmitRapKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+  if Trim(edtPesqEmitRap.Text) = '' then begin
+    fdEmitente.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    fdEmitente.Filtered  := False;
+    if Trim(edtPesqEmitRap.Text) <> '' then begin
+
+
+      fdEmitente.Filter    := '    (upper(codEmitente)  like ' + QuotedStr('%' + AnsiUpperCase(edtPesqEmitRap.Text) + '%') + ') '
+                                 + ' or (upper(nomeEmitente) like ' + QuotedStr('%' + AnsiUpperCase(edtPesqEmitRap.Text) + '%') + ') '
+                                 + ' or (upper(cgc) like ' + QuotedStr('%' + AnsiUpperCase(edtPesqEmitRap.Text) + '%') + ') '
+      ;
+
+
+      fdEmitente.Filtered  := True;
+    end;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniBitBtn1Click(Sender: TObject);
+begin
+
+
+  tsManut.TabVisible := False;
+  tsLista.TabVisible := True;
+  pgMenu.TabIndex := 0;
+end;
+
+procedure TFTitulosAReceberLiquidacao.btEfetivarClick(Sender: TObject);
+begin
+  if not fdTitulosAReceberLista.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
+    MessageDlg('Selecione um ou mais Títulos para Liquidação!',mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  MessageDlg('Tem certeza que deseja Efetivar a Liquidação dos Títulos?',mtConfirmation,mbYesNo, pConfirmaEfetivacao);
+
+  
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniBitBtn3Click(Sender: TObject);
+var
+i:integer;
+begin
+  fdPortador.First;
+  for I := 0 to fdPortador.RecordCount - 1 do begin
+    fdPortador.Edit;
+    fdPortadorFC_SELEC.AsBoolean := True;
+    fdPortador.Post;
+    fdPortador.Next;
+  end;
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniBitBtn4Click(Sender: TObject);
+var
+i:integer;
+begin
+  fdPortador.First;
+  for I := 0 to fdPortador.RecordCount - 1 do begin
+    fdPortador.Edit;
+    fdPortadorFC_SELEC.AsBoolean := False;
+    fdPortador.Post;
+    fdPortador.Next;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniBitBtn5Click(Sender: TObject);
+var
+i:integer;
+begin
+  fdFormaPagto.First;
+  for I := 0 to fdFormaPagto.RecordCount - 1 do begin
+    fdFormaPagto.Edit;
+    fdFormaPagtoFC_SELEC.AsBoolean := True;
+    fdFormaPagto.Post;
+    fdFormaPagto.Next;
+  end;
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniBitBtn6Click(Sender: TObject);
+var
+i:integer;
+begin
+  fdFormaPagto.First;
+  for I := 0 to fdFormaPagto.RecordCount - 1 do begin
+    fdFormaPagto.Edit;
+    fdFormaPagtoFC_SELEC.AsBoolean := False;
+    fdFormaPagto.Post;
+    fdFormaPagto.Next;
+  end;
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.btMarcaTdsTitLiqClick(Sender: TObject);
+var
+i:integer;
+begin
+  fdTitulosAReceberLista.First;
+  for I := 0 to fdTitulosAReceberLista.RecordCount - 1 do begin
+    fdTitulosAReceberLista.Edit;
+    fdTitulosAReceberListaFC_SELEC.AsBoolean := True;
+    fdTitulosAReceberLista.Post;
+    fdTitulosAReceberLista.Next;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.btDesmarcaTdsTitLiqClick(Sender: TObject);
+var
+i:integer;
+begin
+  fdTitulosAReceberLista.First;
+  for I := 0 to fdTitulosAReceberLista.RecordCount - 1 do begin
+    fdTitulosAReceberLista.Edit;
+    fdTitulosAReceberListaFC_SELEC.AsBoolean := False;
+    fdTitulosAReceberLista.Post;
+    fdTitulosAReceberLista.Next;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqFormaPagRapChange(Sender: TObject);
+begin
+  if Trim(edtPesqFormaPagRap.Text) = '' then begin
+    fdFormaPagto.Filtered  := False;
+    fdFormaPagto.filter    := '';
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqFormaPagRapKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Trim(edtPesqFormaPagRap.Text) = '' then begin
+    fdFormaPagto.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    fdFormaPagto.Filtered  := False;
+    if Trim(edtPesqFormaPagRap.Text) <> '' then begin
+
+      fdFormaPagto.Filter    := '    (upper(codFormaPagto)  like ' + QuotedStr('%' + AnsiUpperCase(edtPesqFormaPagRap.Text) + '%') + ') '
+                              + ' or (upper(nomeFormaPagto) like ' + QuotedStr('%' + AnsiUpperCase(edtPesqFormaPagRap.Text) + '%') + ') '
+      ;
+
+      fdFormaPagto.Filtered  := True;
+    end;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqPortRapChange(Sender: TObject);
+begin
+  if Trim(edtPesqPortRap.Text) = '' then begin
+    fdPortador.Filtered  := False;
+    fdPortador.filter    := '';
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtPesqPortRapKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Trim(edtPesqPortRap.Text) = '' then begin
+    fdPortador.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    fdPortador.Filtered  := False;
+    if Trim(edtPesqPortRap.Text) <> '' then begin
+
+      fdPortador.Filter    := '    (upper(codPortador)  like ' + QuotedStr('%' + AnsiUpperCase(edtPesqPortRap.Text) + '%') + ') '
+                            + ' or (upper(nomePortador) like ' + QuotedStr('%' + AnsiUpperCase(edtPesqPortRap.Text) + '%') + ') '
+      ;
+
+      fdPortador.Filtered  := True;
+    end;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtVlDesctoExit(Sender: TObject);
+begin
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtVlJurosExit(Sender: TObject);
+begin
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.edtVlMultaExit(Sender: TObject);
+begin
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.pCalcTotalTitGeral;
+var
+i : integer;
+begin
+
+  fdTitulosAReceberLista.First;
+  for I := 0 to fdTitulosAReceberLista.RecordCount - 1 do begin
+    fdTitulosAReceberLista.Edit;
+    fdTitulosAReceberListaFC_SELEC.AsBoolean := True; 
+    fdTitulosAReceberListaFC_IND_MULTA.AsInteger := 1;
+    fdTitulosAReceberListaFC_IND_JUROS.AsInteger := 1;
+    fdTitulosAReceberListaFC_IND_DESCONTO.AsInteger := 1;    
+    edtPercDescto.OnExit(nil);
+    edtPercMulta.OnExit(nil);
+    edtPercJuros.OnExit(nil);    
+    pCalcVlTit;     
+    fdTitulosAReceberLista.Post;
+    fdTitulosAReceberLista.Next;
+  end;
+
+end;
+
+procedure TFTitulosAReceberLiquidacao.pCalcVlTit;
+begin
+  if fdTitulosAReceberLista.State in [dsInsert,dsEdit] then begin
+    fdTitulosAReceberListaFC_VL_TOTAL.AsFloat :=
+    (fdTitulosAReceberListavalorOriginal.AsFloat +
+     fdTitulosAReceberListaFC_VL_JUROS.AsFloat    +
+     fdTitulosAReceberListaFC_VL_MULTA.AsFloat)   -
+     fdTitulosAReceberListaFC_VL_DESCTO.AsFloat;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.pConfirmaAtualizacao(Sender: TComponent;
+  AResult: Integer);
+var
+iSeq : integer;  
+begin
+  if AResult = mrYes then begin
+
+    try
+
+      fdTitulosAReceberLista.Post;
+
+      iSeq := 1;
+      fqAuxiliar.Close;
+      fqAuxiliar.SQL.Clear;
+      fqAuxiliar.SQL.Add(   ' select max(sequencia) as seqReg from gcTitulosMovtoAReceber '
+                          + ' where codEmpresa = ' + IntToStr(fdTitulosAReceberListacodEmpresa.AsInteger)
+                          +  ' and codEstabel = ' + IntToStr(fdTitulosAReceberListacodEstabel.AsInteger)
+                          +  ' and codTituloAReceber = ' + IntToStr(fdTitulosAReceberListacodTituloAReceber.AsInteger)
+       );
+      fqAuxiliar.Active := True;
+      if not fqAuxiliar.IsEmpty then
+        iSeq := fqAuxiliar.FieldByName('seqReg').AsInteger + 1;
+
+      
+      fdTitulosMovtoAReceber.Close;  
+      fdTitulosMovtoAReceber.SQL.Clear;
+      fdTitulosMovtoAReceber.SQL.Add( ' select * from gcTitulosMovtoAReceber '
+                                    + ' where codEmpresa = ' + IntToStr(fdTitulosAReceberListacodEmpresa.AsInteger)
+                                    +  ' and codEstabel = ' + IntToStr(fdTitulosAReceberListacodEstabel.AsInteger)
+                                    +  ' and codTituloAReceber = ' + IntToStr(fdTitulosAReceberListacodTituloAReceber.AsInteger));
+      fdTitulosMovtoAReceber.Active := True;
+      
+      fdTitulosMovtoAReceber.Insert;
+      fdTitulosMovtoARecebercodEmpresa.AsInteger        := fdTitulosAReceberListacodEmpresa.AsInteger;
+      fdTitulosMovtoARecebercodEstabel.AsInteger        := fdTitulosAReceberListacodEstabel.AsInteger;
+      fdTitulosMovtoARecebercodTituloAReceber.AsInteger := fdTitulosAReceberListacodTituloAReceber.AsInteger;
+      fdTitulosMovtoARecebersequencia.AsInteger         := iSeq;
+      fdTitulosMovtoARecebertipoMovto.AsInteger         := 2;
+      fdTitulosMovtoAReceberdtMovto.AsDateTime          := Now;
+      fdTitulosMovtoARecebercodUsuarMovto.AsString      := MainForm.sCodUsuario;
+      fdTitulosMovtoARecebervalorMovto.AsFloat          := fdTitulosAReceberListavalorOriginal.AsFloat;
+      fdTitulosMovtoAReceberdescHistorico.AsString      := 'Alteração Manual' ;
+      fdTitulosMovtoAReceberdescricao.AsString          := 'Alteração';
+
+      fdTitulosMovtoAReceber.Post; 
+
+      tsManutTitAR.TabVisible := False;
+      tsDadosTitGeral.TabVisible := True;
+      pgManutTitAR.TabIndex := 0;      
+
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.pConfirmaEfetivacao(Sender: TComponent;
+  AResult: Integer);
+var
+iSeq, i : integer;  
+begin
+  if AResult = mrYes then begin
+    try
+
+      btEfetivar.ShowMask('Efetivando Títulos...Aguarde!');
+      UniSession.Synchronize();    
+      
+      try
+
+        fdPortadLiq.Close;
+        fdPortadLiq.SQL.Clear;
+        fdPortadLiq.SQL.Add(  ' select * from gcPortador '
+                            + ' where codEmpresa = ' + IntToStr(fdTitulosAReceberListacodEmpresa.AsInteger)
+                            + '   and codEstabel = ' + IntToStr(fdTitulosAReceberListacodEstabel.AsInteger)  );
+        fdPortadLiq.Active := True;                    
+
+      
+        fdTitulosAReceberLista.Filtered := False;
+        fdTitulosAReceberLista.Filter := ' FC_SELEC = true ';
+        fdTitulosAReceberLista.Filtered := True;
+
+        fdTitulosAReceberLista.First;
+        for I := 0 to fdTitulosAReceberLista.RecordCount - 1 do begin
+
+          fdTitulosAReceberLista.Edit;
+          fdTitulosAReceberListasituacao.AsInteger          := 9; //liquidado
+          fdTitulosAReceberListadtLiquidacao.AsDateTime     := Now;
+          fdTitulosAReceberListacodUsuarLiquid.AsString     := MainForm.sCodUsuario;
+          fdTitulosAReceberLista.Post;
+
+          if fdPortadLiq.Locate('codPortador',fdTitulosAReceberListacodPortador.AsInteger,[]) then begin
+            fdPortadLiq.Edit;
+            fdPortadLiqvlSaldoAtual.AsFloat := fdPortadLiqvlSaldoAtual.AsFloat + 
+                                               fdTitulosAReceberListavalorTituloReceber.AsFloat;
+            fdPortadLiq.Post;                                   
+          end;          
+  
+          iSeq := 1;
+          fqAuxiliar.Close;
+          fqAuxiliar.SQL.Clear;
+          fqAuxiliar.SQL.Add(   ' select max(sequencia) as seqReg from gcTitulosMovtoAReceber '
+                              + ' where codEmpresa = ' + IntToStr(fdTitulosAReceberListacodEmpresa.AsInteger)
+                              +  ' and codEstabel = ' + IntToStr(fdTitulosAReceberListacodEstabel.AsInteger)
+                              +  ' and codTituloAReceber = ' + IntToStr(fdTitulosAReceberListacodTituloAReceber.AsInteger)
+           );
+          fqAuxiliar.Active := True;
+          if not fqAuxiliar.IsEmpty then
+            iSeq := fqAuxiliar.FieldByName('seqReg').AsInteger + 1;
+
+      
+          fdTitulosMovtoAReceber.Close;  
+          fdTitulosMovtoAReceber.SQL.Clear;
+          fdTitulosMovtoAReceber.SQL.Add( ' select * from gcTitulosMovtoAReceber '
+                                        + ' where codEmpresa = ' + IntToStr(fdTitulosAReceberListacodEmpresa.AsInteger)
+                                        +  ' and codEstabel = ' + IntToStr(fdTitulosAReceberListacodEstabel.AsInteger)
+                                        +  ' and codTituloAReceber = ' + IntToStr(fdTitulosAReceberListacodTituloAReceber.AsInteger));
+          fdTitulosMovtoAReceber.Active := True;
+      
+          fdTitulosMovtoAReceber.Insert;
+          fdTitulosMovtoARecebercodEmpresa.AsInteger        := fdTitulosAReceberListacodEmpresa.AsInteger;
+          fdTitulosMovtoARecebercodEstabel.AsInteger        := fdTitulosAReceberListacodEstabel.AsInteger;
+          fdTitulosMovtoARecebercodTituloAReceber.AsInteger := fdTitulosAReceberListacodTituloAReceber.AsInteger;
+          fdTitulosMovtoARecebersequencia.AsInteger         := iSeq;
+          fdTitulosMovtoARecebertipoMovto.AsInteger         := 2;
+          fdTitulosMovtoAReceberdtMovto.AsDateTime          := Now;
+          fdTitulosMovtoARecebercodUsuarMovto.AsString      := MainForm.sCodUsuario;
+          fdTitulosMovtoARecebervalorMovto.AsFloat          := fdTitulosAReceberListavalorTituloReceber.AsFloat;
+          fdTitulosMovtoAReceberdescHistorico.AsString      := 'Liquidação' ;
+          fdTitulosMovtoAReceberdescricao.AsString          := 'Liquidação';
+
+          fdTitulosMovtoAReceber.Post; 
+
+
+          fdTitulosAReceberLista.Next;
+        end;
+
+        tsManutTitAR.TabVisible := False;
+        tsDadosTitGeral.TabVisible := True;
+        pgManutTitAR.TabIndex := 0;      
+
+      except
+        on e : exception do begin
+          MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+          Exit;
+        end;
+      end;
+
+    finally
+      btEfetivar.HideMask;
+      UniSession.Synchronize();
+    end;
+  end;
+end;
+
+procedure TFTitulosAReceberLiquidacao.rgDescontoClick(Sender: TObject);
+begin
+  if rgDesconto.ItemIndex = 0 then begin
+    edtVlDescto.Enabled  := False;
+    edtPercDescto.Enabled  := True;
+  end
+  else begin
+    edtVlDescto.Enabled  := True;
+    edtPercDescto.Enabled  := False;
+  end;
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.rgJurosClick(Sender: TObject);
+begin
+  if rgJuros.ItemIndex = 0 then begin
+    edtVlJuros.Enabled  := False;
+    edtPercJuros.Enabled  := True;
+  end
+  else begin
+    edtVlJuros.Enabled  := True;
+    edtPercJuros.Enabled  := False;
+  end;
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.rgMultaClick(Sender: TObject);
+begin
+  if rgMulta.ItemIndex = 0 then begin
+    edtVlMulta.Enabled  := False;
+    edtPercMulta.Enabled  := True;
+  end
+  else begin
+    edtVlMulta.Enabled  := True;
+    edtPercMulta.Enabled  := False;
+  end;
+  pCalcVlTit;
+end;
+
+procedure TFTitulosAReceberLiquidacao.UniFrameCreate(Sender: TObject);
+begin
+
+  fdPortador.Close;
+  fdPortador.SQL.Clear;
+  fdPortador.SQL.Add( ' select * from gcPortador '
+                     + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                     + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel));
+  fdPortador.Active := True;
+
+  fdFormaPagto.Close;
+  fdFormaPagto.SQL.Clear;
+  fdFormaPagto.SQL.Add( ' select * from gcFormaPagamento '
+                     + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                     + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel));
+  fdFormaPagto.Active := True;
+
+  fdEmitente.Close;
+  fdEmitente.SQL.Clear;
+  fdEmitente.SQL.Add( ' select * from gcEmitente '
+                     + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                     + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel));
+  fdEmitente.Active := True;
+
+  dtImplantIni.DateTime := Date - 90;
+  dtImplantFim.DateTime := Date;
+  dtVenctoIni.DateTime := Date - 180;
+  dtVenctoFim.DateTime := Date + 365;
+
+  tsDadosTitGeral.TabVisible := True;
+  tsManutTitAR.TabVisible := False;
+  pgManutTitAR.TabIndex := 0;
+
+  tsLista.TabVisible := True;
+  tsManut.TabVisible := False;
+  pgMenu.TabIndex := 0;
+
+
+end;
+
+initialization
+  RegisterClass(TFTitulosAReceberLiquidacao);
+
+
+end.

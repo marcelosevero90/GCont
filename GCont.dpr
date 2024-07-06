@@ -51,7 +51,9 @@ uses
   UBOOrdemServItem in 'UBOOrdemServItem.pas',
   UCaixaTextoGlobal in 'UCaixaTextoGlobal.pas' {FCaixaTextoGlobal: TUniForm},
   UOrdemServicoDetalhes in 'UOrdemServicoDetalhes.pas' {FOrdemServicoDetalhes: TUniForm},
-  UTitulosAReceberManutencao in 'UTitulosAReceberManutencao.pas' {UniFrame1: TUniFrame};
+  UTitulosAReceberManutencao in 'UTitulosAReceberManutencao.pas' {FTitulosAReceberManutencao: TUniFrame},
+  UBOTitulosAReceber in 'UBOTitulosAReceber.pas',
+  UTitulosAReceberLiquidacao in 'UTitulosAReceberLiquidacao.pas' {FTitulosAReceberLiquidacao: TUniFrame};
 
 {$R *.res}
 

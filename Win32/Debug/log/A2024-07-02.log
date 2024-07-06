@@ -1,0 +1,7 @@
+GCont.exe: 00004044: 23:52:59 []:>--------------------------------------------------------------<
+GCont.exe: 00004044: 23:52:59 [TUniServerModule]:Server First Init.
+GCont.exe: 00004044: 23:53:00 [TUniServerModule]:Debug Mode = ON
+GCont.exe: 00004044: 23:53:00 [TUniServerModule]:Erasing Cache Folder...
+GCont.exe: 00004044: 23:53:00 [TUniServerModule]:Cache Folder Erased. <112> Files deleted.
+GCont.exe: 00004044: 23:53:00 [TUniServerModule]:Starting HTTP Server...
+GCont.exe: 00004044: 23:53:00 [TUniServerModule]:HTTP Server Started. Port: 8077

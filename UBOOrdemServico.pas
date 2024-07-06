@@ -77,7 +77,7 @@ begin
 
           if (dsRegistros.FieldByName('codOrdemServico').AsInteger = 0 ) or
              (dsRegistros.FieldByName('codOrdemServico').IsNull)         then begin
-            Result := Result + 'Número d aOrdem de Serviço deve ser informado! |';
+            Result := Result + 'Número da Ordem de Serviço deve ser informado! |';
           end;
 
           fqFKTab.Close;
