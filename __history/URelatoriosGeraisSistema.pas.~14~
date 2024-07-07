@@ -1,0 +1,175 @@
+unit URelatoriosGeraisSistema;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, uniLabel, uniGUIBaseClasses, uniImageList,
+  uniPanel, uniMultiItem, uniComboBox, uniGroupBox, uniButton, uniBitBtn,
+  uniToolBar, uniPageControl, uniEdit, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TFRelatoriosGeraisSistema = class(TUniFrame)
+    pgMenu: TUniPageControl;
+    tsLista: TUniTabSheet;
+    UniToolBar1: TUniToolBar;
+    UniToolButton3: TUniToolButton;
+    UniToolButton1: TUniToolButton;
+    btAtualizarDados: TUniBitBtn;
+    UniGroupBox1: TUniGroupBox;
+    cbCadFiltro: TUniComboBox;
+    UniPanel1: TUniPanel;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    tsManut: TUniTabSheet;
+    UniNativeImageList1: TUniNativeImageList;
+    UniLabel1: TUniLabel;
+    UniLabel2: TUniLabel;
+    UniLabel3: TUniLabel;
+    UniLabel4: TUniLabel;
+    edtCodIniFiltro: TUniNumberEdit;
+    edtCodFimFiltro: TUniNumberEdit;
+    edtCodItemIniFiltro: TUniEdit;
+    edtCodItemFimFiltro: TUniEdit;
+    edtDescFimFiltro: TUniEdit;
+    edtDescIniFiltro: TUniEdit;
+    fdRelatorio: TFDQuery;
+    procedure btAtualizarDadosClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, MainModule, ServerModule;
+
+
+
+procedure TFRelatoriosGeraisSistema.btAtualizarDadosClick(Sender: TObject);
+var
+sTab, sSQL, sCod, sDesc, sTpCod : string;
+i,j : integer;
+sLinha : string;
+slArquivoCSV : TStringList;
+sArqCSV, sNomeAux, sRet : string;
+begin
+
+  sTab   := '';
+  sCod   := '';
+  sDesc  := '';
+  sTpCod := '';
+  case cbCadFiltro.ItemIndex  of
+    0:begin sTab := 'gcEmitente'; sCod:='codEmitente'; sDesc:='nomeEmitente'; sTpCod:='int'; end;
+    1:begin sTab := 'gcItem'; sCod:='codItem'; sDesc:='descricao'; sTpCod:='str'; end;
+    2:begin sTab := 'gcItemFamilia'; sCod:='codItemFamilia'; sDesc:='nomeEmitente'; sTpCod:='int'; end;
+    3:begin sTab := 'gcMaquinaEquipamento'; sCod:='codMaqEquip'; sDesc:='nomeMaqEquip'; sTpCod:='int'; end;
+    4:begin sTab := 'gcOperadorMaqEquip'; sCod:='codOperador'; sDesc:='nomeOperador'; sTpCod:='int'; end;
+    5:begin sTab := 'gcCondicaoPagamento'; sCod:='codCondPagto'; sDesc:='nomeCondPagto'; sTpCod:='int'; end;
+    6:begin sTab := 'gcFormaPagamento'; sCod:='codFormaPagto'; sDesc:='nomeFormaPagto'; sTpCod:='int'; end;
+    7:begin sTab := 'gcTabelaPreco'; sCod:='codTabPreco'; sDesc:='nomeTabPreco'; sTpCod:='int'; end;
+    8:begin sTab := 'gcUnidMedida'; sCod:='un'; sDesc:='descricao'; sTpCod:='str'; end;
+    9:begin sTab := 'gcPortador'; sCod:='codPortador'; sDesc:='nomePortador'; sTpCod:='int'; end;
+    10:begin sTab := 'gcBanco'; sCod:='codBanco'; sDesc:='nomeBanco'; sTpCod:='int'; end;
+  end;
+
+  sSQL := ' select * from  ' + sTab
+        + ' where codEmpresa = '    + IntToStr(MainForm.iCodEmpresa)
+        + '   and codEstabel = '    + IntToStr(MainForm.iCodEstabel);
+
+  if sTpCod = 'int' then begin
+      sSQL := sSQL
+        + ' and ' + sCod + ' >= '   + IntToStr(Trunc(edtCodIniFiltro.Value))
+        + ' and ' + sCod + ' <= '   + IntToStr(Trunc(edtCodFimFiltro.Value))
+      ;
+  end
+  else begin
+      sSQL := sSQL
+        + ' and ' + sCod + ' >= '   + QuotedStr(edtCodItemIniFiltro.Text)
+        + ' and ' + sCod + ' <= '   + QuotedStr(edtCodItemFimFiltro.Text)
+      ;
+  end;
+
+  sSQL := sSQL
+    + ' and ' + sDesc + ' >= '   + QuotedStr(edtDescIniFiltro.Text)
+    + ' and ' + sDesc + ' <= '   + QuotedStr(edtDescFimFiltro.Text) ;
+
+  try
+
+    fdRelatorio.Close;
+    fdRelatorio.SQL.Clear;
+    fdRelatorio.SQL.Add(sSQL);
+    fdRelatorio.Active := True;
+
+    slArquivoCSV := TStringList.Create;
+
+    sLinha := '';
+    for I := 0 to fdRelatorio.Fields.Count - 1 do begin
+      if fdRelatorio.Fields[i].FieldKind = fkInternalCalc then
+        Continue;
+      sLinha := sLinha + fdRelatorio.Fields[i].DisplayLabel + ';';
+    end;
+
+    slArquivoCSV.Add(sLinha);
+
+    fdRelatorio.First;
+    for I := 0 to fdRelatorio.RecordCount - 1 do begin
+      sLinha := '';
+      for j := 0 to fdRelatorio.Fields.Count - 1 do begin
+        if fdRelatorio.Fields[j].FieldKind = fkInternalCalc then
+          Continue;
+        sLinha := sLinha + fdRelatorio.FieldByName(fdRelatorio.Fields[j].FieldName).AsString + ';';
+      end;
+      slArquivoCSV.Add(sLinha);
+      fdRelatorio.Next;
+    end;
+
+    try
+
+      Randomize;
+      repeat
+        sArqCSV   := UniServerModule.FilesFolderPath ;
+        sNomeAux  := IntToStr(MainForm.iCodEmpresa) + '_' + sTab + '_'  +
+                     StringReplace(FormatDateTime('dd/mm/yyyy',Now),'/','',[rfReplaceAll]) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '_' +
+                     IntToStr(Random(9999)) + '.csv';
+
+        sArqCSV := sArqCSV + sNomeAux;
+        if not FileExists(sArqCSV) then
+          Break;
+      until (not FileExists(sArqCSV));
+
+      slArquivoCSV.SaveToFile(sArqCSV);
+
+      UniSession.SendFile(sArqCSV);
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao imprimir registros: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+
+  finally
+    FreeAndNil(slArquivoCSV);
+  end;
+
+end;
+
+initialization
+  RegisterClass(TFRelatoriosGeraisSistema);
+
+end.

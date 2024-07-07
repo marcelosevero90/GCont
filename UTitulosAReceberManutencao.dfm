@@ -383,7 +383,7 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
         Align = alTop
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 4
-        ExplicitTop = 109
+        ExplicitLeft = 1
         DesignSize = (
           986
           126)
@@ -464,6 +464,7 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
           Hint = ''
           Enabled = False
           ListField = 'nomeEmitente'
+          ListSource = dsEmitente
           KeyField = 'codEmitente'
           ListFieldIndex = 0
           TabOrder = 6
@@ -478,6 +479,7 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
           Hint = ''
           Caption = ''
           TabOrder = 7
+          OnClick = cbCliHabFiltroClick
         end
         object UniLabel1: TUniLabel
           Left = 376
@@ -533,14 +535,15 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
           Caption = 'Portador:'
           TabOrder = 12
         end
-        object UniDBLookupComboBox1: TUniDBLookupComboBox
+        object lcPortadFiltro: TUniDBLookupComboBox
           Left = 101
           Top = 83
           Width = 364
           Hint = ''
           Enabled = False
-          ListField = 'nomeEmitente'
-          KeyField = 'codEmitente'
+          ListField = 'nomePortador'
+          ListSource = dsPortador
+          KeyField = 'codPortador'
           ListFieldIndex = 0
           TabOrder = 13
           Color = clWindow
@@ -554,6 +557,7 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
           Hint = ''
           Caption = ''
           TabOrder = 14
+          OnClick = cbPortadorHabFiltroClick
         end
         object edtOSFiltro: TUniNumberEdit
           Left = 736

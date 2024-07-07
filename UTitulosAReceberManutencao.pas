@@ -62,7 +62,7 @@ type
     dtVenctoFim: TUniDateTimePicker;
     rgSit: TUniRadioGroup;
     UniLabel4: TUniLabel;
-    UniDBLookupComboBox1: TUniDBLookupComboBox;
+    lcPortadFiltro: TUniDBLookupComboBox;
     cbPortadorHabFiltro: TUniCheckBox;
     edtOSFiltro: TUniNumberEdit;
     UniLabel5: TUniLabel;
@@ -208,6 +208,8 @@ type
       Column: TUniDBGridColumn; Attribs: TUniCellAttribs);
     procedure fdTitulosAReceberAfterScroll(DataSet: TDataSet);
     procedure UniDBLookupComboBox4Change(Sender: TObject);
+    procedure cbCliHabFiltroClick(Sender: TObject);
+    procedure cbPortadorHabFiltroClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -424,6 +426,24 @@ begin
   edtNome.SetFocus;
 
   pgMenu.TabIndex := 1;
+end;
+
+procedure TFTitulosAReceberManutencao.cbCliHabFiltroClick(Sender: TObject);
+begin
+  if cbCliHabFiltro.Checked then begin
+    lcEmitenteFiltro.Enabled := True;
+  end
+  else
+    lcEmitenteFiltro.Enabled := False;
+end;
+
+procedure TFTitulosAReceberManutencao.cbPortadorHabFiltroClick(Sender: TObject);
+begin
+  if cbPortadorHabFiltro.Checked then begin
+    lcPortadFiltro.Enabled := True;
+  end
+  else
+    lcPortadFiltro.Enabled := False;
 end;
 
 procedure TFTitulosAReceberManutencao.dbListaCellClick(

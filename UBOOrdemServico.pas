@@ -117,6 +117,10 @@ begin
            (dsRegistros.FieldByName('codUsuarImplant').IsNull)         then begin
           Result := Result + 'Usuário deve ser informada! |';
         end;
+        if (dsRegistros.FieldByName('codOperador').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('codOperador').IsNull)         then begin
+          Result := Result + 'Operador deve ser informado! |';
+        end;
 
         fqFKTab.Close;
         fqFKTab.SQL.Clear;

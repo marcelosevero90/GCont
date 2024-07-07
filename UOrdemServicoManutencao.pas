@@ -1208,7 +1208,7 @@ end;
 
 procedure TFOrdemServicoManutencao.pTpPrecoValida(sAcao : string);
 begin
-  rgTipoPreco.Enabled := True;  
+  rgTipoPreco.Enabled := True;
   fqAuxiliar.Close;
   fqAuxiliar.SQL.Clear;
   fqAuxiliar.SQL.Add(' select * from gcUsuarioPermisPrograma ' +
@@ -1219,9 +1219,9 @@ begin
   fqAuxiliar.Active := True;
   if fqAuxiliar.IsEmpty then begin
 
-    if sAcao = 'add' then begin  
-      fdOrdemServicotipoPreco.AsInteger := fqAuxiliar.FieldByName('tpPrecoPadraoOS').AsInteger;
-      rgTipoPreco.Enabled := False;  
+    if sAcao = 'add' then begin
+      fdOrdemServicotipoPreco.AsInteger := MainForm.fdEmpresatpPrecoPadraoOS.AsInteger;
+      rgTipoPreco.Enabled := False;
     end
     else
       rgTipoPreco.Enabled := False;

@@ -262,6 +262,31 @@ begin
         if Nd.Text = 'LIQUIDAÇÃO TÍTULOS A RECEBER' then begin
           FClassName := 'TFTitulosAReceberLiquidacao' ;
         end
+        else
+        if Nd.Text = 'RELATÓRIO DE CADASTROS' then begin
+          FClassName := 'TFRelatoriosGeraisSistema' ;
+        end
+        else
+        if Nd.Text = 'RELATÓRIO TÍTULOS A RECEBER' then begin
+          FClassName := 'TFTitulosAReceberRelatorio' ;
+        end
+        else
+        if Nd.Text = 'RELATÓRIO ORDENS DE SERVIÇO' then begin
+          FClassName := 'TFOrdemServicoRelatorio' ;
+        end
+        else
+        if Nd.Text = 'MANUTENÇÃO TÍTULOS A PAGAR' then begin
+          FClassName := 'TFTitulosAPagarManutencao' ;
+        end
+        else
+        if Nd.Text = 'LIQUIDAÇÃO TÍTULOS A PAGAR' then begin
+          FClassName := 'TFTitulosAPagarLiquidacao' ;
+        end
+        else
+        if Nd.Text = 'RELATÓRIO TÍTULOS A PAGAR' then begin
+          FClassName := 'TFTitulosAPagarRelatorio' ;
+        end
+
 
         ;
 

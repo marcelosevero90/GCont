@@ -53,7 +53,14 @@ uses
   UOrdemServicoDetalhes in 'UOrdemServicoDetalhes.pas' {FOrdemServicoDetalhes: TUniForm},
   UTitulosAReceberManutencao in 'UTitulosAReceberManutencao.pas' {FTitulosAReceberManutencao: TUniFrame},
   UBOTitulosAReceber in 'UBOTitulosAReceber.pas',
-  UTitulosAReceberLiquidacao in 'UTitulosAReceberLiquidacao.pas' {FTitulosAReceberLiquidacao: TUniFrame};
+  UTitulosAReceberLiquidacao in 'UTitulosAReceberLiquidacao.pas' {FTitulosAReceberLiquidacao: TUniFrame},
+  URelatoriosGeraisSistema in 'URelatoriosGeraisSistema.pas' {FRelatoriosGeraisSistema: TUniFrame},
+  UTitulosAReceberRelatorio in 'UTitulosAReceberRelatorio.pas' {FTitulosAReceberRelatorio: TUniFrame},
+  UOrdemServicoRelatorio in 'UOrdemServicoRelatorio.pas' {FOrdemServicoRelatorio: TUniFrame},
+  UTitulosAPagarManutencao in 'UTitulosAPagarManutencao.pas' {FTitulosAPagarManutencao: TUniFrame},
+  UBOTitulosAPagar in 'UBOTitulosAPagar.pas',
+  UTitulosAPagarLiquidacao in 'UTitulosAPagarLiquidacao.pas' {FTitulosAPagarLiquidacao: TUniFrame},
+  UTitulosAPagarRelatorio in 'UTitulosAPagarRelatorio.pas' {FTitulosAPagarRelatorio: TUniFrame};
 
 {$R *.res}
 

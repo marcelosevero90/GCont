@@ -277,6 +277,37 @@
             <FormType>dfm</FormType>
             <DesignClass>TUniFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="URelatoriosGeraisSistema.pas">
+            <Form>FRelatoriosGeraisSistema</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UTitulosAReceberRelatorio.pas">
+            <Form>FTitulosAReceberRelatorio</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UOrdemServicoRelatorio.pas">
+            <Form>FOrdemServicoRelatorio</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UTitulosAPagarManutencao.pas">
+            <Form>FTitulosAPagarManutencao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UBOTitulosAPagar.pas"/>
+        <DCCReference Include="UTitulosAPagarLiquidacao.pas">
+            <Form>FTitulosAPagarLiquidacao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UTitulosAPagarRelatorio.pas">
+            <Form>FTitulosAPagarRelatorio</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUniFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

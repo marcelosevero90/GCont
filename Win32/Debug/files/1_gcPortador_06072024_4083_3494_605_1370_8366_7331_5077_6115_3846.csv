@@ -1,0 +1,3 @@
+codEmpresa;codEstabel;codPortador;nomePortador;codBanco;agencia;contaCorrente;tipoPortador;vlSaldoInicial;vlSaldoAtual;percMultaAtraso;percJuroDia;percDesctoAntecip;
+1;0;2;CAIXA;;;;1;123;1000;0;0;0;
+1;0;3;BB 23423;3;3423;23423;2;1000;2250,62;2;0;0;

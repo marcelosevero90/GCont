@@ -154,6 +154,13 @@ begin
   fdOrdServDetalhe.Params[2].AsInteger := iCodOS;
   fdOrdServDetalhe.Active := True;
 
+  fdItem.Close;
+  fdItem.SQL.Clear;
+  fdItem.SQL.Add( ' select gcItem.*, concat(codItem,'' - '', descricao) as itemDesc from gcItem '
+                 + ' where codEmpresa       = ' + IntToStr(MainForm.iCodEmpresa)
+                 + '   and codEstabel       = ' + IntToStr(MainForm.iCodEstabel)  );
+  fdItem.Active := True;
+
   fdOrdemServItem.Close;
   fdOrdemServItem.SQL.Clear;
   fdOrdemServItem.SQL.Add (' select * from gcOrdemServItem ' +

@@ -2430,7 +2430,7 @@ object FOrdemServicoManutencao: TFOrdemServicoManutencao
         Active = True
         Selected = True
         Name = 'idxOrdCodAsc'
-        Fields = 'codFormaPagto'
+        Fields = 'codOrdemServico'
       end>
     IndexName = 'idxOrdCodAsc'
     Connection = UniMainModule.conexaoDB
