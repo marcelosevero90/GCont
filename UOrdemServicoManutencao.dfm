@@ -12,7 +12,7 @@ object FOrdemServicoManutencao: TFOrdemServicoManutencao
     Width = 944
     Height = 584
     Hint = ''
-    ActivePage = tsLista
+    ActivePage = tsItens
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
@@ -1332,7 +1332,7 @@ object FOrdemServicoManutencao: TFOrdemServicoManutencao
               OnClick = btCancelItemClick
             end
             object edtFiltroItemItens: TUniEdit
-              Left = 366
+              Left = 470
               Top = 12
               Width = 283
               Hint = ''
@@ -1345,13 +1345,51 @@ object FOrdemServicoManutencao: TFOrdemServicoManutencao
               OnKeyPress = edtFiltroItemItensKeyPress
             end
             object UniLabel19: TUniLabel
-              Left = 296
+              Left = 400
               Top = 16
               Width = 64
               Height = 13
               Hint = ''
               Caption = 'Filtro R'#225'pido:'
               TabOrder = 4
+            end
+            object btXML: TUniBitBtn
+              Left = 255
+              Top = 10
+              Width = 43
+              Height = 30
+              Hint = 'Importar XML NF'
+              Visible = False
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFCFCFCFCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                CCCCCCCCCCCCCCCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFBB8825B67E0EB47B09B4
+                7A08B47B08B47A08B47A08B47B08B47A08B47B09B67E0EBB8825FFFFFFFFFFFF
+                FFFFFFFFFFFFB67E0DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFB67E0EFFFFFFFFFFFFFFFFFFFFFFFFB57903FFFFFFFFFFFFFF
+                FFFFD6BDA2FFFFFFFFFFFFD6BDA2FFFFFFFFFFFFFFFFFFB47B09DCDCDCCCCCCC
+                CCCCCCCCCCCCB67600FFFFFFFFFFF9FFFFFBD8BD9DFFFFFDFFFFFED6BC9EFFFF
+                FCFFFFFAFFFFFFB47A08BABAB9B0B0ADAEAFADAEAFB0ACAFB1A8AAAAA7A7A6A7
+                A9A8BCB2A6D9BC98D7BB99D8BD9CD7BB99D5B895FFFFFFB47B08B0B0ADFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8AAAAFFFFECFFFFEFD9BC9AFFFF
+                F5FFFDEDFFFFFFB47B08AFAFACFFFFFFFFFFFF85888FFFFFFF85888FFFFFFFFF
+                FFFFA8AAAAFFFDE3FFFEEADABF9EAD7200FFFFEFFFFFFFB57C09B0B0AEFFFFFF
+                878A91C89431BB7800C89431878A91FFFFFFAEAEAEE1B98BDEBD98B07703F0BD
+                6BAD7400FFFFFFB67E0FB2B2B0898A8BFFFFFFBC790149FAC6BC7901FFFFFF89
+                8A8CB3B2B349D2FFB67902F0BE6CEDBC6BEFBD6BB27B0CB88217B0B0AEFFFFFF
+                888B92C69230BC7900C69230888A92FFFFFFB1B3B8BB7C01F4BE66EEBB66EBB9
+                64EDBB67F1C06DB8841BAEAEACFFFFFFF2F2F5878991FFFFFF888B92FFFFFFFF
+                FFFFAEB3BBBA7F0BB88216B47F14EDB861B47F15B7831ABF8F2DAEAEABFFFFFF
+                E7E8E7E9EAE9FFFFFFCFD0D0A8A8A6FFFFFFAEB4BCE0E0E0CCCCCCB58116F0BE
+                6AB68218FFFFFFFFFFFFAEAEACFFFFFFE1E0DFE1E0DFFFFFFFA6A6A3FFFFFFD8
+                D9D9CFD3D9C09D57B68114DCAB53EFC073B78319FFFFFFFFFFFFAFAFADFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFD8D8D7CCCDCFFFFFFFB9800EF9CD89F7CB88CD9D
+                40D0AD66FFFFFFFFFFFFCBCBC9B0B0ADAEAEACADADABAEAEACAFAFADCACBCAFF
+                FFFFFFFFFFCFAA5FC3912EB78217D0AD66FFFFFFFFFFFFFFFFFF}
+              Caption = ''
+              TabOrder = 5
+              OnClick = btXMLClick
             end
           end
           object dbItens: TUniDBGrid
@@ -3348,5 +3386,20 @@ object FOrdemServicoManutencao: TFOrdemServicoManutencao
     DataSet = fdPortador
     Left = 644
     Top = 520
+  end
+  object UniFileUpload1: TUniFileUpload
+    OnCompleted = UniFileUpload1Completed
+    Filter = '*.xml'
+    Title = 'Carregar'
+    Messages.Uploading = 'Carregando'
+    Messages.PleaseWait = 'Por favor aguarde'
+    Messages.Cancel = 'Cancelar'
+    Messages.Processing = 'Processando...'
+    Messages.UploadError = 'Erro ao Carregar'
+    Messages.Upload = 'Carregar'
+    Messages.NoFileError = 'Por favor, selecione um arquivo'
+    Messages.BrowseText = 'Navegar...'
+    Left = 424
+    Top = 340
   end
 end

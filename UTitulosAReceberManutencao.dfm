@@ -1705,7 +1705,7 @@ object FTitulosAReceberManutencao: TFTitulosAReceberManutencao
         Active = True
         Selected = True
         Name = 'idxOrdCodAsc'
-        Fields = 'codOrdemServico'
+        Fields = 'codTituloAReceber'
       end>
     IndexName = 'idxOrdCodAsc'
     Connection = UniMainModule.conexaoDB

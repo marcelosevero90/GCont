@@ -112,6 +112,25 @@ type
     UniToolButton7: TUniToolButton;
     btRelatCSV: TUniBitBtn;
     cbEmitDadosBanco: TUniCheckBox;
+    UniGroupBox5: TUniGroupBox;
+    cbManutOrdManut: TUniCheckBox;
+    cbConsultaOrdManut: TUniCheckBox;
+    tsPermis: TUniTabSheet;
+    UniGroupBox6: TUniGroupBox;
+    cbEfetivaCancelaOM: TUniCheckBox;
+    cbEfetivaCancelaOS: TUniCheckBox;
+    tsProg2: TUniTabSheet;
+    UniGroupBox7: TUniGroupBox;
+    cbManutTitAR: TUniCheckBox;
+    cbLiqTitAR: TUniCheckBox;
+    cbRelatTitAR: TUniCheckBox;
+    cbManutTitAP: TUniCheckBox;
+    cbLiqTitAP: TUniCheckBox;
+    cbRelatTitAP: TUniCheckBox;
+    cbRelatCad: TUniCheckBox;
+    cbPermManutAP: TUniCheckBox;
+    cbPermManutAR: TUniCheckBox;
+    cbTipoPrecoOS: TUniCheckBox;
     procedure dbListaFieldImage(const Column: TUniDBGridColumn;
       const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
       var ATransparent: TUniTransparentOption);
@@ -358,6 +377,8 @@ begin
 
     pgUsuario.TabIndex := 1;
 
+    pgProgPermis.TabIndex  := 0;
+
   end
   else
   if Column.FieldName = 'FC_IMG_VIS' then begin
@@ -486,6 +507,20 @@ begin
   cbBanco.Checked := False;
   cbManutOS.Checked := False;
   cbConsultaOS.Checked := False;
+  cbManutOrdManut.Checked := False;
+  cbConsultaOrdManut.Checked := False;
+  cbRelatCad.Checked := False;
+  cbManutTitAR.Checked := False;
+  cbLiqTitAR.Checked := False;
+  cbRelatTitAR.Checked := False;
+  cbManutTitAP.Checked := False;
+  cbLiqTitAP.Checked := False;
+  cbRelatTitAP.Checked := False;
+  cbEfetivaCancelaOM.Checked := False;
+  cbEfetivaCancelaOS.Checked := False;
+  cbPermManutAP.Checked := False;
+  cbPermManutAR.Checked := False;
+  cbTipoPrecoOS.Checked := False;
 
 
   fqAuxiliar.Close;
@@ -524,17 +559,51 @@ begin
       cbPortador.Checked := True;
     if fqAuxiliar.FieldByName('codPrograma').AsString = 'BANCOS' then
       cbBanco.Checked := True;
-    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO ORDEM DE SERVIÇO' then
-      cbManutOS.Checked := True;
-    if fqAuxiliar.FieldByName('codPrograma').AsString = 'CONSULTA ORDENS DE SERVIÇO' then
-      cbConsultaOS.Checked := True;
     if fqAuxiliar.FieldByName('codPrograma').AsString = 'EMITENTE DADOS BANCÁRIOS' then
       cbEmitDadosBanco.Checked := True;
 
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO ORDEM DE SERVIÇO' then
+      cbManutOS.Checked := True;
+
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'RELATÓRIO ORDENS DE SERVIÇO' then
+      cbConsultaOS.Checked := True;
+
+
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO ORDEM DE MANUTENÇÃO' then
+      cbManutOrdManut.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'RELATÓRIO ORDENS DE MANUTENÇÃO' then
+      cbConsultaOrdManut.Checked := True;
+
+
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'RELATÓRIO DE CADASTROS' then
+      cbRelatCad.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO TÍTULOS A RECEBER' then
+      cbManutTitAR.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'LIQUIDAÇÃO TÍTULOS A RECEBER' then
+      cbLiqTitAR.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'RELATÓRIO TÍTULOS A RECEBER' then
+      cbRelatTitAR.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO TÍTULOS A PAGAR' then
+      cbManutTitAP.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'LIQUIDAÇÃO TÍTULOS A PAGAR' then
+      cbLiqTitAP.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'RELATÓRIO TÍTULOS A PAGAR' then
+      cbRelatTitAP.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'EFETIVA CANCELA OM' then
+      cbEfetivaCancelaOM.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'EFETIVA CANCELA OS' then
+      cbEfetivaCancelaOS.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'PERMITE MANUTENÇÃO AP' then
+      cbPermManutAP.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'PERMITE MANUTENÇÃO AR' then
+      cbPermManutAR.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'TIPO PREÇO OS' then
+      cbTipoPrecoOS.Checked := True;
+
+
+
     fqAuxiliar.Next;
   end;
-
-
 
 
 end;
@@ -663,11 +732,39 @@ begin
     if cbManutOS.Checked = True     then
         pInsertPermisUsuario('MANUTENÇÃO ORDEM DE SERVIÇO');
     if cbConsultaOS.Checked = True  then
-        pInsertPermisUsuario('CONSULTA ORDENS DE SERVIÇO');
+        pInsertPermisUsuario('RELATÓRIO ORDENS DE SERVIÇO');
     if cbEmitDadosBanco.Checked then
       pInsertPermisUsuario('EMITENTE DADOS BANCÁRIOS');
 
+    if cbManutOrdManut.Checked = True  then
+        pInsertPermisUsuario('MANUTENÇÃO ORDEM DE MANUTENÇÃO');
+    if cbConsultaOrdManut.Checked then
+      pInsertPermisUsuario('RELATÓRIO ORDENS DE MANUTENÇÃO');
+    if cbRelatCad.Checked then
+      pInsertPermisUsuario('RELATÓRIO DE CADASTROS');
+    if cbManutTitAR.Checked then
+      pInsertPermisUsuario('MANUTENÇÃO TÍTULOS A RECEBER');
+    if cbLiqTitAR.Checked then
+      pInsertPermisUsuario('LIQUIDAÇÃO TÍTULOS A RECEBER');
+    if cbRelatTitAR.Checked then
+      pInsertPermisUsuario('RELATÓRIO TÍTULOS A RECEBER');
+    if cbManutTitAP.Checked then
+      pInsertPermisUsuario('MANUTENÇÃO TÍTULOS A PAGAR');
+    if cbLiqTitAP.Checked then
+      pInsertPermisUsuario('LIQUIDAÇÃO TÍTULOS A PAGAR');
+    if cbRelatTitAP.Checked then
+      pInsertPermisUsuario('RELATÓRIO TÍTULOS A PAGAR');
 
+    if cbEfetivaCancelaOM.Checked then
+      pInsertPermisUsuario('EFETIVA CANCELA OM');
+    if cbEfetivaCancelaOS.Checked then
+      pInsertPermisUsuario('EFETIVA CANCELA OS');
+    if cbPermManutAP.Checked then
+      pInsertPermisUsuario('PERMITE MANUTENÇÃO AP');
+    if cbPermManutAR.Checked then
+      pInsertPermisUsuario('PERMITE MANUTENÇÃO AR');
+    if cbTipoPrecoOS.Checked then
+      pInsertPermisUsuario('TIPO PREÇO OS');
 
   except
     on e : exception do begin
@@ -693,6 +790,7 @@ begin
   tsUsuarioManut.TabVisible  := False;
   tsUsuarioPermis.TabVisible := False;
   pgUsuario.TabIndex  := 0;
+  pgProgPermis.TabIndex  := 0;
 
 
   with fdUsuarioMestre do

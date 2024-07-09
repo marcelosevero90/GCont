@@ -291,8 +291,8 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
           968
           102)
         object imgDel: TUniImage
-          Left = 719
-          Top = -19
+          Left = 735
+          Top = 6
           Width = 20
           Height = 25
           Hint = ''
@@ -827,10 +827,10 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
         TabOrder = 2
         object tsProgPermis: TUniTabSheet
           Hint = ''
-          Caption = 'Programas'
+          Caption = 'Programas 1'
           object UniGroupBox3: TUniGroupBox
             Left = 23
-            Top = 25
+            Top = 17
             Width = 386
             Height = 270
             Hint = ''
@@ -847,7 +847,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbBanco: TUniCheckBox
               Left = 197
-              Top = 92
+              Top = 67
               Width = 97
               Height = 17
               Hint = ''
@@ -873,7 +873,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
               TabOrder = 4
             end
             object cbItemForn: TUniCheckBox
-              Left = 21
+              Left = 197
               Top = 115
               Width = 148
               Height = 17
@@ -883,7 +883,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbMaqEquip: TUniCheckBox
               Left = 21
-              Top = 138
+              Top = 115
               Width = 164
               Height = 17
               Hint = ''
@@ -892,7 +892,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbOperad: TUniCheckBox
               Left = 21
-              Top = 161
+              Top = 138
               Width = 97
               Height = 17
               Hint = ''
@@ -901,7 +901,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbCondPag: TUniCheckBox
               Left = 21
-              Top = 184
+              Top = 161
               Width = 164
               Height = 17
               Hint = ''
@@ -910,7 +910,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbFormaPag: TUniCheckBox
               Left = 21
-              Top = 207
+              Top = 184
               Width = 148
               Height = 17
               Hint = ''
@@ -919,7 +919,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbTabPreco: TUniCheckBox
               Left = 21
-              Top = 230
+              Top = 207
               Width = 124
               Height = 17
               Hint = ''
@@ -928,16 +928,16 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbPortador: TUniCheckBox
               Left = 197
-              Top = 67
-              Width = 156
+              Top = 44
+              Width = 186
               Height = 17
               Hint = ''
               Caption = 'PORTADORES FINANCEIRO'
               TabOrder = 11
             end
             object cbUn: TUniCheckBox
-              Left = 197
-              Top = 44
+              Left = 21
+              Top = 230
               Width = 132
               Height = 17
               Hint = ''
@@ -946,17 +946,26 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbEmitDadosBanco: TUniCheckBox
               Left = 197
-              Top = 115
+              Top = 92
               Width = 186
               Height = 17
               Hint = ''
               Caption = 'EMITENTE DADOS BANC'#193'RIOS'
               TabOrder = 13
             end
+            object cbRelatCad: TUniCheckBox
+              Left = 197
+              Top = 138
+              Width = 180
+              Height = 17
+              Hint = ''
+              Caption = 'RELAT'#211'RIO DE CADASTROS'
+              TabOrder = 14
+            end
           end
           object UniGroupBox4: TUniGroupBox
             Left = 415
-            Top = 25
+            Top = 17
             Width = 226
             Height = 272
             Hint = ''
@@ -964,7 +973,7 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             TabOrder = 1
             object cbManutOS: TUniCheckBox
               Left = 21
-              Top = 38
+              Top = 42
               Width = 196
               Height = 17
               Hint = ''
@@ -973,12 +982,172 @@ object FUsuarioPermisPrograma: TFUsuarioPermisPrograma
             end
             object cbConsultaOS: TUniCheckBox
               Left = 21
-              Top = 61
+              Top = 65
               Width = 196
               Height = 17
               Hint = ''
-              Caption = 'CONSULTA ORDENS DE SERVI'#199'O'
+              Caption = 'RELAT'#211'RIO ORDENS DE SERVI'#199'O'
               TabOrder = 2
+            end
+          end
+          object UniGroupBox5: TUniGroupBox
+            Left = 647
+            Top = 17
+            Width = 274
+            Height = 272
+            Hint = ''
+            Caption = 'Ordem de Manuten'#231#227'o'
+            TabOrder = 2
+            object cbManutOrdManut: TUniCheckBox
+              Left = 21
+              Top = 42
+              Width = 244
+              Height = 17
+              Hint = ''
+              Caption = 'MANUTEN'#199#195'O ORDEM DE MANUTEN'#199#195'O'
+              TabOrder = 1
+            end
+            object cbConsultaOrdManut: TUniCheckBox
+              Left = 21
+              Top = 65
+              Width = 244
+              Height = 17
+              Hint = ''
+              Caption = 'RELAT'#211'RIO ORDENS DE MANUTEN'#199#195'O'
+              TabOrder = 2
+            end
+          end
+        end
+        object tsProg2: TUniTabSheet
+          Hint = ''
+          Caption = 'Programas 2'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 968
+          ExplicitHeight = 334
+          object UniGroupBox7: TUniGroupBox
+            Left = 31
+            Top = 19
+            Width = 297
+            Height = 272
+            Hint = ''
+            Caption = 'Financeiro'
+            TabOrder = 0
+            object cbManutTitAR: TUniCheckBox
+              Left = 21
+              Top = 42
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'MANUTEN'#199#195'O T'#205'TULOS A RECEBER'
+              TabOrder = 1
+            end
+            object cbLiqTitAR: TUniCheckBox
+              Left = 21
+              Top = 65
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'LIQUIDA'#199#195'O T'#205'TULOS A RECEBER'
+              TabOrder = 2
+            end
+            object cbRelatTitAR: TUniCheckBox
+              Left = 21
+              Top = 90
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'RELAT'#211'RIO T'#205'TULOS A RECEBER'
+              TabOrder = 3
+            end
+            object cbManutTitAP: TUniCheckBox
+              Left = 21
+              Top = 113
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'MANUTEN'#199#195'O T'#205'TULOS A PAGAR'
+              TabOrder = 4
+            end
+            object cbLiqTitAP: TUniCheckBox
+              Left = 21
+              Top = 136
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'LIQUIDA'#199#195'O T'#205'TULOS A PAGAR'
+              TabOrder = 5
+            end
+            object cbRelatTitAP: TUniCheckBox
+              Left = 21
+              Top = 159
+              Width = 204
+              Height = 17
+              Hint = ''
+              Caption = 'RELAT'#211'RIO T'#205'TULOS A PAGAR'
+              TabOrder = 6
+            end
+          end
+        end
+        object tsPermis: TUniTabSheet
+          Hint = ''
+          Caption = 'Permiss'#245'es'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 968
+          ExplicitHeight = 334
+          object UniGroupBox6: TUniGroupBox
+            Left = 23
+            Top = 19
+            Width = 247
+            Height = 272
+            Hint = ''
+            Caption = 'Ordem de Servi'#231'o'
+            TabOrder = 0
+            object cbEfetivaCancelaOM: TUniCheckBox
+              Left = 21
+              Top = 42
+              Width = 196
+              Height = 17
+              Hint = ''
+              Caption = 'EFETIVA CANCELA OM'
+              TabOrder = 1
+            end
+            object cbEfetivaCancelaOS: TUniCheckBox
+              Left = 21
+              Top = 65
+              Width = 196
+              Height = 17
+              Hint = ''
+              Caption = 'EFETIVA CANCELA OS'
+              TabOrder = 2
+            end
+            object cbPermManutAP: TUniCheckBox
+              Left = 21
+              Top = 87
+              Width = 196
+              Height = 17
+              Hint = ''
+              Caption = 'PERMITE MANUTEN'#199#195'O AP'
+              TabOrder = 3
+            end
+            object cbPermManutAR: TUniCheckBox
+              Left = 21
+              Top = 110
+              Width = 196
+              Height = 17
+              Hint = ''
+              Caption = 'PERMITE MANUTEN'#199#195'O AR'
+              TabOrder = 4
+            end
+            object cbTipoPrecoOS: TUniCheckBox
+              Left = 21
+              Top = 133
+              Width = 148
+              Height = 17
+              Hint = ''
+              Caption = 'TIPO PRE'#199'O OS'
+              TabOrder = 5
             end
           end
         end

@@ -1,0 +1,755 @@
+unit UUsuarioPermisPrograma;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniGUIBaseClasses, uniImageList,
+  uniDBComboBox, uniDBLookupComboBox, uniCheckBox, uniDBCheckBox, uniRadioGroup,
+  uniDBRadioGroup, uniDateTimePicker, uniDBDateTimePicker, uniLabel, uniDBEdit,
+  uniScrollBox, Vcl.Imaging.pngimage, uniImage, uniPanel, uniMultiItem,
+  uniComboBox, uniEdit, uniGroupBox, uniDBNavigator, uniButton, uniBitBtn,
+  uniToolBar, uniBasicGrid, uniDBGrid, uniPageControl;
+
+type
+  TFUsuarioPermisPrograma = class(TUniFrame)
+    pgUsuario: TUniPageControl;
+    tsUsuarioLista: TUniTabSheet;
+    dbLista: TUniDBGrid;
+    UniToolBar1: TUniToolBar;
+    UniToolButton3: TUniToolButton;
+    UniToolButton2: TUniToolButton;
+    UniToolButton1: TUniToolButton;
+    UniToolButton5: TUniToolButton;
+    btAtualizarDados: TUniBitBtn;
+    btFiltro: TUniBitBtn;
+    dnNaveg: TUniDBNavigator;
+    UniGroupBox1: TUniGroupBox;
+    edtFiltroPesqRapida: TUniEdit;
+    cbCampoFiltro: TUniComboBox;
+    UniPanel1: TUniPanel;
+    gbFiltroParam: TUniGroupBox;
+    imgDel: TUniImage;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    imgVis: TUniImage;
+    imgEdit: TUniImage;
+    tsUsuarioManut: TUniTabSheet;
+    UniToolBar2: TUniToolBar;
+    UniToolButton4: TUniToolButton;
+    btCancelaAlter: TUniBitBtn;
+    btConfAlter: TUniBitBtn;
+    sbUsuarioManut: TUniScrollBox;
+    edtNomeUsuario: TUniDBEdit;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    edtCodUsuario: TUniDBEdit;
+    UniLabel11: TUniLabel;
+    edtEmail: TUniDBEdit;
+    UniNativeImageList1: TUniNativeImageList;
+    fqAuxiliar: TFDQuery;
+    dsUsuarioMestre: TDataSource;
+    fdUsuarioMestre: TFDQuery;
+    tsUsuarioPermis: TUniTabSheet;
+    btNovoUsuario: TUniBitBtn;
+    fdUsuarioMestrecodEmpresa: TIntegerField;
+    fdUsuarioMestrecodEstabel: TIntegerField;
+    fdUsuarioMestrecodUsuario: TStringField;
+    fdUsuarioMestrenomeUsuario: TStringField;
+    fdUsuarioMestresenhaUsuario: TStringField;
+    fdUsuarioMestretipoUsuario: TIntegerField;
+    fdUsuarioMestrealtSenhaProxAcesso: TIntegerField;
+    fdUsuarioMestredataUltAltAcesso: TDateField;
+    fdUsuarioMestresituacao: TIntegerField;
+    fdUsuarioMestreemail: TStringField;
+    fdUsuarioMestretelefone: TStringField;
+    fdUsuarioMestreFC_IMG_EDIT: TStringField;
+    fdUsuarioMestreFC_IMG_VIS: TStringField;
+    fdUsuarioMestreFC_IMG_DEL: TStringField;
+    edtFiltroEmail: TUniEdit;
+    UniLabel5: TUniLabel;
+    imgPermis: TUniImage;
+    fdUsuarioMestreFC_IMG_PERM: TStringField;
+    UniLabel1: TUniLabel;
+    edtTelef: TUniDBEdit;
+    UniLabel2: TUniLabel;
+    edtSenha: TUniDBEdit;
+    rgTipoUsuario: TUniDBRadioGroup;
+    rgSituacao: TUniDBRadioGroup;
+    cbAltSenhaProxAcesso: TUniDBCheckBox;
+    btAltSenha: TUniBitBtn;
+    UniToolBar3: TUniToolBar;
+    UniToolButton6: TUniToolButton;
+    btCancelaPermis: TUniBitBtn;
+    btConfPermisUsuario: TUniBitBtn;
+    UniGroupBox2: TUniGroupBox;
+    UniLabel3: TUniLabel;
+    UniDBEdit1: TUniDBEdit;
+    UniLabel4: TUniLabel;
+    UniDBEdit2: TUniDBEdit;
+    pgProgPermis: TUniPageControl;
+    tsProgPermis: TUniTabSheet;
+    UniGroupBox3: TUniGroupBox;
+    cbEmitente: TUniCheckBox;
+    cbBanco: TUniCheckBox;
+    cbItem: TUniCheckBox;
+    cbItemFam: TUniCheckBox;
+    cbItemForn: TUniCheckBox;
+    cbMaqEquip: TUniCheckBox;
+    cbOperad: TUniCheckBox;
+    cbCondPag: TUniCheckBox;
+    cbFormaPag: TUniCheckBox;
+    cbTabPreco: TUniCheckBox;
+    cbPortador: TUniCheckBox;
+    cbUn: TUniCheckBox;
+    UniGroupBox4: TUniGroupBox;
+    cbManutOS: TUniCheckBox;
+    cbConsultaOS: TUniCheckBox;
+    UniToolButton7: TUniToolButton;
+    btRelatCSV: TUniBitBtn;
+    cbEmitDadosBanco: TUniCheckBox;
+    UniGroupBox5: TUniGroupBox;
+    cbManutOrdManut: TUniCheckBox;
+    cbConsultaOrdManut: TUniCheckBox;
+    tsPermis: TUniTabSheet;
+    UniGroupBox6: TUniGroupBox;
+    UniCheckBox1: TUniCheckBox;
+    UniCheckBox2: TUniCheckBox;
+    tsProg2: TUniTabSheet;
+    UniGroupBox7: TUniGroupBox;
+    UniCheckBox3: TUniCheckBox;
+    UniCheckBox4: TUniCheckBox;
+    UniCheckBox5: TUniCheckBox;
+    UniCheckBox6: TUniCheckBox;
+    UniCheckBox7: TUniCheckBox;
+    UniCheckBox8: TUniCheckBox;
+    UniCheckBox9: TUniCheckBox;
+    UniCheckBox10: TUniCheckBox;
+    UniCheckBox11: TUniCheckBox;
+    UniCheckBox12: TUniCheckBox;
+    procedure dbListaFieldImage(const Column: TUniDBGridColumn;
+      const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+      var ATransparent: TUniTransparentOption);
+    procedure dbListaColumnSort(Column: TUniDBGridColumn; Direction: Boolean);
+    procedure UniFrameCreate(Sender: TObject);
+    procedure btAtualizarDadosClick(Sender: TObject);
+    procedure edtFiltroPesqRapidaChange(Sender: TObject);
+    procedure edtFiltroPesqRapidaKeyPress(Sender: TObject; var Key: Char);
+    procedure btFiltroClick(Sender: TObject);
+    procedure dbListaCellClick(Column: TUniDBGridColumn);
+    procedure cbCampoFiltroChange(Sender: TObject);
+    procedure btNovoUsuarioClick(Sender: TObject);
+    procedure btConfAlterClick(Sender: TObject);
+    procedure btCancelaAlterClick(Sender: TObject);
+    procedure btAltSenhaClick(Sender: TObject);
+    procedure btCancelaPermisClick(Sender: TObject);
+    procedure btConfPermisUsuarioClick(Sender: TObject);
+    procedure btRelatCSVClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure SortColumn(const FieldName: string; Dir: Boolean);
+    procedure pHabDesabCampo(bAcao : boolean);
+    procedure pDeleteConfirmar(Sender: TComponent; AResult:Integer);
+    procedure pFiltroRapido;
+    procedure pConfirmaSenhaUsuario(Sender: TComponent; AResult:Integer);
+
+    procedure pCarregaProgramasUsuario;
+    procedure pInsertPermisUsuario(sCodProg : string);
+
+    function fValidaUsuarioPost(dsRegistro : TDataSet ) : string;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+uses ServerModule, MainModule, Main, UBOUsuario, UUsuarioSenhaConfirma,
+  UController;
+
+
+
+procedure TFUsuarioPermisPrograma.btAltSenhaClick(Sender: TObject);
+begin
+  FUsuarioSenhaConfirma.edtUsuario.Text := MainForm.sCodUsuario;
+  FUsuarioSenhaConfirma.edtSenha.SetFocus;
+  FUsuarioSenhaConfirma.ShowModal(pConfirmaSenhaUsuario);
+end;
+
+procedure TFUsuarioPermisPrograma.btAtualizarDadosClick(Sender: TObject);
+var
+  sSQL, sSitFiltro : string;
+begin
+
+  try
+    fdUsuarioMestre.Active := True;
+
+    sSQL := ' select * from gcUsuarioMestre '
+          + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+          + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel);
+
+    if Trim(edtFiltroEmail.Text) <> '' then
+      sSQL := sSQL + '  and  (email = ' + QuotedStr(edtFiltroEmail.Text) + ') ';
+
+    fdUsuarioMestre.Close;
+    fdUsuarioMestre.SQL.Clear;
+    fdUsuarioMestre.SQL.Add(sSQL);
+    fdUsuarioMestre.Active := True;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao atualizar registros: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+end;
+
+procedure TFUsuarioPermisPrograma.btCancelaAlterClick(Sender: TObject);
+begin
+  if fdUsuarioMestre.State in [dsEdit,dsInsert] then
+    fdUsuarioMestre.Cancel;
+
+  tsUsuarioManut.TabVisible := False;
+  tsUsuarioLista.TabVisible := True;
+  pgUsuario.TabIndex := 0;
+end;
+
+procedure TFUsuarioPermisPrograma.btCancelaPermisClick(Sender: TObject);
+begin
+  tsUsuarioPermis.TabVisible := False;
+  tsUsuarioLista.TabVisible := True;
+  pgUsuario.TabIndex := 0;
+end;
+
+procedure TFUsuarioPermisPrograma.btConfAlterClick(Sender: TObject);
+var
+sRespValid : string;
+begin
+
+  sRespValid := fBOUsuario_ValidaPostDelete(fdUsuarioMestre,'INS_UPD');
+  if sRespValid <> 'OK' then begin
+
+    sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+    MessageDlg('Erro ao gravar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+
+    if dsUsuarioMestre.State = dsInsert then
+      fdUsuarioMestresenhaUsuario.AsString := MD5String(fdUsuarioMestresenhaUsuario.AsString)
+    else begin
+      if btAltSenha.Enabled = False then //houve alteração
+        fdUsuarioMestresenhaUsuario.AsString := MD5String(fdUsuarioMestresenhaUsuario.AsString);
+    end;
+
+
+    fdUsuarioMestre.Post;
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao gravar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+  tsUsuarioManut.TabVisible := False;
+  tsUsuarioLista.TabVisible := True;
+  pgUsuario.TabIndex := 0;
+
+end;
+
+procedure TFUsuarioPermisPrograma.btFiltroClick(Sender: TObject);
+begin
+  if btFiltro.ImageIndex = 10 then begin
+    gbFiltroParam.Visible := True;
+    btFiltro.ImageIndex := 11;
+  end
+  else begin
+    gbFiltroParam.Visible := False;
+    btFiltro.ImageIndex := 10;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.btNovoUsuarioClick(Sender: TObject);
+begin
+
+  //if fdUsuarioMestre.Active = false then
+    //btAtualizarDados.OnClick(Sender);
+
+  fdUsuarioMestre.Insert;
+  fdUsuarioMestrecodEmpresa.AsInteger   := MainForm.iCodEmpresa;
+  fdUsuarioMestrecodEstabel.AsInteger   := MainForm.iCodEstabel;
+  fdUsuarioMestretipoUsuario.AsInteger  := 1;
+  fdUsuarioMestresituacao.AsInteger     := 1;
+  fdUsuarioMestrealtSenhaProxAcesso.AsInteger := 1;
+
+  edtSenha.Enabled                := True;
+  btAltSenha.Enabled              := False;
+
+  sbUsuarioManut.Enabled       := True;
+  edtCodUsuario.Enabled       := True;
+  tsUsuarioManut.Caption      := 'Manutenção Usuário (Inclusão)';
+  tsUsuarioManut.TabVisible   := True;
+  btConfAlter.Enabled         := True;
+  edtCodUsuario.SetFocus;
+  tsUsuarioManut.TabVisible   := False ;
+
+  pgUsuario.TabIndex := 1;
+end;
+
+procedure TFUsuarioPermisPrograma.btRelatCSVClick(Sender: TObject);
+var
+sArqCSV, sNomeAux, sRet : string;
+begin
+
+  Randomize;
+  repeat
+    sArqCSV   := UniServerModule.FilesFolderPath ;
+    sNomeAux  := IntToStr(MainForm.iCodEmpresa) + '_Usuarios_' +
+                 StringReplace(FormatDateTime('dd/mm/yyyy',Now),'/','',[rfReplaceAll]) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '_' +
+                 IntToStr(Random(9999)) + '.csv';
+
+    sArqCSV := sArqCSV + sNomeAux;
+    if not FileExists(sArqCSV) then
+      Break;
+  until (not FileExists(sArqCSV));
+
+  sRet:= fImpressaoCSV(fdUsuarioMestre,sArqCSV);
+  if sRet <> 'OK' then begin
+    MessageDlg('Erro ao gerar arquivo CSV com mensagem: ' + chr(10) + sRet ,mtError,[mbOK],nil);
+    Exit;
+  end;
+
+  try
+    UniSession.SendFile(sArqCSV);
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao enviar arquivo: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+    end;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.cbCampoFiltroChange(Sender: TObject);
+begin
+  pFiltroRapido;
+end;
+
+procedure TFUsuarioPermisPrograma.dbListaCellClick(Column: TUniDBGridColumn);
+var
+sRespValid : string;
+begin
+
+  if Column.FieldName = 'FC_IMG_EDIT' then begin
+    //ShowMessageN('EDITAR');
+    if fdUsuarioMestre.IsEmpty then
+      Exit;
+
+    fdUsuarioMestre.Edit;
+
+    edtSenha.Enabled                := False;
+    btAltSenha.Enabled                := True;
+
+    sbUsuarioManut.Enabled          := True;
+    edtCodUsuario.Enabled           := False;
+    tsUsuarioManut.Caption          := 'Manutenção Usuário (Edição)';
+    tsUsuarioManut.TabVisible       := True;
+    btConfAlter.Enabled              := True;
+    tsUsuarioLista.TabVisible       := False ;
+    edtNomeUsuario.SetFocus;
+
+    pHabDesabCampo(false);
+
+
+    pgUsuario.TabIndex := 1;
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_VIS' then begin
+    //ShowMessageN('VISUALIZA');
+    if fdUsuarioMestre.IsEmpty then
+      Exit;
+
+    sbUsuarioManut.Enabled       := False;
+    tsUsuarioManut.Caption      := 'Manutenção Usuário (Visualização)';
+    tsUsuarioManut.TabVisible   := True;
+    btConfAlter.Enabled         := False;
+    tsUsuarioLista.TabVisible   := False ;
+
+    pHabDesabCampo(true);
+
+    pgUsuario.TabIndex := 1;
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_DEL' then begin
+    //ShowMessageN('DELETE');
+    if fdUsuarioMestre.IsEmpty then
+      Exit;
+
+
+    sRespValid := fBOUsuario_ValidaPostDelete(fdUsuarioMestre,'DELETE');
+    if sRespValid <> 'OK' then begin
+
+      sRespValid := StringReplace(sRespValid,'|',chr(13),[rfReplaceAll]);
+      MessageDlg('Erro ao eliminar registro: ' + chr(10) + sRespValid ,mtError,[mbOK],nil);
+      Exit;
+    end;
+
+    MessageDlg('Tem certeza que deseja eliminar o Usuário abaixo?' + chr(10) + fdUsuarioMestrenomeUsuario.AsString  ,mtConfirmation,mbYesNo, pDeleteConfirmar);
+
+  end
+  else
+  if Column.FieldName = 'FC_IMG_PERM' then begin
+    if fdUsuarioMestre.IsEmpty then
+      Exit;
+
+    pCarregaProgramasUsuario;
+    tsUsuarioPermis.TabVisible   := True;
+    tsUsuarioLista.TabVisible    := False ;
+
+    pgUsuario.TabIndex := 2;
+
+  end;
+
+
+end;
+
+procedure TFUsuarioPermisPrograma.dbListaColumnSort(Column: TUniDBGridColumn;
+  Direction: Boolean);
+begin
+  SortColumn(Column.FieldName, Direction);
+end;
+
+procedure TFUsuarioPermisPrograma.dbListaFieldImage(const Column: TUniDBGridColumn;
+  const AField: TField; var OutImage: TGraphic; var DoNotDispose: Boolean;
+  var ATransparent: TUniTransparentOption);
+begin
+  if SameText(AField.FieldName, 'FC_IMG_EDIT') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgEdit.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_VIS') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgVis.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_DEL') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgDel.Picture.Graphic;
+  end;
+  if SameText(AField.FieldName, 'FC_IMG_PERM') then
+  begin
+    DoNotDispose := True;
+    OutImage := imgPermis.Picture.Graphic;
+  end;
+end;
+
+
+procedure TFUsuarioPermisPrograma.edtFiltroPesqRapidaChange(Sender: TObject);
+begin
+  if Trim(edtFiltroPesqRapida.Text) = '' then begin
+    fdUsuarioMestre.Filtered  := False;
+    fdUsuarioMestre.filter    := '';
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.edtFiltroPesqRapidaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Trim(edtFiltroPesqRapida.Text) = '' then begin
+    fdUsuarioMestre.Filtered  := False;
+  end;
+  if Key = #13 then begin
+    pFiltroRapido;
+  end;
+end;
+
+function TFUsuarioPermisPrograma.fValidaUsuarioPost(dsRegistro: TDataSet): string;
+begin
+//
+end;
+
+procedure TFUsuarioPermisPrograma.pCarregaProgramasUsuario;
+var
+i : integer;
+begin
+
+  cbItem.Checked := False;
+  cbEmitente.Checked := False;
+  cbItemFam.Checked := False;
+  cbItemForn.Checked := False;
+  cbMaqEquip.Checked := False;
+  cbOperad.Checked := False;
+  cbCondPag.Checked := False;
+  cbFormaPag.Checked := False;
+  cbTabPreco.Checked := False;
+  cbUn.Checked := False;
+  cbPortador.Checked := False;
+  cbBanco.Checked := False;
+  cbManutOS.Checked := False;
+  cbConsultaOS.Checked := False;
+
+
+  fqAuxiliar.Close;
+  fqAuxiliar.SQL.Clear;
+  fqAuxiliar.SQL.Add(' select * from gcUsuarioPermisPrograma '
+                    + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                    + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel)
+                    + '   and codUsuario = ' + QuotedStr(fdUsuarioMestrecodUsuario.AsString)  );
+  fqAuxiliar.Active := True;
+
+  fqAuxiliar.First;
+  for I := 0 to fqAuxiliar.RecordCount - 1 do begin
+
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'EMITENTES' then
+      cbEmitente.Checked := True;
+
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'ITENS' then
+      cbItem.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'FAMÍLIA ITENS' then
+      cbItemFam.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'ITENS FORNECEDORES' then
+      cbItemForn.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MÁQUINAS/EQUIPAMENTOS' then
+      cbMaqEquip.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'OPERADORES' then
+      cbOperad.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'CONDIÇÕES DE PAGAMENTO' then
+      cbCondPag.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'FORMAS DE PAGAMENTO' then
+      cbFormaPag.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'TABELAS DE PREÇO' then
+      cbTabPreco.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'UNIDADES DE MEDIDA' then
+      cbUn.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'PORTADORES FINANCEIRO' then
+      cbPortador.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'BANCOS' then
+      cbBanco.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'MANUTENÇÃO ORDEM DE SERVIÇO' then
+      cbManutOS.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'CONSULTA ORDENS DE SERVIÇO' then
+      cbConsultaOS.Checked := True;
+    if fqAuxiliar.FieldByName('codPrograma').AsString = 'EMITENTE DADOS BANCÁRIOS' then
+      cbEmitDadosBanco.Checked := True;
+
+    fqAuxiliar.Next;
+  end;
+
+
+
+
+end;
+
+procedure TFUsuarioPermisPrograma.pConfirmaSenhaUsuario(Sender: TComponent;
+  AResult: Integer);
+begin
+  if AResult = mrOk then begin
+    btAltSenha.Enabled := False;
+    edtSenha.Enabled := True;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.pDeleteConfirmar(Sender: TComponent; AResult: Integer);
+begin
+  if AResult = mrYes then begin
+
+    try
+
+      fdUsuarioMestre.Delete;
+
+    except
+      on e : exception do begin
+        MessageDlg('Erro ao eliminar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+        Exit;
+      end;
+    end;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.pFiltroRapido;
+begin
+
+  fdUsuarioMestre.Filtered  := False;
+  if Trim(edtFiltroPesqRapida.Text) <> '' then begin
+
+    if cbCampoFiltro.ItemIndex = 0 then begin
+      fdUsuarioMestre.Filter    := '    (upper(codUsuario)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+                                 + ' or (upper(nomeUsuario) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 1 then begin
+      fdUsuarioMestre.Filter    := '    (upper(codUsuario)  like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end
+    else
+    if cbCampoFiltro.ItemIndex = 2 then begin
+      fdUsuarioMestre.Filter    := ' (upper(nomeUsuario) like ' + QuotedStr('%' + AnsiUpperCase(edtFiltroPesqRapida.Text) + '%') + ') '
+      ;
+    end;
+
+    fdUsuarioMestre.Filtered  := True;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.pHabDesabCampo(bAcao: boolean);
+begin
+//
+end;
+
+procedure TFUsuarioPermisPrograma.pInsertPermisUsuario(sCodProg : string);
+begin
+  try
+    fqAuxiliar.Close;
+    fqAuxiliar.SQL.Clear;
+    fqAuxiliar.SQL.Add( ' insert into gcUsuarioPermisPrograma (codEmpresa,codEstabel,codUsuario,codPrograma) '
+                      + ' values(' + IntToStr(MainForm.iCodEmpresa)                 + ','
+                                   + IntToStr(MainForm.iCodEstabel)                 + ','
+                                   + QuotedStr(fdUsuarioMestrecodUsuario.AsString)  + ','
+                                   + QuotedStr(sCodProg)                            + ')' );
+    fqAuxiliar.ExecSQL;
+  except
+    on e : exception do begin
+      //MessageDlg('Erro ao atualizar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+end;
+
+procedure TFUsuarioPermisPrograma.SortColumn(const FieldName: string; Dir: Boolean);
+begin
+  if Dir then
+    fdUsuarioMestre.IndexName := FieldName+'_index_asc'
+  else
+    fdUsuarioMestre.IndexName := FieldName+'_index_des';
+end;
+
+procedure TFUsuarioPermisPrograma.btConfPermisUsuarioClick(Sender: TObject);
+begin
+
+  try
+
+    fqAuxiliar.Close;
+    fqAuxiliar.SQL.Clear;
+    fqAuxiliar.SQL.Add( ' delete from gcUsuarioPermisPrograma '
+                      + ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa)
+                      + '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel)
+                      + '   and codUsuario = ' + QuotedStr(fdUsuarioMestrecodUsuario.AsString)  );
+    fqAuxiliar.ExecSQL;
+
+    if cbEmitente.Checked then
+      pInsertPermisUsuario('EMITENTES');
+    if cbItem.Checked then
+      pInsertPermisUsuario('ITENS');
+    if cbItemFam.Checked = True     then
+        pInsertPermisUsuario('FAMÍLIA ITENS');
+    if cbItemForn.Checked = True    then
+        pInsertPermisUsuario('ITENS FORNECEDORES');
+    if cbMaqEquip.Checked = True    then
+        pInsertPermisUsuario('MÁQUINAS/EQUIPAMENTOS');
+    if cbOperad.Checked = True      then
+        pInsertPermisUsuario('OPERADORES');
+    if cbCondPag.Checked = True     then
+        pInsertPermisUsuario('CONDIÇÕES DE PAGAMENTO');
+    if cbFormaPag.Checked = True    then
+        pInsertPermisUsuario('FORMAS DE PAGAMENTO');
+    if cbTabPreco.Checked = True    then
+        pInsertPermisUsuario('TABELAS DE PREÇO');
+    if cbUn.Checked = True          then
+        pInsertPermisUsuario('UNIDADES DE MEDIDA');
+    if cbPortador.Checked = True    then
+        pInsertPermisUsuario('PORTADORES FINANCEIRO');
+    if cbBanco.Checked = True       then
+        pInsertPermisUsuario('BANCOS');
+    if cbManutOS.Checked = True     then
+        pInsertPermisUsuario('MANUTENÇÃO ORDEM DE SERVIÇO');
+    if cbConsultaOS.Checked = True  then
+        pInsertPermisUsuario('CONSULTA ORDENS DE SERVIÇO');
+    if cbEmitDadosBanco.Checked then
+      pInsertPermisUsuario('EMITENTE DADOS BANCÁRIOS');
+
+    if cbManutOrdManut.Checked = True  then
+        pInsertPermisUsuario('MANUTENÇÃO ORDEM DE MANUTENÇÃO');
+    if cbConsultaOrdManut.Checked then
+      pInsertPermisUsuario('CONSULTA ORDENS DE MANUTENÇÃO');
+
+
+
+
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao atualizar registro: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
+
+  tsUsuarioPermis.TabVisible := False;
+  tsUsuarioLista.TabVisible := True;
+  pgUsuario.TabIndex := 0;
+end;
+
+procedure TFUsuarioPermisPrograma.UniFrameCreate(Sender: TObject);
+var
+  I: Integer;
+  IndexnameAsc : string;
+  IndexnameDes : string;
+  idxOrdAsc,idxOrdDes  : TFDIndex;
+begin
+
+  tsUsuarioManut.TabVisible  := False;
+  tsUsuarioPermis.TabVisible := False;
+  pgUsuario.TabIndex  := 0;
+  pgProgPermis.TabIndex  := 0;
+
+
+  with fdUsuarioMestre do
+  begin
+    for I := 0 to FieldCount-1 do
+    begin
+
+      IndexnameAsc := Fields[I].FieldName+'_index_asc';
+      IndexnameDes := Fields[I].FieldName+'_index_des';
+
+      idxOrdAsc := TFDIndex.Create(fdUsuarioMestre.Indexes);
+      idxOrdAsc.Name      := IndexnameAsc;
+      idxOrdAsc.Fields    := Fields[I].FieldName;
+      idxOrdAsc.Options   := [];
+      idxOrdAsc.Selected  := True;
+      idxOrdAsc.Active    := True;
+
+      idxOrdDes := TFDIndex.Create(fdUsuarioMestre.Indexes);
+      idxOrdDes.Name      := IndexnameDes;
+      idxOrdDes.Fields    := Fields[I].FieldName;
+      idxOrdDes.Options   := [soDescending];
+      idxOrdDes.Selected  := True;
+      idxOrdDes.Active    := True;
+    end;
+  end;
+
+  fdUsuarioMestre.IndexName := 'idxOrdCodAsc';
+  btAtualizarDados.OnClick(Sender);
+end;
+
+initialization
+  RegisterClass(TFUsuarioPermisPrograma);
+
+end.

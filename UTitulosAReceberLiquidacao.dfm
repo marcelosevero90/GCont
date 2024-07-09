@@ -11,7 +11,7 @@ object FTitulosAReceberLiquidacao: TFTitulosAReceberLiquidacao
     Width = 1079
     Height = 568
     Hint = ''
-    ActivePage = tsManut
+    ActivePage = tsLista
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
@@ -33,7 +33,6 @@ object FTitulosAReceberLiquidacao: TFTitulosAReceberLiquidacao
         TabOrder = 0
         ParentColor = False
         Color = clBtnFace
-        ExplicitTop = 2
         object btAtualizarDados: TUniBitBtn
           Left = 0
           Top = 0
@@ -364,7 +363,6 @@ object FTitulosAReceberLiquidacao: TFTitulosAReceberLiquidacao
               Images = UniNativeImageList1
               ImageIndex = 16
               OnClick = UniBitBtn5Click
-              ExplicitLeft = -2
             end
             object UniBitBtn6: TUniBitBtn
               Left = 42
@@ -616,7 +614,7 @@ object FTitulosAReceberLiquidacao: TFTitulosAReceberLiquidacao
           Width = 1069
           Height = 538
           Hint = ''
-          ActivePage = tsManutTitAR
+          ActivePage = tsDadosTitGeral
           Align = alClient
           Anchors = [akLeft, akTop, akRight, akBottom]
           TabOrder = 0

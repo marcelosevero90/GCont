@@ -15,17 +15,9 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
     Align = alClient
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitLeft = -24
-    ExplicitTop = -6
-    ExplicitWidth = 1045
-    ExplicitHeight = 538
     object tsLista: TUniTabSheet
       Hint = ''
       Caption = 'Listagem'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 256
-      ExplicitHeight = 128
       DesignSize = (
         1013
         504)
@@ -41,7 +33,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         TabOrder = 0
         ParentColor = False
         Color = clBtnFace
-        ExplicitWidth = 1037
         object btAtualizarDados: TUniBitBtn
           Left = 0
           Top = 0
@@ -69,8 +60,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         Align = alClient
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 1
-        ExplicitWidth = 1037
-        ExplicitHeight = 460
         object UniLabel2: TUniLabel
           Left = 32
           Top = 31
@@ -130,12 +119,12 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
           TabOrder = 6
         end
         object UniGroupBox2: TUniGroupBox
-          Left = 40
+          Left = 42
           Top = 135
           Width = 325
           Height = 238
           Hint = ''
-          Caption = 'Clientes'
+          Caption = 'Fornecedores'
           TabOrder = 7
           object dbEmitFiltro: TUniDBGrid
             Left = 2
@@ -481,6 +470,32 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
             TabOrder = 3
           end
         end
+        object UniLabel5: TUniLabel
+          Left = 77
+          Top = 89
+          Width = 20
+          Height = 13
+          Hint = ''
+          Caption = 'OM:'
+          TabOrder = 11
+        end
+        object edtOMIniFiltro: TUniNumberEdit
+          Left = 101
+          Top = 85
+          Width = 120
+          Hint = ''
+          TabOrder = 12
+          DecimalSeparator = ','
+        end
+        object edtOMFimFiltro: TUniNumberEdit
+          Left = 237
+          Top = 85
+          Width = 120
+          Hint = ''
+          TabOrder = 13
+          Value = 9999999999.000000000000000000
+          DecimalSeparator = ','
+        end
       end
       object UniPanel1: TUniPanel
         Left = 0
@@ -493,7 +508,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         TabOrder = 2
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 1037
       end
       object UniPanel2: TUniPanel
         Left = 0
@@ -506,7 +520,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         TabOrder = 3
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 1037
       end
       object UniPanel3: TUniPanel
         Left = 0
@@ -519,7 +532,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         TabOrder = 4
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 1037
       end
       object imgVis: TUniImage
         Left = 895
@@ -549,7 +561,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
           A1143E1C94FC4F866296D39B7FF72A70F4AED65DDFBD2F3E2AEA9F66E34CECBE
           10B0BE24008D1B5394EA00681713440000000049454E44AE426082}
         Anchors = [akLeft, akBottom]
-        ExplicitTop = 80
       end
       object imgEdit: TUniImage
         Left = 921
@@ -584,7 +595,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
           16333CED0F9044519464011F73AA81DF6C4AB16584C30B6FAD56EB71A35D6C67
           B29D8CFF5F3C305F560F7F01868B23E98AF177D10000000049454E44AE426082}
         Anchors = [akLeft, akBottom]
-        ExplicitTop = 98
       end
       object imgCancel: TUniImage
         Left = 959
@@ -622,15 +632,12 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
           4E122F99463F84760CFEBFC6FC623FE02F5A2739F0E42306780000000049454E
           44AE426082}
         Anchors = [akLeft, akBottom]
-        ExplicitTop = 111
       end
     end
     object tsManut: TUniTabSheet
       Hint = ''
       TabVisible = False
       Caption = 'Manuten'#231#227'o'
-      ExplicitWidth = 1037
-      ExplicitHeight = 510
     end
   end
   object UniNativeImageList1: TUniNativeImageList
@@ -1328,7 +1335,7 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
         Active = True
         Selected = True
         Name = 'idxOrdCodAsc'
-        Fields = 'codOrdemServico'
+        Fields = 'codTituloAPagar'
       end>
     IndexName = 'idxOrdCodAsc'
     Connection = UniMainModule.conexaoDB
@@ -1477,11 +1484,6 @@ object FTitulosAPagarRelatorio: TFTitulosAPagarRelatorio
       FieldName = 'indOrigem'
       Origin = 'indOrigem'
       Required = True
-    end
-    object fdTitulosAPagarListacodOrdemServico: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'codOrdemServico'
-      Origin = 'codOrdemServico'
     end
     object fdTitulosAPagarListacodUsuarLiquid: TStringField
       AutoGenerateValue = arDefault

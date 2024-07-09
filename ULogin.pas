@@ -77,7 +77,7 @@ begin
                    ', dataUltAltAcesso = current_date, altSenhaProxAcesso = 0 '                                  +
                    ' where codEmpresa     = ' + IntToStr(MainForm.iCodEmpresa) +
                    ' and   codEstabel     = ' + IntToStr(MainForm.iCodEstabel) +
-                   ' and   codUsuario     = ' + QuotedStr(MainForm.sCodUsuario) );
+                   ' and   codUsuario     = ' + QuotedStr( MainForm.sCodUsuario ) );
       fdAux.ExecSQL();
 
       pAtualizaInfoMenuUsuario;

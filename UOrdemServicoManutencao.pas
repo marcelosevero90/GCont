@@ -14,7 +14,7 @@ uses
   uniGroupBox, uniDBNavigator, uniButton, uniBitBtn, uniToolBar, uniBasicGrid,
   uniDBGrid, uniPageControl, uniDBComboBox, uniDBLookupComboBox,
   uniDateTimePicker, uniCheckBox, uniDBDateTimePicker, uniMemo, uniDBMemo,
-  uniDBCheckBox;
+  uniDBCheckBox, uniFileUpload;
 
 type
   TFOrdemServicoManutencao = class(TUniFrame)
@@ -299,6 +299,8 @@ type
     UniDBFormattedNumberEdit1: TUniDBFormattedNumberEdit;
     mtDuplicavista: TIntegerField;
     fdOrdemServicocodUsuarConclusao: TStringField;
+    btXML: TUniBitBtn;
+    UniFileUpload1: TUniFileUpload;
     procedure UniFrameCreate(Sender: TObject);
     procedure btFiltroClick(Sender: TObject);
     procedure btAtualizarDadosClick(Sender: TObject);
@@ -334,6 +336,8 @@ type
       Column: TUniDBGridColumn; Attribs: TUniCellAttribs);
     procedure UniBitBtn4Click(Sender: TObject);
     procedure btEfetivarClick(Sender: TObject);
+    procedure btXMLClick(Sender: TObject);
+    procedure UniFileUpload1Completed(Sender: TObject; AStream: TFileStream);
   private
     { Private declarations }
   public
@@ -361,7 +365,7 @@ implementation
 {$R *.dfm}
 
 uses MainModule, Main, UBOOrdemServico, UBOOrdemServItem, UCaixaTextoGlobal,
-  UOrdemServicoDetalhes;
+  UOrdemServicoDetalhes, XMLIntf, XMLDoc;
 
 
 procedure TFOrdemServicoManutencao.btAtualizarDadosClick(Sender: TObject);
@@ -531,6 +535,11 @@ begin
   edtDesc.SetFocus;
 
   pgMenu.TabIndex := 1;
+end;
+
+procedure TFOrdemServicoManutencao.btXMLClick(Sender: TObject);
+begin
+  UniFileUpload1.Execute;
 end;
 
 procedure TFOrdemServicoManutencao.cbCliHabFiltroClick(Sender: TObject);
@@ -1320,6 +1329,41 @@ begin
   tsEfetiva.TabVisible := False;
   tsLista.TabVisible := True ;
   pgMenu.TabIndex     := 0;
+end;
+
+procedure TFOrdemServicoManutencao.UniFileUpload1Completed(Sender: TObject;
+  AStream: TFileStream);
+var
+  Doc: IXMLDocument;
+  Data: IXMLNode;
+  Node: IXMLNode;
+  I: Integer;
+  cEANXml : string;
+begin
+  try
+    Doc := LoadXMLDocument(AStream.FileName);
+    Data := Doc.DocumentElement;
+    for I := 0 to Data.ChildNodes.Count-1 do
+    begin
+      Node := Data.ChildNodes[I];
+      if Node.LocalName = 'vehicle' then
+      begin
+        // use Node.ChildNodes['type'], Node.ChildNodes['model'],
+        // and Node.ChildNodes['number'] as needed...
+
+        cEANXml := Node.ChildNodes['cEAN'].NodeValue;
+
+
+      end;
+
+    end;
+  except
+    on e : exception do begin
+      MessageDlg('Erro ao carregar o XML: ' + chr(10) + e.Message ,mtError,[mbOK],nil);
+      Exit;
+    end;
+  end;
+
 end;
 
 procedure TFOrdemServicoManutencao.UniFrameCreate(Sender: TObject);

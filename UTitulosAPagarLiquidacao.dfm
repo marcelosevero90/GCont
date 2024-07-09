@@ -119,8 +119,8 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
           TabOrder = 6
         end
         object UniGroupBox2: TUniGroupBox
-          Left = 40
-          Top = 109
+          Left = 32
+          Top = 147
           Width = 325
           Height = 231
           Hint = ''
@@ -215,8 +215,6 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
               Images = UniNativeImageList1
               ImageIndex = 15
               OnClick = btDesmarcaTdsEmitClick
-              ExplicitLeft = 48
-              ExplicitTop = -6
             end
             object edtPesqEmitRap: TUniEdit
               Left = 111
@@ -234,8 +232,8 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
           end
         end
         object UniGroupBox3: TUniGroupBox
-          Left = 369
-          Top = 102
+          Left = 361
+          Top = 140
           Width = 325
           Height = 238
           Hint = ''
@@ -334,8 +332,8 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
           end
         end
         object UniGroupBox4: TUniGroupBox
-          Left = 700
-          Top = 102
+          Left = 692
+          Top = 140
           Width = 325
           Height = 238
           Hint = ''
@@ -432,6 +430,32 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
                 Font.Height = -8
               end>
           end
+        end
+        object UniLabel5: TUniLabel
+          Left = 77
+          Top = 89
+          Width = 20
+          Height = 13
+          Hint = ''
+          Caption = 'OM:'
+          TabOrder = 10
+        end
+        object edtOMIniFiltro: TUniNumberEdit
+          Left = 101
+          Top = 85
+          Width = 120
+          Hint = ''
+          TabOrder = 11
+          DecimalSeparator = ','
+        end
+        object edtOMFimFiltro: TUniNumberEdit
+          Left = 237
+          Top = 85
+          Width = 120
+          Hint = ''
+          TabOrder = 12
+          Value = 9999999999.000000000000000000
+          DecimalSeparator = ','
         end
       end
       object UniPanel1: TUniPanel
@@ -788,6 +812,12 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
                     Width = 165
                     Font.Height = -9
                     ReadOnly = True
+                  end
+                  item
+                    FieldName = 'codOrdemManutencao'
+                    Title.Caption = 'OM'
+                    Width = 54
+                    Font.Height = -9
                   end>
               end
               object UniToolBar3: TUniToolBar
@@ -987,8 +1017,6 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
                 Images = UniNativeImageList1
                 ImageIndex = 12
                 OnClick = btConfAlterClick
-                ExplicitLeft = 2
-                ExplicitTop = -1
               end
             end
             object UniLabel21: TUniLabel
@@ -1929,7 +1957,7 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
         Active = True
         Selected = True
         Name = 'idxOrdCodAsc'
-        Fields = 'codOrdemServico'
+        Fields = 'codTituloAPagar'
       end>
     IndexName = 'idxOrdCodAsc'
     Connection = UniMainModule.conexaoDB
@@ -2056,11 +2084,6 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
       FieldName = 'indOrigem'
       Origin = 'indOrigem'
       Required = True
-    end
-    object fdTitulosAPagarListacodOrdemServico: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'codOrdemServico'
-      Origin = 'codOrdemServico'
     end
     object fdTitulosAPagarListacodUsuarLiquid: TStringField
       AutoGenerateValue = arDefault
@@ -2203,6 +2226,11 @@ object FTitulosAPagarLiquidacao: TFTitulosAPagarLiquidacao
       FieldName = 'contaCorrente'
       Origin = 'contaCorrente'
       Size = 15
+    end
+    object fdTitulosAPagarListacodOrdemManutencao: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'codOrdemManutencao'
+      Origin = 'codOrdemManutencao'
     end
   end
   object dsTitulosAPagarLista: TDataSource

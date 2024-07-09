@@ -22,10 +22,6 @@ object FOrdemServicoRelatorio: TFOrdemServicoRelatorio
     object tsLista: TUniTabSheet
       Hint = ''
       Caption = 'Relat'#243'rio'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 256
-      ExplicitHeight = 128
       object UniToolBar1: TUniToolBar
         Left = 0
         Top = 0
@@ -37,7 +33,6 @@ object FOrdemServicoRelatorio: TFOrdemServicoRelatorio
         TabOrder = 0
         ParentColor = False
         Color = clBtnFace
-        ExplicitWidth = 892
         object UniToolButton3: TUniToolButton
           Left = 0
           Top = 0
@@ -421,7 +416,6 @@ object FOrdemServicoRelatorio: TFOrdemServicoRelatorio
         TabOrder = 2
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 892
       end
       object UniPanel2: TUniPanel
         Left = 0
@@ -434,7 +428,6 @@ object FOrdemServicoRelatorio: TFOrdemServicoRelatorio
         TabOrder = 3
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 892
       end
       object UniPanel3: TUniPanel
         Left = 0
@@ -447,15 +440,12 @@ object FOrdemServicoRelatorio: TFOrdemServicoRelatorio
         TabOrder = 4
         BorderStyle = ubsNone
         Caption = ''
-        ExplicitWidth = 892
       end
     end
     object tsManut: TUniTabSheet
       Hint = ''
       TabVisible = False
       Caption = 'Manuten'#231#227'o'
-      ExplicitWidth = 892
-      ExplicitHeight = 471
     end
   end
   object UniNativeImageList1: TUniNativeImageList

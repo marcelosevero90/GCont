@@ -92,6 +92,9 @@ type
     fdUndescricao: TStringField;
     fdUnunDescricao: TStringField;
     fdItemun: TStringField;
+    UniDBEdit1: TUniDBEdit;
+    UniLabel4: TUniLabel;
+    fdItemcodEAN: TStringField;
     procedure UniFrameCreate(Sender: TObject);
     procedure edtFiltroPesqRapidaKeyPress(Sender: TObject; var Key: Char);
     procedure edtFiltroPesqRapidaChange(Sender: TObject);
@@ -311,7 +314,7 @@ begin
       Exit;
     end;
 
-    MessageDlg('Tem certeza que deseja eliminar o Banco abaixo?' + chr(10) + fdItemdescricao.AsString  ,mtConfirmation,mbYesNo, pDeleteConfirmar);
+    MessageDlg('Tem certeza que deseja eliminar o Item abaixo?' + chr(10) + fdItemdescricao.AsString  ,mtConfirmation,mbYesNo, pDeleteConfirmar);
 
   end;
 

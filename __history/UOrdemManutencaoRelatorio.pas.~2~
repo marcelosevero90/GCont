@@ -1,0 +1,170 @@
+unit UOrdemManutencaoRelatorio;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
+  uniGUIClasses, uniGUIFrame, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, uniGUIBaseClasses, uniImageList,
+  uniPanel, uniRadioGroup, uniCheckBox, uniMultiItem, uniComboBox,
+  uniDBComboBox, uniDBLookupComboBox, uniDateTimePicker, uniEdit, uniLabel,
+  uniGroupBox, uniButton, uniBitBtn, uniToolBar, uniPageControl;
+
+type
+  TFOrdemManutencaoRelatorio = class(TUniFrame)
+    pgMenu: TUniPageControl;
+    tsLista: TUniTabSheet;
+    UniToolBar1: TUniToolBar;
+    UniToolButton3: TUniToolButton;
+    UniToolButton1: TUniToolButton;
+    btAtualizarDados: TUniBitBtn;
+    UniGroupBox1: TUniGroupBox;
+    UniLabel2: TUniLabel;
+    UniLabel4: TUniLabel;
+    edtCodIniFiltro: TUniNumberEdit;
+    edtCodFimFiltro: TUniNumberEdit;
+    edtDescFimFiltro: TUniEdit;
+    edtDescIniFiltro: TUniEdit;
+    dtImplIni: TUniDateTimePicker;
+    dtImplFim: TUniDateTimePicker;
+    dtConcIni: TUniDateTimePicker;
+    dtConcFim: TUniDateTimePicker;
+    UniLabel3: TUniLabel;
+    UniLabel5: TUniLabel;
+    lcMaqEquipFiltro: TUniDBLookupComboBox;
+    lcEmitenteFiltro: TUniDBLookupComboBox;
+    cbCliHabFiltro: TUniCheckBox;
+    cbMaqHabFiltro: TUniCheckBox;
+    rgSit: TUniRadioGroup;
+    UniLabel6: TUniLabel;
+    lcCondPag: TUniDBLookupComboBox;
+    cbCondPag: TUniCheckBox;
+    UniLabel7: TUniLabel;
+    lcFormaPag: TUniDBLookupComboBox;
+    cbFormaPag: TUniCheckBox;
+    UniLabel8: TUniLabel;
+    UniLabel9: TUniLabel;
+    UniLabel10: TUniLabel;
+    lcPortad: TUniDBLookupComboBox;
+    cbPortad: TUniCheckBox;
+    UniPanel1: TUniPanel;
+    UniPanel2: TUniPanel;
+    UniPanel3: TUniPanel;
+    tsManut: TUniTabSheet;
+    UniNativeImageList1: TUniNativeImageList;
+    fdOrdManutDetalhe: TFDQuery;
+    fdOrdManutDetalhecodEmpresa: TIntegerField;
+    fdOrdManutDetalhecodEstabel: TIntegerField;
+    fdOrdManutDetalhecodOrdemServico: TIntegerField;
+    fdOrdManutDetalhedescricao: TStringField;
+    fdOrdManutDetalheobservacao: TStringField;
+    fdOrdManutDetalhetipoOrdem: TIntegerField;
+    fdOrdManutDetalhedataImplantacao: TDateField;
+    fdOrdManutDetalhevalorTotal: TBCDField;
+    fdOrdManutDetalhesituacao: TIntegerField;
+    fdOrdManutDetalhedataConclusao: TDateField;
+    fdOrdManutDetalhecodOperador: TIntegerField;
+    fdOrdManutDetalhecodEmitente: TIntegerField;
+    fdOrdManutDetalhecodLocal: TStringField;
+    fdOrdManutDetalhecodFormaPagto: TIntegerField;
+    fdOrdManutDetalhecodCondPagto: TIntegerField;
+    fdOrdManutDetalhetipoPreco: TIntegerField;
+    fdOrdManutDetalhecodTabPreco: TIntegerField;
+    fdOrdManutDetalhecodMaqEquip: TIntegerField;
+    fdOrdManutDetalhemotivoCancelamento: TStringField;
+    fdOrdManutDetalhedataCancelamento: TDateField;
+    fdOrdManutDetalhemsgAlerta: TStringField;
+    fdOrdManutDetalhecodUsuarImplant: TStringField;
+    fdOrdManutDetalhecodUsuarCancelamento: TStringField;
+    fdOrdManutDetalhecodNomeEmit: TStringField;
+    fdOrdManutDetalhecodNomeOperador: TStringField;
+    fdOrdManutDetalhecodNomeFormaPag: TStringField;
+    fdOrdManutDetalhecodNomeCondPag: TStringField;
+    fdOrdManutDetalhecodNomeTabPre: TStringField;
+    fdOrdManutDetalhecodNomeMaqEquip: TStringField;
+    fdOrdManutDetalhenomeCidade: TStringField;
+    fdOrdManutDetalhecodPortador: TIntegerField;
+    fdOrdManutDetalhecodUsuarConclusao: TStringField;
+    fdOrdManutDetalhenomePortador: TStringField;
+    fdEmitente: TFDQuery;
+    fdEmitentecodEmpresa: TIntegerField;
+    fdEmitentecodEstabel: TIntegerField;
+    fdEmitentecodEmitente: TIntegerField;
+    fdEmitentenomeEmitente: TStringField;
+    fdEmitentecgc: TStringField;
+    fdEmitentesituacao: TIntegerField;
+    fdEmitenteidentificacao: TIntegerField;
+    fdEmitenteemail: TStringField;
+    fdEmitentetelefone: TStringField;
+    fdEmitentecelular: TStringField;
+    fdEmitentedataImplantacao: TDateField;
+    dsEmitente: TDataSource;
+    fdOperadorMaqEquip: TFDQuery;
+    fdOperadorMaqEquipcodEmpresa: TIntegerField;
+    fdOperadorMaqEquipcodEstabel: TIntegerField;
+    fdOperadorMaqEquipcodOperador: TIntegerField;
+    fdOperadorMaqEquipnomeOperador: TStringField;
+    fdOperadorMaqEquipsituacao: TIntegerField;
+    fdOperadorMaqEquipcodUsuario: TStringField;
+    dsOperadorMaqEquip: TDataSource;
+    fdMaquinaEquipamento: TFDQuery;
+    fdMaquinaEquipamentocodEmpresa: TIntegerField;
+    fdMaquinaEquipamentocodEstabel: TIntegerField;
+    fdMaquinaEquipamentocodMaqEquip: TIntegerField;
+    fdMaquinaEquipamentonomeMaqEquip: TStringField;
+    dsMaquinaEquipamento: TDataSource;
+    fdTabPreco: TFDQuery;
+    fdTabPrecocodEmpresa: TIntegerField;
+    fdTabPrecocodEstabel: TIntegerField;
+    fdTabPrecocodTabPreco: TIntegerField;
+    fdTabPreconomeTabPreco: TStringField;
+    fdTabPrecodtIniValidade: TDateField;
+    fdTabPrecodtFimValidade: TDateField;
+    fdTabPrecosituacao: TIntegerField;
+    dsTabPreco: TDataSource;
+    fdFormaPagto: TFDQuery;
+    fdFormaPagtocodEmpresa: TIntegerField;
+    fdFormaPagtocodEstabel: TIntegerField;
+    fdFormaPagtocodFormaPagto: TIntegerField;
+    fdFormaPagtonomeFormaPagto: TStringField;
+    dsFormaPagto: TDataSource;
+    fdCondPagto: TFDQuery;
+    fdCondPagtocodEmpresa: TIntegerField;
+    fdCondPagtocodEstabel: TIntegerField;
+    fdCondPagtocodCondPagto: TIntegerField;
+    fdCondPagtonomeCondPagto: TStringField;
+    fdCondPagtonumParcelas: TIntegerField;
+    fdCondPagtotipoVencimento: TIntegerField;
+    fdCondPagtonrDias: TIntegerField;
+    dsCondPagto: TDataSource;
+    fdPortador: TFDQuery;
+    fdPortadorcodEmpresa: TIntegerField;
+    fdPortadorcodEstabel: TIntegerField;
+    fdPortadorcodPortador: TIntegerField;
+    fdPortadornomePortador: TStringField;
+    fdPortadorcodBanco: TIntegerField;
+    fdPortadoragencia: TStringField;
+    fdPortadorcontaCorrente: TStringField;
+    fdPortadortipoPortador: TIntegerField;
+    fdPortadorvlSaldoInicial: TBCDField;
+    fdPortadorvlSaldoAtual: TBCDField;
+    fdPortadorpercMultaAtraso: TBCDField;
+    fdPortadorpercJuroDia: TBCDField;
+    fdPortadorpercDesctoAntecip: TBCDField;
+    dsPortador: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+{$R *.dfm}
+
+
+
+end.

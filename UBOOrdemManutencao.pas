@@ -1,0 +1,568 @@
+unit UBOOrdemManutencao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, System.IniFiles, IdHTTP,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,  JSon, DateUtils, System.Math ;
+
+  function fBOOrdemManutencao_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+  function fBOOrdemManutencao_CancelaOM(dsRegistros : TDataSet; sParam : string ) : string;
+  function fBOOrdemManutencao_CalcVlTotal(iCodOS : integer) : Real;
+  function fBOOrdemManutencao_CalcParcelasDuplc(dsRegistros : TDataSet; sParam : string; var mtDuplic : TFDMemTable) : string;
+  function fBOOrdemManutencao_EfetivarOM(dsRegistros : TDataSet; sParam : string; mtDuplic : TFDMemTable) : string;
+
+implementation
+
+uses Main, MainModule;
+
+function fBOOrdemManutencao_ValidaPostDelete(dsRegistros : TDataSet; sAcao : string ) : string;
+var
+  fqFKTab : TFDQuery;
+begin
+  Result := '';
+  try
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    try
+
+      if dsRegistros.IsEmpty then begin
+        Result := Result + 'Não foram encontrados registros para manutenção! |';
+        Exit;
+      end;
+
+      if sAcao = 'EFETIVAR' then begin
+
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codPortador from gcPortador ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codPortador   = ' + IntToStr(dsRegistros.FieldByName('codPortador').AsInteger)
+                        );
+        fqFKTab.Active := True;
+        if fqFKTab.IsEmpty then begin
+          Result := Result + 'Portador deve ser informado para Efetivação da OM! |';
+        end;
+
+        if (dsRegistros.FieldByName('descAtividadesExecutadas').AsString = '' ) or
+           (dsRegistros.FieldByName('descAtividadesExecutadas').IsNull)         then begin
+          Result := Result + 'Detalhamento da atividade deve ser informada! |';
+        end;
+
+      end
+      else
+      if sAcao = 'DELETE' then begin
+
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codOrdemManutencao, codItem from gcOrdemManutItem ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codOrdemManutencao   = ' + IntToStr(dsRegistros.FieldByName('codOrdemManutencao').AsInteger)
+                        );
+        fqFKTab.Active := True;
+        if not fqFKTab.IsEmpty then begin
+          Result := Result + 'Existem itens cadastrados para a OM, não pode ser eliminada! |';
+        end;
+
+
+
+      end
+      else begin
+
+        if dsRegistros.State = dsInsert then begin
+
+          if (dsRegistros.FieldByName('codOrdemManutencao').AsInteger = 0 ) or
+             (dsRegistros.FieldByName('codOrdemManutencao').IsNull)         then begin
+            Result := Result + 'Número da Ordem de Manutenção deve ser informado! |';
+          end;
+
+          fqFKTab.Close;
+          fqFKTab.SQL.Clear;
+          fqFKTab.SQL.Add(' select codOrdemManutencao from gcOrdemManutencao ' +
+                          ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                          '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                          '   and codOrdemManutencao   = ' + IntToStr(dsRegistros.FieldByName('codOrdemManutencao').AsInteger)
+                          );
+          fqFKTab.Active := True;
+          if not fqFKTab.IsEmpty then begin
+            Result := Result + 'Código ' + dsRegistros.FieldByName('codOrdemManutencao').AsString + ' já está cadastrado! |';
+          end;
+        end;
+        if (dsRegistros.FieldByName('descricao').AsString = '' ) or
+           (dsRegistros.FieldByName('descricao').IsNull)         then begin
+          Result := Result + 'Descrição deve ser informada! |';
+        end;
+
+        if (dsRegistros.FieldByName('dataImplantacao').IsNull)         then begin
+          Result := Result + 'Data Implantação deve ser informado! |';
+        end;
+        if (dsRegistros.FieldByName('tipoOrdem').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('tipoOrdem').IsNull)         then begin
+          Result := Result + 'Tipo da Ordem deve ser informada! |';
+        end;
+        if (dsRegistros.FieldByName('situacao').AsInteger = 0 ) or
+           (dsRegistros.FieldByName('situacao').IsNull)         then begin
+          Result := Result + 'Situação deve ser informada! |';
+        end;
+
+        if (dsRegistros.FieldByName('codUsuarImplant').AsString = '' ) or
+           (dsRegistros.FieldByName('codUsuarImplant').IsNull)         then begin
+          Result := Result + 'Usuário deve ser informada! |';
+        end;
+        if (dsRegistros.FieldByName('dthrPrevManutencao').IsNull)         then begin
+          Result := Result + 'Data Previsão deve ser informada! |';
+        end;
+        if (dsRegistros.FieldByName('descricaoSolicitacaoManut').AsString = '' ) or
+           (dsRegistros.FieldByName('descricaoSolicitacaoManut').IsNull)         then begin
+          Result := Result + 'Detalhes da Manutenção deve ser informada! |';
+        end;
+
+
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codEmitente from gcEmitente ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codEmitente   = ' + IntToStr(dsRegistros.FieldByName('codEmitente').AsInteger)
+                        );
+        fqFKTab.Active := True;
+        if fqFKTab.IsEmpty then begin
+          Result := Result + 'Fornecedor informado ' + dsRegistros.FieldByName('codEmitente').AsString + ' não encontrado! |';
+        end;
+
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codMaqEquip from gcMaquinaEquipamento ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codMaqEquip   = ' + IntToStr(dsRegistros.FieldByName('codMaqEquip').AsInteger)
+                        );
+        fqFKTab.Active := True;
+        if fqFKTab.IsEmpty then begin
+          Result := Result + 'Máquina/Equip informado ' + dsRegistros.FieldByName('codMaqEquip').AsString + ' não encontrado! |';
+        end;
+
+        fqFKTab.Close;
+        fqFKTab.SQL.Clear;
+        fqFKTab.SQL.Add(' select codCondPagto from gcCondicaoPagamento ' +
+                        ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                        '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                        '   and codCondPagto   = ' + IntToStr(dsRegistros.FieldByName('codCondPagto').AsInteger)
+                        );
+        fqFKTab.Active := True;
+        if fqFKTab.IsEmpty then begin
+          Result := Result + 'Condição Pagto informada ' + dsRegistros.FieldByName('codCondPagto').AsString + ' não encontrado! |';
+        end;
+
+
+        if (dsRegistros.FieldByName('codFormaPagto').AsInteger > 0 )    and
+           (not dsRegistros.FieldByName('codFormaPagto').IsNull)        then begin
+
+          fqFKTab.Close;
+          fqFKTab.SQL.Clear;
+          fqFKTab.SQL.Add(' select codFormaPagto from gcFormaPagamento ' +
+                          ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                          '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                          '   and codFormaPagto   = ' + IntToStr(dsRegistros.FieldByName('codFormaPagto').AsInteger)
+                          );
+          fqFKTab.Active := True;
+          if fqFKTab.IsEmpty then begin
+            Result := Result + 'Forma Pagto informada ' + dsRegistros.FieldByName('codFormaPagto').AsString + ' não encontrado! |';
+          end;
+        end;
+
+        if (dsRegistros.FieldByName('codBanco').AsInteger > 0 )    and
+           (not dsRegistros.FieldByName('codBanco').IsNull)        then begin
+
+          fqFKTab.Close;
+          fqFKTab.SQL.Clear;
+          fqFKTab.SQL.Add(' select codBanco from gcBanco ' +
+                          ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                          '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                          '   and codBanco   = ' + IntToStr(dsRegistros.FieldByName('codBanco').AsInteger)
+                          );
+          fqFKTab.Active := True;
+          if fqFKTab.IsEmpty then begin
+            Result := Result + 'Banco informada ' + dsRegistros.FieldByName('codBanco').AsString + ' não encontrado! |';
+          end;
+        end;
+
+
+      end;
+
+      if Result = '' then
+        Result := 'OK';
+
+    except
+      on e : exception do begin
+        Result := 'Erro ao gravar registro: ' + e.message;
+      end;
+    end;
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+end;
+
+function fBOOrdemManutencao_CancelaOM(dsRegistros : TDataSet; sParam : string ) : string;
+var
+i,j : integer;
+begin
+
+  Result := '';
+  try
+    if dsRegistros.FieldByName('situacao').AsInteger = 1 then begin
+
+      dsRegistros.Edit;
+      dsRegistros.FieldByName('motivoCancelamento').AsString := sParam;
+      dsRegistros.FieldByName('situacao').AsInteger := 3;
+      dsRegistros.FieldByName('codUsuarCancelamento').AsString  := MainForm.sCodUsuario;
+      dsRegistros.FieldByName('dataCancelamento').AsDateTime    := Now;
+      dsRegistros.Post;
+
+    end
+    else begin
+
+      UniMainModule.fdTitulosAPagar.Close;
+      UniMainModule.fdTitulosAPagar.SQL.Clear;
+      UniMainModule.fdTitulosAPagar.SQL.Add( ' select * from gcTitulosAPagar ' +
+                                               ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                               '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                                               '   and codOrdemManutencao = ' + IntToStr(dsRegistros.FieldByName('codOrdemManutencao').AsInteger)
+                                               );
+      UniMainModule.fdTitulosAPagar.Active := True;
+
+      UniMainModule.fdTitulosAPagar.First;
+      for I := 0 to UniMainModule.fdTitulosAPagar.RecordCount - 1 do begin
+
+        UniMainModule.fdTitulosMovtoAPagar.Close;
+        UniMainModule.fdTitulosMovtoAPagar.SQL.Clear;
+        UniMainModule.fdTitulosMovtoAPagar.SQL.Add( ' select * from gcTitulosMovtoAPagar ' +
+                                                     ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                                     '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                                                     '   and codTituloAPagar = ' + IntToStr(UniMainModule.fdTitulosAPagar.FieldByName('codTituloAPagar').AsInteger)
+                                                     );
+        UniMainModule.fdTitulosMovtoAPagar.Active := True;
+        UniMainModule.fdTitulosMovtoAPagar.First;
+        for j := 0 to UniMainModule.fdTitulosMovtoAPagar.RecordCount - 1 do begin
+          UniMainModule.fdTitulosMovtoAPagar.Delete;
+          UniMainModule.fdTitulosMovtoAPagar.Next;
+        end;
+
+        UniMainModule.fdTitulosAPagar.Delete;
+        UniMainModule.fdTitulosAPagar.Next;
+      end;
+
+
+
+      UniMainModule.fdPortador.Close;
+      UniMainModule.fdPortador.SQL.Clear;
+      UniMainModule.fdPortador.SQL.Add(' select * from gcPortador ' +
+                                        ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                        '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                                        '   and codPortador      = ' + IntToStr(dsRegistros.FieldByName('codPortador').AsInteger)
+                                        );
+      UniMainModule.fdPortador.Active := True;
+      UniMainModule.fdPortador.Edit;
+      UniMainModule.fdPortadorvlSaldoAtual.AsFloat := UniMainModule.fdPortadorvlSaldoAtual.AsFloat + dsRegistros.FieldByName('valorTotal').AsFloat;
+      UniMainModule.fdPortador.Post;
+
+      dsRegistros.Edit;
+      dsRegistros.FieldByName('motivoCancelamento').AsString := sParam;
+      dsRegistros.FieldByName('situacao').AsInteger := 3;
+      dsRegistros.FieldByName('codUsuarCancelamento').AsString  := MainForm.sCodUsuario;
+      dsRegistros.FieldByName('dataCancelamento').AsDateTime    := Now;
+      dsRegistros.Post;
+
+    end;
+
+    Result := 'OK';
+  except
+    on e : exception do begin
+      Result := 'Erro ao cancelar registro: ' + e.message;
+    end;
+  end;
+
+end;
+
+function fBOOrdemManutencao_CalcVlTotal(iCodOS : integer) : Real;
+var
+  fqFKTab : TFDQuery;
+  dVlTotal : Real;
+  i : integer;
+begin
+  Result := 0;
+  try
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    fqFKTab.SQL.Clear;
+    fqFKTab.SQL.Add(' select * from gcOrdemManutItem ' +
+                    ' where codEmpresa = ' + IntToStr(MainForm.iCodEmpresa) +
+                    '   and codEstabel = ' + IntToStr(MainForm.iCodEstabel) +
+                    '   and codOrdemManutencao   = ' + IntToStr(iCodOS)
+                    );
+    fqFKTab.Active := True;
+
+    dVlTotal := 0;
+    fqFKTab.First;
+    for I := 0 to fqFKTab.RecordCount - 1 do begin
+      dVlTotal := dVlTotal + fqFKTab.FieldByName('preco').AsFloat;
+      fqFKTab.Next;
+    end;
+
+    Result := dVlTotal;
+
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+end;
+
+function fBOOrdemManutencao_CalcParcelasDuplc(dsRegistros : TDataSet; sParam : string; var mtDuplic : TFDMemTable) : string;
+var
+  fqFKTab : TFDQuery;
+  dVlParc, dVlDif, dVlTotParc, dVlTotal : Real;
+  dtVenc : TDate;
+  i : integer;
+begin
+
+  try
+
+    mtDuplic.EmptyDataSet;
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    fqFKTab.SQL.Clear;
+    fqFKTab.SQL.Add(' select * from gcCondicaoPagamento ' +
+                    ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                    '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                    '   and codCondPagto    = ' + IntToStr(dsRegistros.FieldByName('codCondPagto').AsInteger)
+                    );
+    fqFKTab.Active := True;
+
+    if fqFKTab.FieldByName('tipoVencimento').AsInteger = 1 then begin //a vista
+        mtDuplic.Insert;
+        mtDuplic.FieldByName('parcela').AsInteger  := 1;
+        mtDuplic.FieldByName('valor').AsFloat    := dsRegistros.FieldByName('valorTotal').AsFloat;
+        mtDuplic.FieldByName('dtVencto').AsDateTime := Now;
+        mtDuplic.FieldByName('avista').AsInteger  := 1;
+        mtDuplic.Post;
+    end
+    else begin
+      dVlParc := 0;
+      dVlTotParc := 0;
+      dVlDif := 0;
+      dtVenc  := Date;
+      fqFKTab.First;
+      for I := 1 to fqFKTab.FieldByName('numParcelas').AsInteger do begin
+
+        dtVenc := IncDay(dtVenc,fqFKTab.FieldByName('nrDias').AsInteger);
+        dVlTotal := dsRegistros.FieldByName('valorTotal').AsFloat;
+        dVlParc := (dVlTotal / fqFKTab.FieldByName('numParcelas').AsInteger);
+        dVlParc := RoundTo(dVlParc,-2);
+        dVlTotParc := dVlTotParc + dVlParc;
+
+
+        mtDuplic.Insert;
+        mtDuplic.FieldByName('parcela').AsInteger   := i;
+        mtDuplic.FieldByName('dtVencto').AsDateTime := dtVenc;
+        mtDuplic.FieldByName('avista').AsInteger    := 0;
+
+        if i < fqFKTab.FieldByName('numParcelas').AsInteger  then
+          mtDuplic.FieldByName('valor').AsFloat    := dVlParc
+        else begin
+          if dVlTotParc = dsRegistros.FieldByName('valorTotal').AsFloat then begin
+            mtDuplic.FieldByName('valor').AsFloat    := dVlParc;
+          end
+          else begin
+            dVlDif := RoundTo(dsRegistros.FieldByName('valorTotal').AsFloat,-2) - RoundTo(dVlTotParc,-2);
+            if dVlDif < 0 then begin
+              dVlDif := dVlDif * -1;
+              dVlParc := dVlParc - dVlDif;
+            end
+            else begin
+              dVlParc := dVlParc + dVlDif;
+            end;
+            mtDuplic.FieldByName('valor').AsFloat    := dVlParc;
+          end;
+        end;
+
+        mtDuplic.Post;
+
+        fqFKTab.Next;
+      end;
+    end;
+
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+end;
+
+function fBOOrdemManutencao_EfetivarOM(dsRegistros : TDataSet; sParam : string; mtDuplic : TFDMemTable) : string;
+var
+fqFKTab : TFDQuery;
+i, iSeqCR, iSeqMov : integer;
+begin
+
+  try
+
+    fqFKTab := TFDQuery.Create(nil);
+    fqFKTab.Connection := UniMainModule.conexaoDB;
+    fqFKTab.Close;
+
+    fqFKTab.SQL.Clear;
+    fqFKTab.SQL.Add(' select max(codTituloAPagar) as seqCR from gcTitulosAPagar ' +
+                    ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                    '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel)
+                    );
+    fqFKTab.Active := True;
+
+    iSeqCR := 1;
+    if not fqFKTab.IsEmpty then
+      iSeqCR := fqFKTab.FieldByName('seqCR').AsInteger + 1;
+
+    try
+      Result := '';
+
+      UniMainModule.fdTitulosAPagar.Close;
+      UniMainModule.fdTitulosAPagar.SQL.Clear;
+      UniMainModule.fdTitulosAPagar.SQL.Add( ' select * from gcTitulosAPagar ' +
+                                               ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                               '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel)
+                                               );
+      UniMainModule.fdTitulosAPagar.Active := True;
+
+      UniMainModule.fdTitulosMovtoAPagar.Close;
+      UniMainModule.fdTitulosMovtoAPagar.SQL.Clear;
+      UniMainModule.fdTitulosMovtoAPagar.SQL.Add( ' select * from gcTitulosMovtoAPagar ' +
+                                                   ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                                   '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel)
+                                                   );
+      UniMainModule.fdTitulosMovtoAPagar.Active := True;
+
+      fqFKTab.Close;
+      fqFKTab.SQL.Clear;
+      fqFKTab.SQL.Add(' select * from gcPortador ' +
+                      ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                      '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                      '   and codPortador      = ' + IntToStr(dsRegistros.FieldByName('codPortador').AsInteger)
+                      );
+      fqFKTab.Active := True;
+
+      iSeqMov := 1;
+
+      mtDuplic.First;
+      for I := 0 to mtDuplic.RecordCount - 1 do begin
+
+        //with UniMainModule do begin
+
+          UniMainModule.fdTitulosAPagar.Insert;
+          UniMainModule.fdTitulosAPagarcodEmpresa.AsInteger         := MainForm.iCodEmpresa;
+          UniMainModule.fdTitulosAPagarcodEstabel.AsInteger         := MainForm.iCodEstabel;
+          UniMainModule.fdTitulosAPagarcodTituloAPagar.AsInteger  := iSeqCR;
+          UniMainModule.fdTitulosAPagardescricao.AsString           := '';
+          UniMainModule.fdTitulosAPagarcodEmitente.AsInteger        := dsRegistros.FieldByName('codEmitente').AsInteger;
+          UniMainModule.fdTitulosAPagarcodFormaPagto.AsInteger      := dsRegistros.FieldByName('codFormaPagto').AsInteger;
+          UniMainModule.fdTitulosAPagardtVencimento.AsDateTime      := mtDuplic.FieldByName('dtVencto').AsDateTime;
+          UniMainModule.fdTitulosAPagardtEmissao.AsDateTime         := Now;
+          UniMainModule.fdTitulosAPagardtTransacao.AsDateTime       := Now;
+          UniMainModule.fdTitulosAPagarcodUsuarImplant.AsString     := MainForm.sCodUsuario;
+          UniMainModule.fdTitulosAPagarvalorOriginal.AsFloat        := mtDuplic.FieldByName('valor').AsFloat;
+          UniMainModule.fdTitulosAPagarvalorTituloPagar.AsFloat     := mtDuplic.FieldByName('valor').AsFloat;
+          UniMainModule.fdTitulosAPagarcodPortador.AsInteger        := dsRegistros.FieldByName('codPortador').AsInteger;
+          UniMainModule.fdTitulosAPagardoctoReferencia.AsString     := 'OM-' + IntToStr(dsRegistros.FieldByName('codOrdemManutencao').AsInteger);
+          UniMainModule.fdTitulosAPagarcodOrdemManutencao.AsInteger := dsRegistros.FieldByName('codOrdemManutencao').AsInteger;
+          UniMainModule.fdTitulosAPagarindOrigem.AsInteger          := 1; //OM
+          UniMainModule.fdTitulosAPagarcodOrdemManutencao.AsInteger    := dsRegistros.FieldByName('codOrdemManutencao').AsInteger;
+          UniMainModule.fdTitulosAPagarparcela.AsInteger            := mtDuplic.FieldByName('parcela').AsInteger;
+          UniMainModule.fdTitulosAPagarcodBanco.AsInteger           := dsRegistros.FieldByName('codOrdemManutencao').AsInteger;
+          UniMainModule.fdTitulosAPagaragencia.AsString             := dsRegistros.FieldByName('agencia').AsString;
+          UniMainModule.fdTitulosAPagarcontaCorrente.AsString       := dsRegistros.FieldByName('contaCorrente').AsString;
+
+          UniMainModule.fdTitulosAPagarpercMultaAtraso.AsFloat      := 0;
+          UniMainModule.fdTitulosAPagarpercJuroDia.AsFloat          := 0;
+          UniMainModule.fdTitulosAPagarpercDesctoAntecip.AsFloat    := 0;
+
+          if mtDuplic.FieldByName('avista').AsInteger = 1 then //sim
+            UniMainModule.fdTitulosAPagarsituacao.AsInteger := 9 //liquidado
+          else
+            UniMainModule.fdTitulosAPagarsituacao.AsInteger := 1; //aberta
+
+
+          {if not fqFKTab.IsEmpty then begin
+            UniMainModule.fdTitulosAPagarpercMultaAtraso.AsFloat      := fqFKTab.FieldByName('percMultaAtraso').AsFloat;
+            UniMainModule.fdTitulosAPagarpercJuroDia.AsFloat          := fqFKTab.FieldByName('percJuroDia').AsFloat;
+            UniMainModule.fdTitulosAPagarpercDesctoAntecip.AsFloat    := fqFKTab.FieldByName('percDesctoAntecip').AsFloat;
+          end;}
+
+          UniMainModule.fdTitulosAPagar.Post;
+
+          //movto
+          UniMainModule.fdTitulosMovtoAPagar.Insert;
+          UniMainModule.fdTitulosMovtoAPagarcodEmpresa.AsInteger        := MainForm.iCodEmpresa;
+          UniMainModule.fdTitulosMovtoAPagarcodEstabel.AsInteger        := MainForm.iCodEstabel;
+          UniMainModule.fdTitulosMovtoAPagarcodTituloAPagar.AsInteger := iSeqCR;
+          UniMainModule.fdTitulosMovtoAPagarsequencia.AsInteger         := iSeqMov;
+          UniMainModule.fdTitulosMovtoAPagartipoMovto.AsInteger         := 1; //implantacao
+          UniMainModule.fdTitulosMovtoAPagardescricao.AsString          := 'Implantação';
+          UniMainModule.fdTitulosMovtoAPagardtMovto.AsDateTime          := Now;
+          UniMainModule.fdTitulosMovtoAPagarcodUsuarMovto.AsString      := MainForm.sCodUsuario;
+          UniMainModule.fdTitulosMovtoAPagarvalorMovto.AsFloat          := mtDuplic.FieldByName('valor').AsFloat;
+          UniMainModule.fdTitulosMovtoAPagar.Post;
+
+
+          iSeqCR  := iSeqCR  + 1;
+          iSeqMov := iSeqMov + 1;
+        //end;
+
+        mtDuplic.Next;
+      end;
+
+      UniMainModule.fdPortador.Close;
+      UniMainModule.fdPortador.SQL.Clear;
+      UniMainModule.fdPortador.SQL.Add(' select * from gcPortador ' +
+                                        ' where codEmpresa      = ' + IntToStr(MainForm.iCodEmpresa) +
+                                        '   and codEstabel      = ' + IntToStr(MainForm.iCodEstabel) +
+                                        '   and codPortador      = ' + IntToStr(dsRegistros.FieldByName('codPortador').AsInteger)
+                                        );
+      UniMainModule.fdPortador.Active := True;
+      UniMainModule.fdPortador.Edit;
+      UniMainModule.fdPortadorvlSaldoAtual.AsFloat := UniMainModule.fdPortadorvlSaldoAtual.AsFloat - dsRegistros.FieldByName('valorTotal').AsFloat;
+      UniMainModule.fdPortador.Post;
+
+      dsRegistros.Edit;
+      dsRegistros.FieldByName('situacao').AsInteger   := 2; //concluida
+      dsRegistros.FieldByName('dataConclusao').AsDateTime     := Now;
+      dsRegistros.FieldByName('codUsuarConclusao').AsString   := MainForm.sCodUsuario;
+      dsRegistros.Post;
+
+      Result := 'OK';
+
+    except
+      on e : exception do begin
+        Result := e.message;
+      end;
+    end;
+  finally
+    FreeAndNil(fqFKTab);
+  end;
+
+end;
+
+
+end.

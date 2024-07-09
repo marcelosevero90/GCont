@@ -60,7 +60,11 @@ uses
   UTitulosAPagarManutencao in 'UTitulosAPagarManutencao.pas' {FTitulosAPagarManutencao: TUniFrame},
   UBOTitulosAPagar in 'UBOTitulosAPagar.pas',
   UTitulosAPagarLiquidacao in 'UTitulosAPagarLiquidacao.pas' {FTitulosAPagarLiquidacao: TUniFrame},
-  UTitulosAPagarRelatorio in 'UTitulosAPagarRelatorio.pas' {FTitulosAPagarRelatorio: TUniFrame};
+  UTitulosAPagarRelatorio in 'UTitulosAPagarRelatorio.pas' {FTitulosAPagarRelatorio: TUniFrame},
+  UOrdemManutManutencao in 'UOrdemManutManutencao.pas' {FOrdemManutManutencao: TUniFrame},
+  UBOOrdemManutencao in 'UBOOrdemManutencao.pas',
+  UBOOrdemManutItem in 'UBOOrdemManutItem.pas',
+  UOrdemManutencaoRelatorio in 'UOrdemManutencaoRelatorio.pas' {FOrdemManutencaoRelatorio: TUniFrame};
 
 {$R *.res}
 

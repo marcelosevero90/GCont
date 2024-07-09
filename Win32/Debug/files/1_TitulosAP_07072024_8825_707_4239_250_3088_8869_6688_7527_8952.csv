@@ -1,0 +1,5 @@
+codEmpresa;codEstabel;codTituloAPagar;descricao;codEmitente;codFormaPagto;situacao;dtVencimento;dtEmissao;dtTransacao;codUsuarImplant;observacao;valorOriginal;valorTituloPagar;valorDesconto;valorJuros;valorMulta;codPortador;doctoReferencia;indOrigem;codUsuarLiquid;dtCancelamento;dtLiquidacao;codUsuarCancela;parcela;percMultaAtraso;percJuroDia;percDesctoAntecip;motivoCancela;codBanco;agencia;contaCorrente;dscSit;nomeEmitente;nomeFormaPagto;nomePortador;
+1;0;1;TETET4444;1;2;9;07/07/2024;06/07/2024;06/07/2024;ADMIN;sdasgsdgdgasdgsd  ;66;60;6;0;0;3;ETET;9;ADMIN;;06/07/2024;;1;;;;;0;;;;JOAO;CC;BB 23423;
+1;0;2;CVCXVXC;1;2;2;07/07/2024;06/07/2024;06/07/2024;ADMIN;;123;123;0;0;0;3;;9;;;;ADMIN;1;;;;dfgdfgdgdfgdf  ;4;2312;12311;Cancelada;JOAO;CC;BB 23423;
+1;0;3;NNNGH;2;2;2;07/07/2024;06/07/2024;06/07/2024;ADMIN;;77;69,3;7,7;0;0;2;;9;ADMIN;;06/07/2024;ADMIN;1;;;10;jghjg  ;0;;;Cancelada;ERTERTERT;CC;CAIXA;
+1;0;4;FGDFGDF;1;2;9;08/07/2024;07/07/2024;07/07/2024;ADMIN;fgdfgdfgdfgd  ;30;25;5;0;0;2;;9;ADMIN;;07/07/2024;;1;;;;;1;1;1;;JOAO;CC;CAIXA;

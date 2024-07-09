@@ -102,6 +102,7 @@ type
 
     iCodEmpresa, iCodEstabel : Integer;
     sCodUsuario : string;
+    sVersao : string;
 
     PSString: string;
     procedure SearchTree(const AText: string);
@@ -286,6 +287,16 @@ begin
         if Nd.Text = 'RELATÓRIO TÍTULOS A PAGAR' then begin
           FClassName := 'TFTitulosAPagarRelatorio' ;
         end
+        else
+        if Nd.Text = 'MANUTENÇÃO ORDEM DE MANUTENÇÃO' then begin
+          FClassName := 'TFOrdemManutManutencao' ;
+        end
+        else
+        if Nd.Text = 'RELATÓRIO ORDENS DE MANUTENÇÃO' then begin
+          FClassName := 'TFOrdemManutencaoRelatorio' ;
+        end
+
+
 
 
         ;
@@ -390,6 +401,8 @@ begin
   iCodEmpresa := StrToIntDef(uniApplication.Parameters.Values['Empresa'],0);
   iCodEstabel := 0; //para implementações futuras
 
+  sVersao := '202407.01';
+
   try
     UniMainModule.conexaoDB.Connected := False;
     UniMainModule.conexaoDB.Connected := True;
@@ -400,6 +413,8 @@ begin
       Exit;
     end;
   end;
+
+  sbMenu.Panels[2].Text := sVersao;
 
   fdEmpresa.Close;
   fdEmpresa.SQL.Clear;

@@ -148,7 +148,6 @@ type
     fdTitulosAPagarListacodPortador: TIntegerField;
     fdTitulosAPagarListadoctoReferencia: TStringField;
     fdTitulosAPagarListaindOrigem: TIntegerField;
-    fdTitulosAPagarListacodOrdemServico: TIntegerField;
     fdTitulosAPagarListacodUsuarLiquid: TStringField;
     fdTitulosAPagarListadtCancelamento: TDateField;
     fdTitulosAPagarListadtLiquidacao: TDateField;
@@ -203,6 +202,10 @@ type
     fdTitulosAPagarListaagencia: TLargeintField;
     fdTitulosAPagarListacontaCorrente: TStringField;
     fdTitulosMovtoAPagarcodTituloAPagar: TIntegerField;
+    UniLabel5: TUniLabel;
+    edtOMIniFiltro: TUniNumberEdit;
+    edtOMFimFiltro: TUniNumberEdit;
+    fdTitulosAPagarListacodOrdemManutencao: TIntegerField;
     procedure UniFrameCreate(Sender: TObject);
     procedure btMarcaTdsEmitClick(Sender: TObject);
     procedure btDesmarcaTdsEmitClick(Sender: TObject);
@@ -283,7 +286,7 @@ sEmits, sPortads, sFormasPags, SqlExec : string;
 i : integer;
 begin
   if not fdEmitente.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
-    MessageDlg('Selecione um ou mais Clientes para Liquidação!',mtError,[mbOK],nil);
+    MessageDlg('Selecione um ou mais Fornecedores para Liquidação!',mtError,[mbOK],nil);
     Exit;
   end;
   if not fdPortador.Locate('FC_SELEC',True,[loCaseInsensitive]) then begin
@@ -352,7 +355,9 @@ begin
           + '   and gcTitulosAPagar.dtVencimento >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtVenctoIni.DateTime))
           + '   and gcTitulosAPagar.dtVencimento <= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtVenctoFim.DateTime))
           + '   and gcTitulosAPagar.dtEmissao    >= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtImplantIni.DateTime))
-          + '   and gcTitulosAPagar.dtEmissao    <= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtImplantFim.DateTime));
+          + '   and gcTitulosAPagar.dtEmissao    <= ' + QuotedStr(FormatDateTime('yyyy-mm-dd',dtImplantFim.DateTime))
+          + '   and ((gcTitulosAPagar.codOrdemManutencao >= ' + IntToStr(Trunc(edtOMIniFiltro.Value))
+          + '   and   gcTitulosAPagar.codOrdemManutencao <= ' + IntToStr(Trunc(edtOMFimFiltro.Value)) + ') or gcTitulosAPagar.codOrdemManutencao is null) ' ;
 
   if sEmits <> '' then begin
     SqlExec := SqlExec + ' and gcTitulosAPagar.codEmitente in (' + sEmits + ')';
